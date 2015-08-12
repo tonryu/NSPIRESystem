@@ -119,6 +119,7 @@ namespace NSPIREIncSystem.Models
         public string CompanyAddress { get; set; }
         public string Status { get; set; }
         public string DateAdded { get; set; }
+        public bool IsActive { get; set; }
     }
 
     public class Territory
@@ -165,5 +166,18 @@ namespace NSPIREIncSystem.Models
         public int SalesStageID { get; set; }
         public string SalesStageName { get; set; }
         public int RankNo { get; set; }
+    }
+
+    public class CustomerAccount
+    {
+        [Key]
+        public int CustomerID { get; set; }
+        public int LeadID { get; set; }
+        public string DateSigned { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyAddress { get; set; }
+        public string PhoneNo { get; set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
     }
 }
