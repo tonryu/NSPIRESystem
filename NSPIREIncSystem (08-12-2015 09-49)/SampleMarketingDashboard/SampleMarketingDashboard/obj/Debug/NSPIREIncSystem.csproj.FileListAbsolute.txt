@@ -204,3 +204,6 @@ C:\Users\Jomarc\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\
 C:\Users\Jomarc\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.LeadManagement.Reports.LeadsReportDesign.resources
 C:\Users\Jomarc\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.csproj.GenerateResource.Cache
 C:\Users\Jomarc\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.exe.licenses
+C:\Users\dominic\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\bin\Debug\NSPIREIncSystem.exe.config
+C:\Users\dominic\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.exe
+C:\Users\dominic\Documents\GitHub\NSPIRESytem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.pdb

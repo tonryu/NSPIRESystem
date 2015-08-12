@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -8,6 +9,7 @@ using DevExpress.Xpf.Charts;
 using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.LeadManagement.MasterDatas;
 using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.Dashboards
 {
@@ -18,6 +20,10 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
     {
         public List<ActivityView> activityList = new List<ActivityView>();
         public List<LeadsListBox> leadListBox = new List<LeadsListBox>();
+        double screenLeftEdge = Application.Current.MainWindow.Left;
+        double screenTopEdge = Application.Current.MainWindow.Top;
+        double screenWidth = Application.Current.MainWindow.Width;
+        double screenHeight = Application.Current.MainWindow.Height;
 
         public LeadDashboard()
         {
@@ -191,6 +197,10 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             FillLeadPerMonth();
             FillLeadPerSalesStageStatus();
             //FillLeadPerTerritory();
+            FillEngagedClientsPerYear();
+            FillEngagedClientsPerMonth();
+            FillEngagedClientsPerTerritory();
+            FillOverallLeads();
         }
 
         private void FillLeadPerYear()
@@ -227,7 +237,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 ccLeadPerYear.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 2), year2));
                 ccLeadPerYear.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 1), year3));
 
-                lblChartPerYear.Text = "Total Leads: " + Convert.ToString(year1 + year2 + year3);
+                lblChartPerYear.Text = "Total Leads : " + Convert.ToString(year1 + year2 + year3);
             }
         }
 
@@ -275,7 +285,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[10]), month11));
                 ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[11]), month12));
 
-                lblChartPerMonth.Text = "Total Leads: " + Convert.ToString(month1 + month2 + month3 
+                lblChartPerMonth.Text = "Total Leads : " + Convert.ToString(month1 + month2 + month3 
                     + month4 + month5 + month6 + month7 + month8 + month9 + month10 + month11 + month12);
             }
         }
@@ -305,7 +315,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     countLeads = 0;
                 }
 
-                lblChartPerSalesStageStatus.Text = "Total Leads: " + overAll;
+                lblChartPerSalesStageStatus.Text = "Total Leads : " + overAll;
             }
         }
 
@@ -338,7 +348,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         //            countLeads = 0;
         //        }
 
-        //        lblChartPerTerritory.Text = "Total Leads: " + overAll;
+        //        lblChartPerTerritory.Text = "Total Leads : " + overAll;
         //    }
         //}
 
@@ -356,6 +366,130 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         {
 
         }
+
+        private void FillOverallLeads()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var leads = context.Leads.ToList();
+                List<string> statuses = new List<string>() {"Engaged client", "Active", "Not active"};
+                int countLeads = 0, overAll = leads.Count(), percent = 0;
+
+                foreach (var status in statuses)
+                {
+                    foreach (var item in leads)
+                    {
+                        var customerAccount = context.CustomerAccounts.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
+
+                        if (item.IsActive == true && status == "Engaged client" && customerAccount != null)
+                        {
+                            countLeads++;
+                        }
+                        else if (item.IsActive == true && status == "Active" && customerAccount == null)
+                        {
+                            countLeads++;
+                        }
+                        else if (item.IsActive == false && status == "Not active" && customerAccount == null)
+                        {
+                            countLeads++;
+                        }
+                    }
+
+                    Compute(countLeads, overAll, out percent);
+                    countLeads = 0;
+
+                    if (status == "Engaged client")
+                    {
+                        lblEngaged.Text = percent + "%";
+                    }
+                    else if (status == "Active")
+                    {
+                        lblNotContinue.Text = percent + "%";
+                    }
+                    else if (status == "Not active")
+                    {
+                        lblActive.Text = percent + "%";
+                    }
+                }
+
+                lbloverAllLeads.Text = "Overall Leads : " + overAll;
+            }
+        }
+
+        private static int Compute(int part, int whole, out int percent)
+        {
+            if (part > 0 && whole > 0)
+            {
+                return percent = Convert.ToInt32(Math.Round(Convert.ToDouble((part * 100) / whole)));
+            }
+            else
+            {
+                return percent = 0;
+            }
+        }
+        #endregion
+
+        #region Load Details
+        private Task<string> QueryLoadLeadDashboard()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    using (var context = new DatabaseContext())
+                    {
+                        var lead = context.Leads.ToList();
+
+                        leadListBox.Clear();
+                        foreach (var item in lead)
+                        {
+                            leadListBox.Add(new LeadsListBox
+                            {
+                                CompanyName = item.CompanyName
+                            });
+                        }
+                    }
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    return "Error Message: " + ex.Message;
+                }
+            });
+        }
+
+        private async void RefreshTables(string str)
+        {
+            FillCharts();
+            using (var context = new DatabaseContext())
+            {
+                string message = "";
+                busyIndicator.IsBusy = true;
+                message = await QueryLoadLeadDashboard();
+
+                if (message != null)
+                {
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = message;
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
+
+                lbeLeads.ItemsSource = leadListBox.Select(c => c.CompanyName).ToList();
+
+                lblTotalLead.Text = "Total Leads : " + leadListBox.Count();
+
+                busyIndicator.IsBusy = false;
+            }
+        }
+
+        private void LoadLeadDashboard()
+        {
+            RefreshTables("");
+        }
         #endregion
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -371,24 +505,25 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             canvasSalesStages.Visibility = Visibility.Collapsed;
             canvasSalesStages.Opacity = 0;
 
-            FillCharts();
+            //FillCharts();
+            LoadLeadDashboard();
 
-            using (var context = new DatabaseContext())
-            {
-                var lead = context.Leads.ToList();
+            //using (var context = new DatabaseContext())
+            //{
+            //    var lead = context.Leads.ToList();
 
-                leadListBox.Clear();
-                foreach (var item in lead)
-                {
-                    leadListBox.Add(new LeadsListBox
-                    {
-                        CompanyName = item.CompanyName
-                    });
-                }
-                lbeLeads.ItemsSource = leadListBox.Select(c => c.CompanyName).ToList();
+            //    leadListBox.Clear();
+            //    foreach (var item in lead)
+            //    {
+            //        leadListBox.Add(new LeadsListBox
+            //        {
+            //            CompanyName = item.CompanyName
+            //        });
+            //    }
+            //    lbeLeads.ItemsSource = leadListBox.Select(c => c.CompanyName).ToList();
 
-                lblTotalLead.Text = "Total Lead : " + leadListBox.Count();
-            }
+            //    lblTotalLead.Text = "Total Lead : " + leadListBox.Count();
+            //}
         }
 
         private void btnLeads_Click(object sender, RoutedEventArgs e)
@@ -494,7 +629,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                             viewActivity.BestFitColumns();
                         }
                     }
-                    lblTotalLeadActivity.Text = "Total Lead Activity : " + activityList.Where(c => c.CompanyName == selectedRow
+                    lblTotalLeadActivity.Text = "Total Lead Activities : " + activityList.Where(c => c.CompanyName == selectedRow
                                 && c.IsFinalized != true).Count();
                 }
             }
