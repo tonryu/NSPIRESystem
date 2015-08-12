@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="NSPIREIncSystem.CustomerServiceManagement.MasterDatas.ProductsMasterData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             dxc:ThemeManager.ThemeName="DeepBlue" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="PRODUCTS" FontSize="25" Margin="10" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="#FF0096FF"/>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource ResourceKey=TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="/new images/search-icon.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+        <dxg:GridControl Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5" SelectionMode="Row">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="viewProducts" ShowGroupPanel="False" AllowEditing="False"/>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Product Name"/>
+                <dxg:GridColumn Header="Cost"/>
+                <dxg:GridColumn Header="Category Name"/>
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

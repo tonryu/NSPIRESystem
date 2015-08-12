@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="NSPIREIncSystem.CustomerServiceManagement.Dashboards.CustomerServiceDashboard" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             dxc:ThemeManager.ThemeName="DeepBlue"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="CUSTOMER SERVICE MANAGEMENT DASHBOARD" Grid.ColumnSpan="2" Foreground="#0069ff" Margin="10 5 5 5" FontSize="25" FontFamily="Segoe UI Light"/>
+
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="White" Margin="5 0 10 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="ACTIVITY LOGS" FontSize="20" Margin="10 10 5 5" FontWeight="Bold" Foreground="#0069ff" Background="White"/>
+
+            <dxg:GridControl Margin="5 0 5 0" Grid.Row="1">
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowGroupPanel="False"/>
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Contact Person"/>
+                    <dxg:GridColumn Header="Description"/>
+                    <dxg:GridColumn Header="Activity Date"/>
+                    <dxg:GridColumn Header="Activity Time"/>
+                    <dxg:GridColumn Header="Cost"/>
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </Grid>
+
+        <dxc:DXTabControl Margin="20 5 5 10" Grid.Row="1" Grid.RowSpan="2">
+            <dxc:DXTabItem Header="Tickets" FontSize="15" Cursor="Hand">
+                <Grid>
+                    <Grid Background="White" ScrollViewer.CanContentScroll="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Margin="2" Content="Pending"/>
+
+                        <GroupBox Margin="2" Content="Resolved" Grid.Row="1"/>
+                    </Grid>
+                </Grid>
+            </dxc:DXTabItem>
+            
+            <dxc:DXTabItem Header="Service Requests" FontSize="15" Cursor="Hand">
+                <Grid Background="White" ScrollViewer.CanContentScroll="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Margin="2" Content="Pending"/>
+
+                    <GroupBox Margin="2" Content="Approved" Grid.Row="1"/>
+
+                    <GroupBox Margin="2" Content="Rejected" Grid.Row="2"/>
+                </Grid>
+            </dxc:DXTabItem>
+        </dxc:DXTabControl>
+        
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Canvas x:Name="canvasCustomerServiceMenu" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <StackPanel x:Name="stackServiceRequests">
+                    <Button x:Name="btnServiceRequests" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnServiceRequests_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/service-request-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="SERVICE" HorizontalAlignment="Center"/>
+                        <TextBlock Text="REQUESTS" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackTickets">
+                    <Button x:Name="btnTickets" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnTickets_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/ticket-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="TICKETS" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackClientAccounts">
+                    <Button x:Name="btnClientAccounts" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnClientAccounts_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/client-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="CLIENT" HorizontalAlignment="Center"/>
+                        <TextBlock Text="ACCOUNTS" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackProducts">
+                    <Button x:Name="btnProducts" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnProducts_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/product-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="PRODUCTS" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackServiceRequestForm">
+                    <Button x:Name="btnServiceRequestForm" Margin="3" Cursor="Hand" Height="80" Width="80" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnServiceRequestForm_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/service-request-form-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="SERVICE" HorizontalAlignment="Center"/>
+                        <TextBlock Text="REQUEST FORM" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackTicketForm">
+                    <Button x:Name="btnTicketForm" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnTicketForm_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/ticket-form-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="TICKET" HorizontalAlignment="Center"/>
+                        <TextBlock Text="FORM" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackBack">
+                    <Button x:Name="btnBack" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/back-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="BACK" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </Canvas>
+        </Grid>
+    </Grid>
+</UserControl>
