@@ -1,0 +1,28 @@
+﻿<Window x:Class="NSPIREIncSystem.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+        xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
+        Title="NSPIRE Inc." WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize" 
+        Closing="Window_Closing" Icon="images/Nspire new.png">
+    <Window.Background>
+        <ImageBrush ImageSource="/new images/05.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="35*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,0,-40,10"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+            <Image Height="320" Opacity=".25" Source="/images/Nspire new.png" />
+        </StackPanel>
+        <dxwui:NavigationFrame Grid.ColumnSpan="2" Grid.RowSpan="3" Source="Login" AnimationType="Fade"/>
+    </Grid>
+</Window>

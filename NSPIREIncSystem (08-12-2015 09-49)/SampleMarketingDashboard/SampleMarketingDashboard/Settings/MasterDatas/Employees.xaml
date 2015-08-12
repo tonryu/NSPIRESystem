@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="NSPIREIncSystem.Settings.MasterDatas.Employees" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             dxc:ThemeManager.ThemeName="DeepBlue" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="EMPLOYEES" FontSize="25" Margin="10" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="#FF0096FF"/>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtSearch"  Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource ResourceKey=TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" Click="btnSearch_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/new images/search-icon.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+        <dxg:GridControl x:Name="dcEmployeesList" Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="viewEmployee" ShowGroupPanel="False" NavigationStyle="Row" AllowEditing="False"/>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Employee #" FieldName="EmployeeId"/>
+                <dxg:GridColumn Header="Employee Name" FieldName="EmployeeName"/>
+                <dxg:GridColumn Header="Position" FieldName="Position"/>
+                <dxg:GridColumn Header="Address" FieldName="FullAddress"/>
+                <dxg:GridColumn Header="Territory" FieldName="Territory"/>
+                <dxg:GridColumn Header="E-mail Address" FieldName="EmailAddress"/>
+                <dxg:GridColumn Header="Phone #" FieldName="PhoneNo"/>
+                <dxg:GridColumn Header="Fax #" FieldName="FaxNo"/>
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+
+        <Canvas x:Name="canvasEmployeeMasterData" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackView">
+                <Button x:Name="btnView" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/view-details-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="VIEW" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackAdd">
+                <Button x:Name="btnAdd" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAdd_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/add-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="ADD" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackEdit">
+                <Button x:Name="btnEdit" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEdit_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/edit-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="MODIFY" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackDelete">
+                <Button x:Name="btnDelete" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDelete_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/trash-mail-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="DELETE" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackBack">
+                <Button x:Name="btnBack" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</UserControl>

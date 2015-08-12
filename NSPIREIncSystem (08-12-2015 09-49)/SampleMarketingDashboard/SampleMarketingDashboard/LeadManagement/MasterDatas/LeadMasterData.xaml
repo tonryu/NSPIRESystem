@@ -1,0 +1,334 @@
+﻿<UserControl x:Class="NSPIREIncSystem.LeadManagement.MasterDatas.LeadMasterData" 
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:gridanim="clr-namespace:NSPIREIncSystem" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             dx:ThemeManager.ThemeName="Office2013" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Storyboard x:Key="gridin">
+            <gridanim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="firstColumn" Storyboard.TargetProperty="Width" From="633" To="803"/>
+        </Storyboard>
+        <Storyboard x:Key="gridout">
+            <gridanim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="firstColumn" Storyboard.TargetProperty="Width" From="803" To="633"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/new images/05.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="LEADS AND CONTACT PERSONS" FontSize="25" Margin="10" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
+
+        <Grid Grid.Row="1" Margin="50 5 50 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="firstColumn"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#0069ff" BorderThickness="2" CornerRadius="15" Grid.RowSpan="2" Margin="5 0 5 0" Padding="8" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="2" Text="Search Lead : " Foreground="#0069ff" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtSearch" Grid.Column="1"  Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="2" Click="btnSearch_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/search-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <dxg:GridControl x:Name="dcLeadsList" Grid.Row="1" Grid.ColumnSpan="3" Margin="10 5 5 5" SelectedItemChanged="dcLeadsList_SelectedItemChanged">
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="viewLead" ShowGroupPanel="False" NavigationStyle="Row"
+                                HorizontalScrollbarVisibility="Auto" VerticalScrollbarVisibility="Auto"/>
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Header="Lead ID#" FieldName="LeadId" Visible="False"/>
+                            <dxg:GridColumn Header="Company Name" FieldName="CompanyName"/>
+                            <dxg:GridColumn Header="Address" FieldName="CompanyAddress" Visible="False"/>
+                            <dxg:GridColumn Header="Territory" FieldName="TerritoryName" Visible="False"/>
+                            <dxg:GridColumn Header="Sales Stage Status" FieldName="SalesStageStatus"/>
+                        </dxg:GridControl.Columns>
+                    </dxg:GridControl>
+                </Grid>
+            </Border>
+            <Border BorderBrush="#0069ff" BorderThickness="2" CornerRadius="15" Grid.Column="1" Grid.RowSpan="2" Margin="5 0 5 0" Padding="8" Background="White">
+                <dxwui:NavigationFrame x:Name="frame" AnimationType="Fade">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="lblLeadContacts" FontSize="20" Foreground="#0069ff" Margin="5 0 2 0" Padding="5" TextWrapping="Wrap"/>
+                            <TextBlock Margin="2" Text="Search Contact : " Grid.Column="1" Foreground="#0069ff" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtSearch2" Grid.Column="2" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btnSearch2" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="3" Click="btnSearch2_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/new images/search-icon.png"/>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                        <dxg:GridControl x:Name="dcContactsList" Grid.Row="2" Margin="5">
+                            <dxg:GridControl.View>
+                                <dxg:TableView x:Name="viewContact" ShowGroupPanel="False" NavigationStyle="Row"
+                                   HorizontalScrollbarVisibility="Auto" VerticalScrollbarVisibility="Auto"/>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn Header="Contact ID #" FieldName="ContactId" Visible="False"/>
+                                <dxg:GridColumn Header="Contact Person" FieldName="ContactPersonName"/>
+                                <dxg:GridColumn Header="Company" FieldName="Company" Visible="False"/>
+                                <dxg:GridColumn Header="Position" FieldName="Position"/>
+                                <dxg:GridColumn Header="Phone #" FieldName="PhoneNo"/>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </Grid>
+                </dxwui:NavigationFrame>
+            </Border>
+        </Grid>
+        
+        <Canvas x:Name="canvasLeadMasterData" Grid.Row="2" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackView">
+                <Button x:Name="btnView" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/view-details-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="VIEW" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackLeadActivities">
+                <Button x:Name="btnLeadActivities" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLeadActivities_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/activity-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="VIEW ACTIVITIES" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackAdd">
+                <Button x:Name="btnAdd" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAdd_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/add-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="ADD" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackEdit">
+                <Button x:Name="btnEdit" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEdit_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/edit-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="MODIFY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackDelete">
+                <Button x:Name="btnDelete" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDelete_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/trash-mail-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="DELETE" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackPrint">
+                <Button x:Name="btnPrint" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPrint_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/print-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="PRINT" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackBack">
+                <Button x:Name="btnBack" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+        <Canvas x:Name="canvasPrint" Grid.Row="2" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackPrintLead">
+                <Button x:Name="btnPrintLead" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPrintLead_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/lead-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="PRINT LEADS" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackPrintContact">
+                <Button x:Name="btnPrintContact" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPrintContact_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/client-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="PRINT CONTACTS" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackBackToLeadMenu">
+                <Button x:Name="btnBackToLeadMenu" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+        <Canvas x:Name="canvasAdd" Grid.Row="2" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackAddLead">
+                <Button x:Name="btnAddLead" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAddLead_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/lead-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="ADD LEAD" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackAddContact">
+                <Button x:Name="btnAddContact" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAddContact_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/client-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="ADD CONTACT" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <Button Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+        <Canvas x:Name="canvasEdit" Grid.Row="2" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackEditLead">
+                <Button x:Name="btEditLead" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btEditLead_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/lead-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="EDIT LEAD" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackEditContact">
+                <Button x:Name="btnEditContact" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEditContact_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/client-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="EDIT CONTACT" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <Button Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+        <Canvas x:Name="canvasDelete" Grid.Row="2" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackDeleteLead">
+                <Button x:Name="btnDeleteLead" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDeleteLead_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/lead-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="DELETE LEAD" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackDeleteContact">
+                <Button x:Name="btnDeleteContact" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDeleteContact_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/client-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="DELETE CONTACT" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <Button Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+        
+        <xctk:BusyIndicator x:Name="busyIndicator" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Grid.ColumnSpan="3" Margin="116 0 116 13" 
+                            Width="162" Height="68" Grid.RowSpan="3" FontWeight="Bold" 
+                            Foreground="Black"/>
+        <Border x:Name="borderTransparent" 
+                Grid.ColumnSpan="3" 
+                Grid.RowSpan="2" 
+                Background="White" 
+                Opacity=".65" 
+                Visibility="Hidden"/>
+    </Grid>
+</UserControl>

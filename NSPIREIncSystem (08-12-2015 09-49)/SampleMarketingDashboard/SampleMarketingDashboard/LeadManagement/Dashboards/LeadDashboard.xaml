@@ -1,0 +1,434 @@
+﻿<UserControl x:Class="NSPIREIncSystem.LeadManagement.Dashboards.LeadDashboard" 
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             dx:ThemeManager.ThemeName="Office2013" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/NSPIREIncSystem;component/new images/05.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="LEAD MANAGEMENT DASHBOARD" FontSize="25" FontWeight="Bold" Margin="50 5 5 5" Grid.ColumnSpan="2" Foreground="White"/>
+
+        <dx:DXTabControl Grid.Row="1" Margin="50 5 5 5">
+            <dx:DXTabItem Header="LEAD STATISTICS">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Leads per Year" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl x:Name="ccLeadPerYear"  HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Palette>
+                                <dxc:ChameleonPalette/>
+                            </dxc:ChartControl.Palette>
+                            <dxc:XYDiagram2D>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="No. of Leads" Visible="False"/>
+                                        </dxc:AxisY2D.Title>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D>
+                                        <dxc:AxisX2D.Label>
+                                            <dxc:AxisLabel/>
+                                        </dxc:AxisX2D.Label>
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Alignment="Center" Content="Year" Visible="False"/>
+                                        </dxc:AxisX2D.Title>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+                                <dxc:BarSideBySideSeries2D DisplayName="per year">
+                                    <dxc:BarSideBySideSeries2D.Model>
+                                        <dxc:OutsetBar2DModel/>
+                                    </dxc:BarSideBySideSeries2D.Model>
+                                    <dxc:BarSideBySideSeries2D.Label>
+                                        <dxc:SeriesLabel Indent="5"/>
+                                    </dxc:BarSideBySideSeries2D.Label>
+                                </dxc:BarSideBySideSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock x:Name="lblChartPerYear" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Leads per Month" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl x:Name="ccLeadPerMonth" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Palette>
+                                <dxc:ChameleonPalette/>
+                            </dxc:ChartControl.Palette>
+                            <dxc:XYDiagram2D>
+                                <dxc:LineSeries2D DisplayName="Series 1" MarkerVisible="True">
+                                    <dxc:LineSeries2D.MarkerModel>
+                                        <dxc:CircleMarker2DModel/>
+                                    </dxc:LineSeries2D.MarkerModel>
+                                    <dxc:LineSeries2D.Label>
+                                        <dxc:SeriesLabel dxc:MarkerSeries2D.Angle="90" Indent="5"/>
+                                    </dxc:LineSeries2D.Label>
+                                </dxc:LineSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock x:Name="lblChartPerMonth" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Leads per Sales Stage Status" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl x:Name="ccPerSalesStageStatus" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Palette>
+                                <dxc:ChameleonPalette/>
+                            </dxc:ChartControl.Palette>
+                            <dxc:ChartControl.Legend>
+                                <dxc:Legend/>
+                            </dxc:ChartControl.Legend>
+                            <dxc:SimpleDiagram2D>
+                                <dxc:PieSeries2D DisplayName="Series 1">
+                                    <dxc:PieSeries2D.LegendPointOptions>
+                                        <dxc:PointOptions PointView="ArgumentAndValues">
+                                            <dxc:PointOptions.ValueNumericOptions>
+                                                <dxc:NumericOptions Format="Number"/>
+                                            </dxc:PointOptions.ValueNumericOptions>
+                                        </dxc:PointOptions>
+                                    </dxc:PieSeries2D.LegendPointOptions>
+                                    <dxc:PieSeries2D.Label>
+                                        <dxc:SeriesLabel Indent="5" dxc:PieSeries.LabelPosition="Outside"/>
+                                    </dxc:PieSeries2D.Label>
+                                    <dxc:PieSeries2D.Model>
+                                        <dxc:GlassPie2DModel/>
+                                    </dxc:PieSeries2D.Model>
+                                </dxc:PieSeries2D>
+                            </dxc:SimpleDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock x:Name="lblChartPerSalesStageStatus" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>
+                    <!--<Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Leads per Territory" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl x:Name="ccLeadPerTerritory" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Palette>
+                                <dxc:ChameleonPalette/>
+                            </dxc:ChartControl.Palette>
+                            <dxc:ChartControl.Legend>
+                                <dxc:Legend FontSize="10"/>
+                            </dxc:ChartControl.Legend>
+                            <dxc:SimpleDiagram2D>
+                                <dxc:PieSeries2D DisplayName="Series 1">
+                                    <dxc:PieSeries2D.LegendPointOptions>
+                                        <dxc:PointOptions PointView="Argument"/>
+                                    </dxc:PieSeries2D.LegendPointOptions>
+                                    <dxc:PieSeries2D.Label>
+                                        <dxc:SeriesLabel Indent="5" dxc:PieSeries.LabelPosition="Outside"/>
+                                    </dxc:PieSeries2D.Label>
+                                    <dxc:PieSeries2D.Model>
+                                        <dxc:GlassPie2DModel/>
+                                    </dxc:PieSeries2D.Model>
+                                </dxc:PieSeries2D>
+                            </dxc:SimpleDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock x:Name="lblChartPerTerritory" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>-->
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="ENGAGED CLIENTS STATISTICS">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="New Clients per Year" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Palette>
+                                <dxc:ChameleonPalette/>
+                            </dxc:ChartControl.Palette>
+                            <dxc:XYDiagram2D>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="Engaged Clients" Visible="False"/>
+                                        </dxc:AxisY2D.Title>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D>
+                                        <dxc:AxisX2D.Label>
+                                            <dxc:AxisLabel Staggered="True"/>
+                                        </dxc:AxisX2D.Label>
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Alignment="Center" Content="Year" Visible="False"/>
+                                        </dxc:AxisX2D.Title>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+                                <dxc:BarSideBySideSeries2D DisplayName="per year" LabelsVisibility="True">
+                                    <dxc:BarSideBySideSeries2D.Model>
+                                        <dxc:OutsetBar2DModel/>
+                                    </dxc:BarSideBySideSeries2D.Model>
+                                    <dxc:BarSideBySideSeries2D.Label>
+                                        <dxc:SeriesLabel Indent="5"/>
+                                    </dxc:BarSideBySideSeries2D.Label>
+                                    <dxc:SeriesPoint Argument="2013" Value="3"/>
+                                    <dxc:SeriesPoint Argument="2014" Value="1"/>
+                                    <dxc:SeriesPoint Argument="2015" Value="2"/>
+                                </dxc:BarSideBySideSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock Text="Total : 6" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="New Clients per Month" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Palette>
+                                <dxc:ChameleonPalette/>
+                            </dxc:ChartControl.Palette>
+                            <dxc:XYDiagram2D>
+                                <dxc:XYDiagram2D.AxisY>
+                                    <dxc:AxisY2D>
+                                        <dxc:AxisY2D.Title>
+                                            <dxc:AxisTitle Content="Engaged Clients" Visible="False"/>
+                                        </dxc:AxisY2D.Title>
+                                    </dxc:AxisY2D>
+                                </dxc:XYDiagram2D.AxisY>
+                                <dxc:XYDiagram2D.AxisX>
+                                    <dxc:AxisX2D>
+                                        <dxc:AxisX2D.Label>
+                                            <dxc:AxisLabel Staggered="True"/>
+                                        </dxc:AxisX2D.Label>
+                                        <dxc:AxisX2D.Title>
+                                            <dxc:AxisTitle Alignment="Center" Content="Month" Visible="False"/>
+                                        </dxc:AxisX2D.Title>
+                                    </dxc:AxisX2D>
+                                </dxc:XYDiagram2D.AxisX>
+                                <dxc:BarSideBySideSeries2D DisplayName="per month" LabelsVisibility="True">
+                                    <dxc:BarSideBySideSeries2D.Model>
+                                        <dxc:OutsetBar2DModel/>
+                                    </dxc:BarSideBySideSeries2D.Model>
+                                    <dxc:BarSideBySideSeries2D.Label>
+                                        <dxc:SeriesLabel Indent="5"/>
+                                    </dxc:BarSideBySideSeries2D.Label>
+                                    <dxc:SeriesPoint Argument="December 1-31, 2013" Value="2"/>
+                                    <dxc:SeriesPoint Argument="January 1-31, 2014" Value="0"/>
+                                    <dxc:SeriesPoint Argument="February 1-28, 2014" Value="1"/>
+                                </dxc:BarSideBySideSeries2D>
+                            </dxc:XYDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock Text="Total : 3" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>
+                    <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="New Clients per Territory" FontSize="15" Foreground="#0069ff"/>
+                        <dxc:ChartControl HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                            <dxc:ChartControl.Legend>
+                                <dxc:Legend FontSize="10"/>
+                            </dxc:ChartControl.Legend>
+                            <dxc:SimpleDiagram2D>
+                                <dxc:PieSeries2D DisplayName="Series 1" LabelsVisibility="True">
+                                    <dxc:PieSeries2D.Label>
+                                        <dxc:SeriesLabel Indent="5" dxc:PieSeries.LabelPosition="Outside"/>
+                                    </dxc:PieSeries2D.Label>
+                                    <dxc:PieSeries2D.Model>
+                                        <dxc:GlassPie2DModel/>
+                                    </dxc:PieSeries2D.Model>
+                                    <dxc:SeriesPoint Argument="Bataan" Value="4"/>
+                                    <dxc:SeriesPoint Argument="Cavite" Value="3"/>
+                                </dxc:PieSeries2D>
+                            </dxc:SimpleDiagram2D>
+                        </dxc:ChartControl>
+                        <TextBlock Text="Total : 7" Grid.Row="2" Foreground="#0069ff"/>
+                    </Grid>
+                </Grid>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="#0069ff" BorderThickness="2" Margin="5 5 50 5" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="LEAD ACTIVITIES" FontWeight="Bold" Grid.ColumnSpan="2" FontSize="16" Margin="10" Foreground="#0069ff"/>
+                    <dxe:ListBoxEdit x:Name="lbeLeads" Grid.Row="1" Margin="5" SelectedIndexChanged="lbeLeads_SelectedIndexChanged"/>
+                    <dxg:GridControl x:Name="dcActivity" Grid.Row="1" Grid.Column="1" Margin="5" Padding="5">
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="viewActivity" NavigationStyle="Row" ShowGroupPanel="False" AllowEditing="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Header="Description" FieldName="Description"/>
+                            <dxg:GridColumn Header="Sales Representative" FieldName="SalesRep"/>
+                            <dxg:GridColumn Header="Activity Date" FieldName="ActivityDate"/>
+                            <dxg:GridColumn Header="Activity Time" FieldName="ActivityTime"/>
+                            <dxg:GridColumn Header="Cost" FieldName="Cost"/>
+                            <dxg:GridColumn Header="Transaction Details" FieldName="TransactionDetails"/>
+                            <dxg:GridColumn Header="Contact Person" FieldName="ContactPerson"/>
+                            <dxg:GridColumn Header="Client Response" FieldName="ClientResponse"/>
+                            <dxg:GridColumn Header="Next Step" FieldName="NextStep"/>
+                            <dxg:GridColumn Header="Next Step Due Date" FieldName="NextStepDueDate"/>
+                        </dxg:GridControl.Columns>
+                    </dxg:GridControl>
+                    <TextBlock x:Name="lblTotalLead" Grid.Row="2" Margin="10 5" Foreground="#0069ff"/>
+                    <TextBlock x:Name="lblTotalLeadActivity" Grid.Row="2" Grid.Column="1" Margin="10 5" Foreground="#0069ff"/>
+                    <Border Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="#0069ff" BorderThickness="0 0 0 2"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="3">
+                        <TextBlock Text="OVERALL LEADS" Foreground="#0069ff" FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
+                        <TextBlock Text="AS OF JULY 27, 2015, 00:00" Foreground="#0069ff" FontSize="10" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                        <Viewbox>
+                            <TextBlock x:Name="lblEngaged" Text="40%" FontSize="35" Foreground="#FF00A600" Padding="10 3 10 0"/>
+                        </Viewbox>
+                        <TextBlock Text="of Leads are converted into engaged clients" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FF00A600" Padding="10 0 10 10" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                        <Viewbox>
+                            <TextBlock x:Name="lblNotContinue" Text="10%" FontSize="35" Foreground="#FFDC1313" Padding="10 3 10 0"/>
+                        </Viewbox>
+                        <TextBlock Text="of Leads did not continue" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FFDC1313" Margin="10 0 10 10" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
+                        <Viewbox>
+                            <TextBlock x:Name="lblActive" Text="50%" FontSize="35" Foreground="#FFECE210" Padding="10 3 10 0"/>
+                        </Viewbox>
+                        <TextBlock Text="of Leads are still active" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FFECE210" Margin="10 0 10 10" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <TextBlock x:Name="overAllLeads" Foreground="#0069ff" Grid.Row="2" Margin="10 5" Padding="10 1 10 10" Grid.ColumnSpan="3"/>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="5 5 5 10">
+            <Canvas x:Name="canvasLeadMenu" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <StackPanel x:Name="stackLeads">
+                    <Button x:Name="btnLeads" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLeads_Click" Padding="5 5 5 0">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/lead-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="LEADS" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackSalesStage">
+                    <Button x:Name="btnSalesStage" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSalesStage_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/chart-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="SALES STAGE" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="REPORTS" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackBack">
+                    <Button x:Name="btnBack" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/back-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
+            </Canvas>
+            <Canvas x:Name="canvasSalesStages" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <StackPanel x:Name="stackPerCompany">
+                    <Button x:Name="btnPerCompany" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPerCompany_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/report-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="PER COMPANY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackBackToLeadMenu">
+                    <Button x:Name="btnBackToLeadMenu" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/back-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
+            </Canvas>
+        </Grid>
+    </Grid>
+</UserControl>

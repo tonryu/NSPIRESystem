@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="NSPIREIncSystem.TaskManagement.MasterDatas.ProjectMasterData" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             dxc:ThemeManager.ThemeName="DeepBlue"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="PROJECTS" FontSize="25" Margin="10" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="#FF0096FF"/>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource ResourceKey=TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1">
+                <Button.Background>
+                    <ImageBrush ImageSource="/new images/search-icon.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+        <dxg:GridControl Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5" SelectionMode="Row">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="viewProject" ShowGroupPanel="False"/>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Project Name"/>
+                <dxg:GridColumn Header="Party"/>
+                <dxg:GridColumn Header="Start Date"/>
+                <dxg:GridColumn Header="Completion Date"/>
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" Background="White">
+            <Button x:Name="btnAdd" Background="Transparent" Cursor="Hand" ToolTip="Add record" Width="50" Height="50" Style="{DynamicResource MenuButtonStyle2}" Margin="10">
+                <Image Source="/images/Add2.png"/>
+            </Button>
+            <Button x:Name="btnEdit" Background="Transparent" Cursor="Hand" Opacity=".5" IsEnabled="False" ToolTip="Edit record" Width="50" Height="50" Style="{DynamicResource MenuButtonStyle2}" Margin="10">
+                <Image Source="/images/Edit2.png"/>
+            </Button>
+            <Button x:Name="btnHome" Cursor="Hand" Background="Transparent" ToolTip="Home" Width="50" Height="50" Style="{DynamicResource MenuButtonStyle2}" Margin="10">
+                <Image Source="/images/Home2.png"/>
+            </Button>
+            <Button x:Name="btnDelete" Cursor="Hand" Background="Transparent" Opacity=".5" IsEnabled="False" ToolTip="Delete record" Width="50" Height="50" Style="{DynamicResource MenuButtonStyle2}" Margin="10">
+                <Image Source="/images/Garbage2.png"/>
+            </Button>
+            <Button x:Name="btnPrint" Cursor="Hand" Background="Transparent" ToolTip="Print" Width="50" Height="50" Style="{DynamicResource MenuButtonStyle2}" Margin="10">
+                <Image Source="/images/Printer2.png"/>
+            </Button>
+        </StackPanel>
+
+        <Button x:Name="btnBack" Cursor="Hand" Background="Transparent" ToolTip="Go back" Width="50" Height="50" Style="{DynamicResource ButtonStyle1}" Margin="10" Visibility="Visible" HorizontalAlignment="Left" Grid.Row="2">
+            <Image Source="/images/Previous3.png"/>
+        </Button>
+
+        <Button x:Name="btnView" Cursor="Hand" Background="Transparent" Opacity=".5" ToolTip="View action plan" IsEnabled="False" Width="50" Height="50" Style="{DynamicResource ButtonStyle1}" Margin="10" Visibility="Visible" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1">
+            <Image Source="/images/View2.png"/>
+        </Button>-->
+    </Grid>
+</UserControl>
