@@ -216,7 +216,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
 
                     if (date != null)
                     {
-                        var dateAdded = Convert.ToDateTime(date.DateAdded).ToString("yyyy");
+                        var dateAdded = date.DateAdded.ToString("yyyy");
 
                         if (dateAdded == Convert.ToString(Convert.ToInt32(year) - 3))
                         {
@@ -255,8 +255,8 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 foreach (var item in lead)
                 {
                     var dateAdded = context.Leads.FirstOrDefault(c => c.DateAdded == item.DateAdded);
-                    var monthAdded = Convert.ToDateTime(dateAdded.DateAdded).ToString("MM");
-                    var yearAdded = Convert.ToDateTime(dateAdded.DateAdded).ToString("yyyy");
+                    var monthAdded = dateAdded.DateAdded.ToString("MM");
+                    var yearAdded = dateAdded.DateAdded.ToString("yyyy");
 
                     if (Convert.ToString(monthAdded) == "01" && yearAdded == year) { month1++; }
                     else if (Convert.ToString(monthAdded) == "02" && yearAdded == year) { month2++; }

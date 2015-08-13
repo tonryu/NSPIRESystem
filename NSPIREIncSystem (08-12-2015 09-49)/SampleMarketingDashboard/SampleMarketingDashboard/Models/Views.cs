@@ -118,7 +118,7 @@ namespace NSPIREIncSystem.Models
         public string CompanyName { get; set; }
         public string CompanyAddress { get; set; }
         public string Status { get; set; }
-        public string DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }
         public bool IsActive { get; set; }
     }
 
