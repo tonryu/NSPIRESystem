@@ -387,7 +387,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             //LoadMethod(txtSearch.Text);
-            LoadActivity();
+            RefreshTable(txtSearch.Text);
         }
 
         private void btnView_Click(object sender, RoutedEventArgs e)

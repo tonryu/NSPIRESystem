@@ -75,6 +75,15 @@ namespace NSPIREIncSystem.Models
         public string Position { get; set; }
     }
 
+    public class SalesStagesView 
+    {
+        public SalesStagesView() { }
+        public int SalesStageID { get; set; }
+        public string SalesStageName { get; set; }
+        public int RankNo { get; set; }
+
+    }
+
     public class LeadsListBox
     {
         public LeadsListBox() { }

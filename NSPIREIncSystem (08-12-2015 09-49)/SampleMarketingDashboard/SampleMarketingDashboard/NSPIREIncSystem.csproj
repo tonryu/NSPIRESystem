@@ -201,8 +201,14 @@
     <Compile Include="Settings\MasterDatas\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\MasterDatas\SalesStage.xaml.cs">
+      <DependentUpon>SalesStage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\MasterDatas\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\SalesStageDetails.xaml.cs">
+      <DependentUpon>SalesStageDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\Windows\EmployeeSelectionWindow.xaml.cs">
       <DependentUpon>EmployeeSelectionWindow.xaml</DependentUpon>
@@ -325,7 +331,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Settings\MasterDatas\SalesStage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Settings\MasterDatas\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\SalesStageDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
