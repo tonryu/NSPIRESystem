@@ -49,7 +49,10 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         txtSalesId.Text = Convert.ToString(stage.SalesStageID);
                         txtRankNo.Text = Convert.ToString(stage.RankNo);
                         txtSalesStageName.Text = stage.SalesStageName;
+
                     }
+
+                    SalesStageId = 0;
 
                 }
                 else
@@ -115,12 +118,12 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     else
                     {
                         var Stages = context.SalesStages.FirstOrDefault
-                            (c => c.SalesStageName.ToLower() == txtSalesStageName.Text.ToLower() &&
-                            c.RankNo == Convert.ToInt32(txtRankNo.Text));
+                            (c => c.SalesStageName.ToLower() == txtSalesStageName.Text.ToLower());
 
-                        if (Stages != null)
+                        if (Stages == null)
                         {
                             Stages = new SalesStage();
+                            Stages.SalesStageName = txtSalesStageName.Text;
                             Stages.RankNo =Convert.ToInt32 (txtRankNo.Text);
 
                             context.SalesStages.Add(Stages);
