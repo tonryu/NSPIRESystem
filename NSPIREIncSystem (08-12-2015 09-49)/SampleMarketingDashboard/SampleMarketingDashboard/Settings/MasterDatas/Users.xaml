@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" 
              dxc:ThemeManager.ThemeName="DeepBlue"
              mc:Ignorable="d" 
@@ -99,5 +100,11 @@
                 </StackPanel>
             </StackPanel>
         </Canvas>
+
+        <xctk:BusyIndicator x:Name="busyIndicator" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Grid.ColumnSpan="3" Margin="116 0 116 13" 
+                            Width="162" Height="68" Grid.RowSpan="3" FontWeight="Bold" 
+                            Foreground="Black"/>
     </Grid>
 </UserControl>

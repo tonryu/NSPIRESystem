@@ -29,30 +29,90 @@ namespace NSPIREIncSystem.Settings.MasterDatas
         }
 
         #region Load Details
-        //private Task<string> QueryLoadUsers()
-        //{
-        //    return Task.Factory.StartNew(() =>
-        //    {
-        //        try
-        //        {
-        //            usersList.Clear();
-        //            using(var context = new DatabaseContext())
-        //            {
-        //                var user = context.UserAccounts.ToList();
+        private Task<string> QueryLoadUsers()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    usersList.Clear();
+                    using(var context = new DatabaseContext())
+                    {
+                        var user = context.UserAccounts.ToList();
 
-        //                foreach(var item in user)
-        //                {
-        //                    var name = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == item.UserAccountId);
+                        foreach(var item in user)
+                        {
+                            var empname = context.Employees.FirstOrDefault(c => c.EmployeeId == item.EmployeeId);
+                            usersList.Add(new UsersLists()
+                            {
+                                IsAdmin= item.IsAdmin,
+                                CustomerServiceManagementAccess= item.CustomerServiceAccess,
+                                EmployeeName = empname.FirstName + "" + empname.LastName,
+                                LeadManagementAccess= item.LeadManagementAccess,
+                                TaskManagementAccess = item.TaskManagementAccess,
+                                UserAccountId = item.UserAccountId
+                            });
 
-        //                    usersList.Add
+                        }
+                    }
+                    return null;
+            }
 
+                catch(Exception ex)
+                {
+                    return "Error Message" + ex.Message;
+                }
+            });
+        }
 
+        private async void RefreshTable(string str)
+        {
+            using (var context = new DatabaseContext())
+            {
+                string message = "";
+                busyIndicator.IsBusy = true;
+                message = await QueryLoadUsers();
+
+                if (message != null)
+                {
+                    var windows = new Shared.Windows.NoticeWindow();
+                    NoticeWindow.message = message;
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
+
+                dcUsersList.ItemsSource = usersList.Where(c => c.UserAccountId.Contains(txtSearch.Text) ||
+                   c.EmployeeName.Contains(txtSearch.Text)).OrderBy(c => c.UserAccountId).ToList();
+
+                viewUser.BestFitColumns();
+
+                if (usersList.Count == 0)
+                {
+                    var windows = new Shared.Windows.NoticeWindow();
+                    NoticeWindow.message = "List has no Record.";
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
+                busyIndicator.IsBusy = false;
+            }
+        }
+
+        private void LoadUsers()
+        {
+            RefreshTable("");
+        }
 
         #endregion
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadMethod(txtSearch.Text);
+            LoadUsers();
 
             canvasUserMasterData.Width = GetCanvasMinWidth(canvasUserMasterData);
             canvasUserMasterData.Height = GetCanvasMinHeight(canvasUserMasterData);
@@ -62,32 +122,32 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             FoldInnerCanvasSideward(canvasUserMasterData);
         }
 
-        private void LoadMethod(string text)
-        {
-            using (var context = new DatabaseContext())
-            {
-                var user = context.UserAccounts.ToList();
+        //private void LoadMethod(string text)
+        //{
+        //    using (var context = new DatabaseContext())
+        //    {
+        //        var user = context.UserAccounts.ToList();
 
-                usersList.Clear();
-                foreach (var item in user)
-                {
-                    var employee = context.Employees.FirstOrDefault(c => c.EmployeeId == item.EmployeeId);
-                    usersList.Add(new UsersLists
-                    {
-                        UserAccountId = item.UserAccountId,
-                        EmployeeName = employee.FirstName + " " + employee.LastName,
-                        LeadManagementAccess = item.LeadManagementAccess,
-                        CustomerServiceManagementAccess = item.CustomerServiceAccess,
-                        TaskManagementAccess = item.TaskManagementAccess,
-                        IsAdmin = item.IsAdmin
-                    });
-                }
-                dcUsersList.ItemsSource = usersList.Where(c => c.UserAccountId.Contains(text) || 
-                    c.EmployeeName.Contains(text)).OrderBy(c => c.UserAccountId).ToList();
+        //        usersList.Clear();
+        //        foreach (var item in user)
+        //        {
+        //            var employee = context.Employees.FirstOrDefault(c => c.EmployeeId == item.EmployeeId);
+        //            usersList.Add(new UsersLists
+        //            {
+        //                UserAccountId = item.UserAccountId,
+        //                EmployeeName = employee.FirstName + " " + employee.LastName,
+        //                LeadManagementAccess = item.LeadManagementAccess,
+        //                CustomerServiceManagementAccess = item.CustomerServiceAccess,
+        //                TaskManagementAccess = item.TaskManagementAccess,
+        //                IsAdmin = item.IsAdmin
+        //            });
+        //        }
+        //        dcUsersList.ItemsSource = usersList.Where(c => c.UserAccountId.Contains(text) || 
+        //            c.EmployeeName.Contains(text)).OrderBy(c => c.UserAccountId).ToList();
 
-                viewUser.BestFitColumns();
-            }
-        }
+        //        viewUser.BestFitColumns();
+        //    }
+        //}
 
         #region Measure canvas and child objects
         private double GetCanvasMinWidth(Canvas canvas)
@@ -251,7 +311,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            LoadMethod(txtSearch.Text);
+           LoadUsers();
         }
 
         private void btnView_Click(object sender, RoutedEventArgs e)
@@ -267,7 +327,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             window.Width = (screenWidth - 90) * 0.35;
             window.ShowDialog();
 
-            LoadMethod(txtSearch.Text);
+            LoadUsers();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -292,7 +352,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                 }
 
                 UserAccountWindow.UserAccountId = "";
-                LoadMethod(txtSearch.Text);
+               LoadUsers();
             }
         }
 
@@ -336,7 +396,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                         NullMessage();
                     }
                 }
-                LoadMethod(txtSearch.Text);
+                LoadUsers();
             }
         }
 

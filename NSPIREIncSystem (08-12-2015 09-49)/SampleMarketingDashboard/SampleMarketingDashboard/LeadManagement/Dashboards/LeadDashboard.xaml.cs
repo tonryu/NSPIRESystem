@@ -404,11 +404,11 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     }
                     else if (status == "Active")
                     {
-                        lblNotContinue.Text = percent + "%";
+                        lblActive.Text = percent + "%";
                     }
                     else if (status == "Not active")
                     {
-                        lblActive.Text = percent + "%";
+                        lblNotContinue.Text = percent + "%";
                     }
                 }
 
@@ -420,13 +420,14 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         {
             if (part > 0 && whole > 0)
             {
-                return percent = Convert.ToInt32((Convert.ToDouble((part * 100) / whole)));
+                return percent = Convert.ToInt32((Convert.ToDouble((part * 100.00) / whole)));
             }
             else
             {
-                return percent = 0;
+                return percent = 00;
             }
         }
+
         #endregion
 
         #region Load Details

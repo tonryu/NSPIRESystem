@@ -186,13 +186,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
         }
         #endregion
 
-        #region Load Details
-        private Task<string>QueryLoadUsers()
-        {
-
-
-
-        #endregion
+      
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

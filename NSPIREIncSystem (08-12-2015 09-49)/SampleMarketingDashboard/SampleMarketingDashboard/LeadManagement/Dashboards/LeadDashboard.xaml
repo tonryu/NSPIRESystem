@@ -353,7 +353,7 @@
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
                         <Viewbox>
-                            <TextBlock x:Name="lblEngaged" Text="40%" FontSize="35" Foreground="#FF00A600" Padding="10 3 10 0"/>
+                            <TextBlock x:Name="lblEngaged" Text="40%" FontSize="30" Foreground="#FF00A600" Padding="10 3 10 0"/>
                         </Viewbox>
                         <TextBlock Text="of Leads are engaged clients" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FF00A600" Padding="10 0 10 10" TextWrapping="Wrap"/>
                     </StackPanel>
@@ -365,7 +365,7 @@
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
                         <Viewbox>
-                            <TextBlock x:Name="lblActive" Text="50%" FontSize="35" Foreground="#FFECE210" Padding="10 3 10 0"/>
+                            <TextBlock x:Name="lblActive" Text="50%" FontSize="30" Foreground="#FFECE210" Padding="10 3 10 0"/>
                         </Viewbox>
                         <TextBlock Text="of Leads are still active" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FFECE210" Margin="10 0 10 10" TextWrapping="Wrap"/>
                     </StackPanel>

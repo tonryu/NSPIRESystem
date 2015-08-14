@@ -8,6 +8,7 @@ using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Settings.Windows;
 using NSPIREIncSystem.Shared.Windows;
+using System.Threading.Tasks;
 
 namespace NSPIREIncSystem.Settings.MasterDatas
 {
@@ -185,6 +186,87 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             }
         }
         #endregion
+
+        #region Load 
+        private Task<string> QueryLoadEmployees()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    employeeList.Clear();
+                    using (var context = new DatabaseContext())
+                    {
+                        var emp = context.Employees.ToList();
+                        foreach (var item in emp)
+                        {
+                            var empname = context.Employees.FirstOrDefault(c => c.EmployeeId == item.EmployeeId);
+                            employeeList.Add(new EmployeeView()
+                            {
+                                EmailAddress = item.EmailAddress,
+                                EmployeeId = item.EmployeeId,
+                                EmployeeName = item.FirstName + "" + item.LastName,
+                                FaxNo = item.FaxNo,
+                                FullAddress = item.Address,
+                                PhoneNo = item.PhoneNo,
+                                Position = item.Position,
+                                Territory = item.Territory
+                            });
+                        }
+                    }
+
+                    return null;
+                }
+
+                catch (Exception ex)
+                {
+                    return "Error Message" + ex.Message;
+                }
+            });
+        }
+
+        private async void Refreshtale(string str)
+        {
+            using (var context = new DatabaseContext())
+            {
+                string message = "";
+                busyIndicator.IsBusy = true;
+                message = await QueryLoadEmployees();
+
+                if (message != null)
+                {
+                    var windows = new Shared.Windows.NoticeWindow();
+                    NoticeWindow.message = message;
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
+
+                dcEmployeesList.ItemsSource = employeeList.Where(c => c.EmployeeName.ToLower().Contains(txtSearch.Text))
+                   .OrderBy(c => c.EmployeeId).ToList();
+
+                viewEmployee.BestFitColumns();
+
+                if (employeeList.Count == 0)
+                {
+                    var windows = new Shared.Windows.NoticeWindow();
+                    NoticeWindow.message = "List has no Record.";
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
+                busyIndicator.IsBusy = false;
+            }
+        }
+
+
+
+        #endregion
+
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

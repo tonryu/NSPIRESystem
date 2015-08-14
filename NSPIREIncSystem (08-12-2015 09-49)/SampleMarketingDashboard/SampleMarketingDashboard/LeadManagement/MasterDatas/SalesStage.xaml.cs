@@ -200,6 +200,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         #endregion
 
         #region Load Details
+
         private Task <string> QueryLoadSalesStages()
         {
             return Task.Factory.StartNew(() =>
@@ -238,6 +239,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                     }
                 });
         }
+
          private async void RefreshTable(string str)
         {
             using (var context = new DatabaseContext())
@@ -283,6 +285,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
          {
              RefreshTable("");
          }
+
          #endregion
 
          private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -294,6 +297,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              canvasSalesStagesMasterData.Visibility = Visibility.Collapsed;
              canvasSalesStagesMasterData.Opacity = 0;
              FoldInnerCanvasSideward(canvasSalesStagesMasterData);
+             
          }
 
          private void btnView_Click(object sender, RoutedEventArgs e)
@@ -402,7 +406,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              windows.ShowDialog();
          }
 
-
          //private void LoadMethod(string text)
          //{
          //    using (var context = new DatabaseContext())
@@ -461,9 +464,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
          //        }
          //    }
          //}
-
-
-
 
     }
 
