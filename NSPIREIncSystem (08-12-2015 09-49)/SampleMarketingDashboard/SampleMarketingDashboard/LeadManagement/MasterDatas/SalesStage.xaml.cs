@@ -373,14 +373,47 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
          private void btnDelete_Click(object sender, RoutedEventArgs e)
          {
+             using (var context= new DatabaseContext())
+             {
+                 var selectedSalestage = dcSalesStagesList.SelectedItem as SalesStagesView;
 
-             var windows = new Shared.Windows.NoticeWindow();
-             Shared.Windows.NoticeWindow.message = "Sales Stage cannot be deleted.";
-             windows.Height = 0;
-             windows.Top = screenTopEdge + 8;
-             windows.Left = (screenWidth / 2) - (windows.Width / 2);
-             if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-             windows.ShowDialog();
+                 if (selectedSalestage != null)
+                 {
+                     var salestage = context.SalesStages.First(c => c.SalesStageID == selectedSalestage.SalesStageID);
+
+                     if (salestage != null)
+                     {
+                         var window = new MessageBoxWindow("Are you sure you want to delete this record?");
+                         window.Height = 0;
+                         window.Top = screenTopEdge + 8;
+                         window.Left = (screenWidth / 2) - (window.Width / 2);
+                         if (screenLeftEdge > 0 || screenLeftEdge < -8) { window.Left += screenLeftEdge; }
+                         window.ShowDialog();
+
+                         if (Variables.yesClicked == true)
+                         {
+                             context.SalesStages.Remove(salestage);
+                             var windows = new Shared.Windows.NoticeWindow();
+                             Shared.Windows.NoticeWindow.message = "SALE STAGE SUCCESSFULLY DELETED";
+                             windows.Height = 0;
+                             windows.Top = screenTopEdge + 8;
+                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                             if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                             windows.ShowDialog();
+
+                             context.SaveChanges();
+
+                         }
+                     }
+                     else
+                     {
+                         NullMessage();
+                     }
+                 }
+
+                 LoadActivity();
+             }
+            
          }
 
          private void btnPrint_Click(object sender, RoutedEventArgs e)
@@ -405,65 +438,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
              windows.ShowDialog();
          }
-
-         //private void LoadMethod(string text)
-         //{
-         //    using (var context = new DatabaseContext())
-         //    {
-         //        if (SalesStageId > 0)
-         //        {
-         //            var sales = context.SalesStages.ToList();
-
-         //            if (sales != null)
-         //            {
-         //                salessatageList.Clear();
-         //                foreach (var item in sales)
-         //                {
-         //                    var lead = context.SalesStages.FirstOrDefault(c => c.SalesStageID == sales.);
-         //                    var contact = context.Contacts.FirstOrDefault(c => c.LeadId == lead.LeadID);
-
-         //                    salessatageList.Add(new SalesStagesView
-         //                    {
-         //                        ActivityDate = item.ActivityDate,
-         //                        ActivityId = item.ActivityID,
-         //                        ActivityTime = item.ActivityTime,
-         //                        ClientResponse = item.ClientResponse,
-         //                        CompanyName = lead.CompanyName,
-         //                        Cost = item.Cost,
-         //                        Description = item.Description,
-         //                        MarketingVoucher = item.MarketingVoucherNo,
-         //                        NextStep = item.NextStep,
-         //                        NextStepDueDate = item.DueDateOfNextStep,
-         //                        SalesRep = item.SalesRep,
-         //                        TransactionDetails = item.DetailsOfTransaction,
-         //                        ContactPerson = contact.ContactPersonName,
-         //                        IsFinalized = item.IsFinalized
-         //                    });
-         //                }
-
-         //                var leads = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
-
-         //                if (leads != null)
-         //                {
-         //                    dcLeadActivitiesList.ItemsSource = activityList.Where
-         //                        (c => (c.Description.ToLower().Contains(text.ToLower()) ||
-         //                            c.NextStep.ToLower().Contains(text.ToLower()) ||
-         //                            c.SalesRep.ToLower().Contains(text.ToLower()) ||
-         //                            c.TransactionDetails.ToLower().Contains(text.ToLower()) ||
-         //                            c.MarketingVoucher.ToLower().Contains(text.ToLower()) ||
-         //                            c.ActivityDate.ToLower().Contains(text.ToLower()) ||
-         //                            c.ActivityTime.ToLower().Contains(text.ToLower()) ||
-         //                            c.NextStepDueDate.ToLower().Contains(text.ToLower()) ||
-         //                            c.ContactPerson.ToLower().Contains(text.ToLower())) &&
-         //                            c.CompanyName.ToLower() == leads.CompanyName.ToLower()).
-         //                            OrderByDescending(c => Convert.ToDateTime(c.NextStepDueDate)).ToList();
-
-         //                    viewLeadActivity.BestFitColumns();
-         //                }
-         //            }
-         //        }
-         //    }
-         //}
 
     }
 
