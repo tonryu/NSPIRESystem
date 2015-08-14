@@ -44,6 +44,7 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     {
                         lblsaleId.Visibility = Visibility.Visible;
                         txtSalesId.Visibility = Visibility.Visible;
+                        txtSalesId.IsReadOnly = true;
                         txtSalesStageName.IsEnabled = IsEnabled;
                         txtRankNo.IsEnabled = IsEnabled;
                         txtSalesId.Text = Convert.ToString(stage.SalesStageID);

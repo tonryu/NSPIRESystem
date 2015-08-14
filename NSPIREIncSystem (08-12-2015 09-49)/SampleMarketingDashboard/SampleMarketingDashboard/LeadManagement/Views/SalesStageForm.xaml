@@ -31,10 +31,10 @@
             </Grid.RowDefinitions>
             <TextBlock x:Name="lblsaleId" Text="SALES STAGE ID #"  Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:TextEdit x:Name="txtSalesId" IsReadOnly="True" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left" IsEnabled="False"/>
-            <TextBlock x:Name="lblSaleName" Text="SALES STTAGE NAME" Grid.Row="1" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtSalesStageName" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False"/>
+            <TextBlock x:Name="lblSaleName" Text="SALES STAGE NAME" Grid.Row="1" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
+            <dxe:TextEdit x:Name="txtSalesStageName" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False" NullText="Stage Name"/>
             <TextBlock x:Name="lblRAnk" Text="RANK NO." Grid.Row="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtRankNo" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtRankNo" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False" NullText="Rank Number"/>
 
         </Grid>
         <Button x:Name="btnSave" Grid.Row="2" Cursor="Hand" ToolTip="Save changes" BorderBrush="#0069ff" Style="{DynamicResource ButtonStyle1}" Margin="5" Width="50" Height="50" Click="btnSave_Click">
