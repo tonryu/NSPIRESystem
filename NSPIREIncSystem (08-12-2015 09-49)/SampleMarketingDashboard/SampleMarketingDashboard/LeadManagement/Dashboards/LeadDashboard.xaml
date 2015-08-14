@@ -419,7 +419,17 @@
                         <TextBlock Text="PER COMPANY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel x:Name="stackBackToLeadMenu">
+                <StackPanel x:Name="SalesStageMaster">
+                    <Button x:Name="btnsalesmaster" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnsalesmaster_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/report-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="Stages MasterData" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
+                    <StackPanel x:Name="stackBackToLeadMenu">
                     <Button x:Name="btnBackToLeadMenu" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/back-icon.png"/>

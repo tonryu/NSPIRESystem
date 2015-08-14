@@ -420,7 +420,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         {
             if (part > 0 && whole > 0)
             {
-                return percent = Convert.ToInt32(Math.Round(Convert.ToDouble((part * 100) / whole)));
+                return percent = Convert.ToInt32((Convert.ToDouble((part * 100) / whole)));
             }
             else
             {
@@ -633,6 +633,14 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                                 && c.IsFinalized != true).Count();
                 }
             }
+        }
+
+        private void btnsalesmaster_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            NSPIREIncSystem.LeadManagement.MasterDatas.SalesStage page = new MasterDatas.SalesStage();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasSalesStages);
         }
     }
 }

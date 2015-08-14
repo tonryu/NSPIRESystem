@@ -9,6 +9,7 @@ using NSPIREIncSystem.Settings.MasterDatas;
 using NSPIREIncSystem.TaskManagement.Dashboards;
 using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
 using NSPIREIncSystem.Shared.Views;
+using System.Threading.Tasks;
 
 namespace NSPIREIncSystem.Shared.Dashboards
 {
@@ -185,6 +186,14 @@ namespace NSPIREIncSystem.Shared.Dashboards
         }
         #endregion
 
+        #region Load Details
+        private Task<string>QueryLoadUsers()
+        {
+
+
+
+        #endregion
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             canvasMainMenu.Width = GetCanvasMinWidth(canvasMainMenu);
@@ -263,5 +272,6 @@ namespace NSPIREIncSystem.Shared.Dashboards
             FoldInnerCanvasSideward(canvasSettings);
             FoldInnerCanvasSideward(canvasMainMenu);
         }
+
     }
 }

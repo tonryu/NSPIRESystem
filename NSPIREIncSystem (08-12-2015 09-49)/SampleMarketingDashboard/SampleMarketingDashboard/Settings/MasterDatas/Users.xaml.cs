@@ -8,6 +8,7 @@ using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Settings.Windows;
 using NSPIREIncSystem.Shared.Windows;
+using System.Threading.Tasks;
 
 namespace NSPIREIncSystem.Settings.MasterDatas
 {
@@ -26,6 +27,28 @@ namespace NSPIREIncSystem.Settings.MasterDatas
         {
             InitializeComponent();
         }
+
+        #region Load Details
+        //private Task<string> QueryLoadUsers()
+        //{
+        //    return Task.Factory.StartNew(() =>
+        //    {
+        //        try
+        //        {
+        //            usersList.Clear();
+        //            using(var context = new DatabaseContext())
+        //            {
+        //                var user = context.UserAccounts.ToList();
+
+        //                foreach(var item in user)
+        //                {
+        //                    var name = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == item.UserAccountId);
+
+        //                    usersList.Add
+
+
+
+        #endregion
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

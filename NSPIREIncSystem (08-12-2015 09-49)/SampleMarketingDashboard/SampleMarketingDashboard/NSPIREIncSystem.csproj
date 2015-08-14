@@ -145,6 +145,9 @@
     <Compile Include="LeadManagement\MasterDatas\LeadActivityMasterData.xaml.cs">
       <DependentUpon>LeadActivityMasterData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeadManagement\MasterDatas\SalesStage.xaml.cs">
+      <DependentUpon>SalesStage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeadManagement\Views\ContactPersonForm.xaml.cs">
       <DependentUpon>ContactPersonForm.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,12 @@
     </Compile>
     <Compile Include="LeadManagement\Views\LeadDetails.xaml.cs">
       <DependentUpon>LeadDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\SalesStageDetails.xaml.cs">
+      <DependentUpon>SalesStageDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\SalesStageForm.xaml.cs">
+      <DependentUpon>SalesStageForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="LeadManagement\Windows\LeadActivityWindow.xaml.cs">
       <DependentUpon>LeadActivityWindow.xaml</DependentUpon>
@@ -201,14 +210,8 @@
     <Compile Include="Settings\MasterDatas\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings\MasterDatas\SalesStage.xaml.cs">
-      <DependentUpon>SalesStage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Settings\MasterDatas\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Settings\Views\SalesStageDetails.xaml.cs">
-      <DependentUpon>SalesStageDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\Windows\EmployeeSelectionWindow.xaml.cs">
       <DependentUpon>EmployeeSelectionWindow.xaml</DependentUpon>
@@ -283,6 +286,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LeadManagement\MasterDatas\SalesStage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="LeadManagement\Views\ContactPersonForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -298,6 +305,14 @@
     <Page Include="LeadManagement\Views\LeadDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\SalesStageDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\SalesStageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LeadManagement\Windows\LeadActivityWindow.xaml">
       <SubType>Designer</SubType>
@@ -331,15 +346,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings\MasterDatas\SalesStage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Settings\MasterDatas\Users.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Settings\Views\SalesStageDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

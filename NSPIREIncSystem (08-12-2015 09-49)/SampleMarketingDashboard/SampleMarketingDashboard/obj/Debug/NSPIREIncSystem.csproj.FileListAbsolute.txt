@@ -310,7 +310,9 @@ C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)
 C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.LeadManagement.Reports.LeadsReportDesign.resources
 C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.csproj.GenerateResource.Cache
 C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.exe.licenses
-C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\MasterDatas\SalesStage.g.cs
-C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\MasterDatas\SalesStage.baml
-C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\Views\SalesStageDetails.baml
-C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\Views\SalesStageDetails.g.cs
+C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\LeadManagement\Views\SalesStageDetails.baml
+C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\LeadManagement\MasterDatas\SalesStage.g.cs
+C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\LeadManagement\Views\SalesStageDetails.g.cs
+C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\LeadManagement\MasterDatas\SalesStage.baml
+C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\LeadManagement\Views\SalesStageForm.baml
+C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\LeadManagement\Views\SalesStageForm.g.cs
