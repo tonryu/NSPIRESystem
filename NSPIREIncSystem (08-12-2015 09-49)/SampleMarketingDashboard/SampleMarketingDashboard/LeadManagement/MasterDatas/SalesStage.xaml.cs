@@ -439,6 +439,11 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              windows.ShowDialog();
          }
 
+         private void btnSearch_Click(object sender, RoutedEventArgs e)
+         {
+             LoadActivity();
+         }
+
     }
 
     
