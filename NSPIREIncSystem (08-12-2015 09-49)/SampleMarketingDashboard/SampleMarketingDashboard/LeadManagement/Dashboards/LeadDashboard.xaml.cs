@@ -381,7 +381,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     {
                         var customerAccount = context.CustomerAccounts.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
 
-                        if (item.IsActive == true && status == "Engaged client" && customerAccount != null)
+                        if (item.IsActive == true && status == "Engaged client" && customerAccount != null && item.Status == "New Customer")
                         {
                             countLeads++;
                         }
