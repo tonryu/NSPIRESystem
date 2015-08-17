@@ -436,6 +436,4 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              LoadActivity();
          }
     }
-
-    
 }

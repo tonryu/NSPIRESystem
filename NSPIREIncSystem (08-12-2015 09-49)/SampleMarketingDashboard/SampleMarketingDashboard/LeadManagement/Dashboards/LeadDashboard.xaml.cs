@@ -427,7 +427,6 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 return percent = "00";
             }
         }
-
         #endregion
 
         #region Load Details
