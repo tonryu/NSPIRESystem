@@ -373,7 +373,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             {
                 var leads = context.Leads.ToList();
                 List<string> statuses = new List<string>() {"Engaged client", "Active", "Not active"};
-                int countLeads = 0, overAll = leads.Count(), percent = 0;
+                int countLeads = 0, overAll = leads.Count(); string percent = "";
 
                 foreach (var status in statuses)
                 {
@@ -416,15 +416,15 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             }
         }
 
-        private static int Compute(int part, int whole, out int percent)
+        private static string Compute(int part, int whole, out string percent)
         {
             if (part > 0 && whole > 0)
             {
-                return percent = Convert.ToInt32((Convert.ToDouble((part * 100.00) / whole)));
+                return percent = Convert.ToString(Convert.ToInt32((Convert.ToDouble((part * 100.00) / whole))));
             }
             else
             {
-                return percent = 00;
+                return percent = "00";
             }
         }
 

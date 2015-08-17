@@ -41,9 +41,9 @@
             <TextBlock Name="lblsalestage" Text="Sales Stages" FontSize="25" Margin="50 10 10 10" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
             <Grid Grid.Column="1" Margin="5 5 50 5">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Search Lead Activity : " Margin="2" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock Text="Search Sales Stage : " Margin="2" Foreground="White" VerticalAlignment="Center"/>
                     <TextBox x:Name="txtSearch" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-                    <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" >
+                    <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" Click="btnSearch_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/search-icon.png"/>
                         </Button.Background>
