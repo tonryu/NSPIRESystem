@@ -189,6 +189,13 @@
     <Compile Include="Reports\ContactsReportDesign.designer.cs">
       <DependentUpon>ContactsReportDesign.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DashboardReportData.cs" />
+    <Compile Include="Reports\DashboardReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DashboardReportDesign.Designer.cs">
+      <DependentUpon>DashboardReportDesign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\LeadActivityReportData.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -465,6 +472,9 @@
     <EmbeddedResource Include="Reports\ContactsReportDesign.resx">
       <DependentUpon>ContactsReportDesign.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DashboardReportDesign.resx">
+      <DependentUpon>DashboardReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\LeadActivityReportDesign.resx">
       <DependentUpon>LeadActivityReportDesign.cs</DependentUpon>
     </EmbeddedResource>
@@ -472,6 +482,7 @@
       <DependentUpon>LeadsReportDesign.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\NSPIREIncSystem.Reports.DashboardReportData.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
