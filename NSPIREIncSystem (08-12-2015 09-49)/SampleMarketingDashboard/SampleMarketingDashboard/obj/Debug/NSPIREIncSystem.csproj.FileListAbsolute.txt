@@ -535,3 +535,4 @@ C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-4
 C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.LeadManagement.Reports.LeadsReportDesign.resources
 C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.csproj.GenerateResource.Cache
 C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.exe.licenses
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.Reports.DashboardReportDesign.resources
