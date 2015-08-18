@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\
+C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\
 NSPIREIncSystem
 none
 false
 DEBUG;TRACE
-C:\Users\Jomarc\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\App.xaml
+C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\App.xaml
 38350315229
 
-55-1488634970
-591397501112
+58-1127801524
+59-1341535059
 LeadManagement\MasterDatas\LeadActivityMasterData.xaml;LeadManagement\MasterDatas\SalesStage.xaml;LeadManagement\Views\ContactPersonForm.xaml;LeadManagement\Views\LeadActivityDetails.xaml;LeadManagement\Views\LeadActivityForm.xaml;LeadManagement\Views\LeadDetails.xaml;LeadManagement\Views\SalesStageDetails.xaml;LeadManagement\Views\SalesStageForm.xaml;LeadManagement\Windows\LeadActivityWindow.xaml;LeadManagement\Views\LeadForm.xaml;MainWindow.xaml;LeadManagement\Windows\LeadDetailsWindow.xaml;LeadManagement\Windows\LeadWindow.xaml;Settings\MasterDatas\Employees.xaml;Settings\MasterDatas\Users.xaml;Shared\Windows\EmployeeSelectionWindow.xaml;Settings\Windows\EmployeeWindow.xaml;Settings\Windows\UserAccountWindow.xaml;Shared\Sample\MasterDataView.xaml;Shared\Views\Login.xaml;Shared\Views\MainView.xaml;Shared\Dashboards\UserDashboard.xaml;Shared\Windows\NoticeWindow.xaml;Shared\Windows\MessageBoxLogout.xaml;Shared\Windows\MessageBoxWindow.xaml;Shared\Windows\NotificationWindow.xaml;Shared\Windows\TaskSchedulerWindow.xaml;Shared\Dashboards\AdminDashboard.xaml;CustomerServiceManagement\MasterDatas\ClientAccountsMasterData.xaml;CustomerServiceManagement\Dashboards\CustomerServiceDashboard.xaml;LeadManagement\Dashboards\LeadDashboard.xaml;LeadManagement\MasterDatas\LeadMasterData.xaml;CustomerServiceManagement\MasterDatas\ProductsMasterData.xaml;TaskManagement\MasterDatas\ProjectMasterData.xaml;CustomerServiceManagement\MasterDatas\ServiceRequestsMasterData.xaml;TaskManagement\Dashboards\TaskManagementDashboard.xaml;TaskManagement\MasterDatas\TaskMasterData.xaml;CustomerServiceManagement\MasterDatas\TicketsMasterData.xaml;
 
 False
