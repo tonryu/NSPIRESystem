@@ -542,7 +542,10 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
 
         private void btnPerCompany_Click(object sender, RoutedEventArgs e)
         {
-
+            using (var context = new DatabaseContext())
+            {
+                
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
