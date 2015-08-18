@@ -435,5 +435,9 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
          {
              LoadActivity();
          }
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
     }
 }
