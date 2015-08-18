@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel3 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
-            DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel2 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel1 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
+            DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel2 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
+            DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel3 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrChart3 = new DevExpress.XtraReports.UI.XRChart();
+            this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrChart2 = new DevExpress.XtraReports.UI.XRChart();
+            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
+            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
-            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrChart2 = new DevExpress.XtraReports.UI.XRChart();
-            this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrChart3 = new DevExpress.XtraReports.UI.XRChart();
-            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrChart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrChart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrChart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -68,6 +68,82 @@
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // xrLabel5
+            // 
+            this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 13F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(363.5417F, 291.6667F);
+            this.xrLabel5.Name = "xrLabel5";
+            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel5.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
+            this.xrLabel5.StylePriority.UseFont = false;
+            this.xrLabel5.Text = "Overall Leads";
+            // 
+            // xrChart3
+            // 
+            this.xrChart3.BorderColor = System.Drawing.Color.Black;
+            this.xrChart3.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrChart3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 328.2083F);
+            this.xrChart3.Name = "xrChart3";
+            this.xrChart3.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            sideBySideBarSeriesLabel1.LineVisible = true;
+            this.xrChart3.SeriesTemplate.Label = sideBySideBarSeriesLabel1;
+            this.xrChart3.SizeF = new System.Drawing.SizeF(332.2917F, 200F);
+            this.xrChart3.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrChart3_BeforePrint);
+            // 
+            // xrLabel4
+            // 
+            this.xrLabel4.Font = new System.Drawing.Font("Times New Roman", 13F);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 291.6667F);
+            this.xrLabel4.Name = "xrLabel4";
+            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel4.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
+            this.xrLabel4.StylePriority.UseFont = false;
+            this.xrLabel4.Text = "Leads Per Sales Stage Status";
+            // 
+            // xrChart2
+            // 
+            this.xrChart2.BorderColor = System.Drawing.Color.Black;
+            this.xrChart2.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrChart2.LocationFloat = new DevExpress.Utils.PointFloat(363.5417F, 46.54169F);
+            this.xrChart2.Name = "xrChart2";
+            this.xrChart2.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            sideBySideBarSeriesLabel2.LineVisible = true;
+            this.xrChart2.SeriesTemplate.Label = sideBySideBarSeriesLabel2;
+            this.xrChart2.SizeF = new System.Drawing.SizeF(332.2917F, 200F);
+            this.xrChart2.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrChart2_BeforePrint);
+            // 
+            // xrLabel3
+            // 
+            this.xrLabel3.Font = new System.Drawing.Font("Times New Roman", 13F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(363.5417F, 10.00001F);
+            this.xrLabel3.Name = "xrLabel3";
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
+            this.xrLabel3.StylePriority.UseFont = false;
+            this.xrLabel3.Text = "Leads Per Year";
+            // 
+            // xrChart1
+            // 
+            this.xrChart1.BorderColor = System.Drawing.Color.Black;
+            this.xrChart1.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 46.54169F);
+            this.xrChart1.Name = "xrChart1";
+            this.xrChart1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            sideBySideBarSeriesLabel3.LineVisible = true;
+            this.xrChart1.SeriesTemplate.Label = sideBySideBarSeriesLabel3;
+            this.xrChart1.SizeF = new System.Drawing.SizeF(332.2917F, 200F);
+            this.xrChart1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrChart1_BeforePrint);
+            // 
+            // xrLabel2
+            // 
+            this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 13F);
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
+            this.xrLabel2.Name = "xrLabel2";
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
+            this.xrLabel2.StylePriority.UseFont = false;
+            this.xrLabel2.Text = "Leads Per Month";
             // 
             // TopMargin
             // 
@@ -108,79 +184,6 @@
             // 
             this.bindingSource1.DataSource = typeof(NSPIREIncSystem.Reports.DashboardReportData);
             // 
-            // xrLabel2
-            // 
-            this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 13F);
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
-            this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
-            this.xrLabel2.StylePriority.UseFont = false;
-            this.xrLabel2.Text = "Leads Per Month";
-            // 
-            // xrChart1
-            // 
-            this.xrChart1.BorderColor = System.Drawing.Color.Black;
-            this.xrChart1.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 46.54169F);
-            this.xrChart1.Name = "xrChart1";
-            this.xrChart1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            sideBySideBarSeriesLabel3.LineVisible = true;
-            this.xrChart1.SeriesTemplate.Label = sideBySideBarSeriesLabel3;
-            this.xrChart1.SizeF = new System.Drawing.SizeF(332.2917F, 200F);
-            // 
-            // xrLabel3
-            // 
-            this.xrLabel3.Font = new System.Drawing.Font("Times New Roman", 13F);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(363.5417F, 10.00001F);
-            this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
-            this.xrLabel3.StylePriority.UseFont = false;
-            this.xrLabel3.Text = "Leads Per Year";
-            // 
-            // xrChart2
-            // 
-            this.xrChart2.BorderColor = System.Drawing.Color.Black;
-            this.xrChart2.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrChart2.LocationFloat = new DevExpress.Utils.PointFloat(363.5417F, 46.54169F);
-            this.xrChart2.Name = "xrChart2";
-            this.xrChart2.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            sideBySideBarSeriesLabel2.LineVisible = true;
-            this.xrChart2.SeriesTemplate.Label = sideBySideBarSeriesLabel2;
-            this.xrChart2.SizeF = new System.Drawing.SizeF(332.2917F, 200F);
-            // 
-            // xrLabel4
-            // 
-            this.xrLabel4.Font = new System.Drawing.Font("Times New Roman", 13F);
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 291.6667F);
-            this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel4.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
-            this.xrLabel4.StylePriority.UseFont = false;
-            this.xrLabel4.Text = "Leads Per Sales Stage Status";
-            // 
-            // xrChart3
-            // 
-            this.xrChart3.BorderColor = System.Drawing.Color.Black;
-            this.xrChart3.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrChart3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 328.2083F);
-            this.xrChart3.Name = "xrChart3";
-            this.xrChart3.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            sideBySideBarSeriesLabel1.LineVisible = true;
-            this.xrChart3.SeriesTemplate.Label = sideBySideBarSeriesLabel1;
-            this.xrChart3.SizeF = new System.Drawing.SizeF(332.2917F, 200F);
-            // 
-            // xrLabel5
-            // 
-            this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 13F);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(363.5417F, 291.6667F);
-            this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(246.875F, 36.54167F);
-            this.xrLabel5.StylePriority.UseFont = false;
-            this.xrLabel5.Text = "Overall Leads";
-            // 
             // DashboardReportDesign
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -191,13 +194,13 @@
             this.DataSource = this.bindingSource1;
             this.Margins = new System.Drawing.Printing.Margins(50, 50, 48, 49);
             this.Version = "13.1";
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrChart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrChart3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrChart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
