@@ -635,7 +635,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 var salesStages = context.SalesStages.ToList();
                 countLeads = 0; overAll = 0;
                 DevExpress.XtraCharts.Series leadSeriesPerStage = new DevExpress.XtraCharts.Series();
-                leadSeriesPerStage = new DevExpress.XtraCharts.Series("Sales Stages", ViewType.Pie);
+                leadSeriesPerStage = new DevExpress.XtraCharts.Series("Sales Stages", ViewType.Doughnut);
 
                 foreach (var salesStage in salesStages)
                 {
