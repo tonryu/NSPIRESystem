@@ -13,6 +13,10 @@ namespace NSPIREIncSystem.Reports
         public static List<Series> seriesList1 = new List<Series>();
         public static List<Series> seriesList2 = new List<Series>();
         public static List<Series> seriesList3 = new List<Series>();
+        public static XRLabel lblActive = new XRLabel();
+        public static XRLabel lblEngaged = new XRLabel();
+        public static XRLabel lblNotActive = new XRLabel();
+        DashboardReportData data = new DashboardReportData();
 
         public DashboardReportDesign()
         {
@@ -41,6 +45,21 @@ namespace NSPIREIncSystem.Reports
             xrChart3.Legend.AlignmentVertical = LegendAlignmentVertical.Top;
             xrChart3.Legend.AlignmentHorizontal = LegendAlignmentHorizontal.LeftOutside;
             xrChart3.AppearanceName = "Gray";
+        }
+
+        private void xrLabel6_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            xrLabel6.Text = lblActive.Text;
+        }
+
+        private void xrLabel8_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            xrLabel8.Text = lblEngaged.Text;
+        }
+
+        private void xrLabel10_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            xrLabel10.Text = lblNotActive.Text;
         }
     }
 }

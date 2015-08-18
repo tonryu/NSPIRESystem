@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using DevExpress.Xpf.Charts;
 using DevExpress.Xpf.WindowsUI;
+using DevExpress.Xpf.Charts;
+using DevExpress.XtraCharts;
+using DevExpress.XtraReports.UI;
 using NSPIREIncSystem.LeadManagement.MasterDatas;
 using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Reports;
 using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.Dashboards
@@ -218,24 +221,24 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     {
                         var dateAdded = Convert.ToDateTime(date.DateAdded).ToString("yyyy");
 
-                        if (dateAdded == Convert.ToString(Convert.ToInt32(year) - 3))
+                        if (dateAdded == Convert.ToString(Convert.ToInt32(year) - 2))
                         {
                             year1++;
                         }
-                        else if (dateAdded == Convert.ToString(Convert.ToInt32(year) - 2))
+                        else if (dateAdded == Convert.ToString(Convert.ToInt32(year) - 1))
                         {
                             year2++;
                         }
-                        else if (dateAdded == Convert.ToString(Convert.ToInt32(year) - 1))
+                        else if (dateAdded == Convert.ToString(year))
                         {
                             year3++;
                         }
                     }
                 }
                 ccLeadPerYear.Diagram.Series[0].Points.Clear();
-                ccLeadPerYear.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 3), year1));
-                ccLeadPerYear.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 2), year2));
-                ccLeadPerYear.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 1), year3));
+                ccLeadPerYear.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 2), year1));
+                ccLeadPerYear.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(Convert.ToInt32(year) - 1), year2));
+                ccLeadPerYear.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(year), year3));
 
                 lblChartPerYear.Text = "Total Leads : " + Convert.ToString(year1 + year2 + year3);
             }
@@ -272,18 +275,18 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     else if (Convert.ToString(monthAdded) == "12" && yearAdded == year) { month12++; }
                 }
                 ccLeadPerMonth.Diagram.Series[0].Points.Clear();
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[0]), month1));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[1]), month2));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[2]), month3));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[3]), month4));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[4]), month5));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[5]), month6));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[6]), month7));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[7]), month8));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[8]), month9));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[9]), month10));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[10]), month11));
-                ccLeadPerMonth.Diagram.Series[0].Points.Add(new SeriesPoint(Convert.ToString(months[11]), month12));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[0]), month1));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[1]), month2));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[2]), month3));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[3]), month4));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[4]), month5));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[5]), month6));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[6]), month7));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[7]), month8));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[8]), month9));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[9]), month10));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[10]), month11));
+                ccLeadPerMonth.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(Convert.ToString(months[11]), month12));
 
                 lblChartPerMonth.Text = "Total Leads : " + Convert.ToString(month1 + month2 + month3 
                     + month4 + month5 + month6 + month7 + month8 + month9 + month10 + month11 + month12);
@@ -309,7 +312,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                             overAll++;
                         }
                     }
-                    ccPerSalesStageStatus.Diagram.Series[0].Points.Add(new SeriesPoint(item.SalesStageName, countLeads));
+                    ccPerSalesStageStatus.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(item.SalesStageName, countLeads));
                     ccPerSalesStageStatus.ToolTipEnabled = true;
                     ccPerSalesStageStatus.Legend.DataContext = item.SalesStageName;
                     countLeads = 0;
@@ -400,15 +403,36 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
 
                     if (status == "Engaged client")
                     {
-                        lblEngaged.Text = percent + "%";
+                        if (Convert.ToInt32(percent) < 10)
+                        {
+                            lblEngaged.Text = "0" + percent + "%";
+                        }
+                        else
+                        {
+                            lblEngaged.Text = percent + "%";
+                        }
                     }
                     else if (status == "Active")
                     {
-                        lblActive.Text = percent + "%";
+                        if (Convert.ToInt32(percent) < 10)
+                        {
+                            lblActive.Text = "0" + percent + "%";
+                        }
+                        else
+                        {
+                            lblActive.Text = percent + "%";
+                        }
                     }
                     else if (status == "Not active")
                     {
-                        lblNotContinue.Text = percent + "%";
+                        if (Convert.ToInt32(percent) < 10)
+                        {
+                            lblNotContinue.Text = "0" + percent + "%";
+                        }
+                        else
+                        {
+                            lblNotContinue.Text = percent + "%";
+                        }
                     }
                 }
 
@@ -424,7 +448,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             }
             else
             {
-                return percent = "00";
+                return percent = "0";
             }
         }
         #endregion
@@ -542,9 +566,163 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
 
         private void btnPerCompany_Click(object sender, RoutedEventArgs e)
         {
+            DashboardReportDesign.seriesList1.Clear();
+            DashboardReportDesign.seriesList2.Clear();
+            DashboardReportDesign.seriesList3.Clear();
             using (var context = new DatabaseContext())
             {
-                
+                var dataList = new List<DashboardReportData>();
+
+                #region Leads per month
+                var leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
+                DateTime[] months = { DateTime.Now.AddMonths(-2), DateTime.Now.AddMonths(-1), DateTime.Now };
+                if (months[0].Month >= DateTime.Now.Month && months[1].Month >= DateTime.Now.Month)
+                {
+                    months[0].AddYears(-1);
+                    months[1].AddYears(-1);
+                }
+                int countLeads = 0, overAll = 0;
+                DevExpress.XtraCharts.Series leadSeries = new DevExpress.XtraCharts.Series();
+
+                foreach (var month in months)
+                {
+                    foreach (var lead in leads)
+                    {
+                        leadSeries = new DevExpress.XtraCharts.Series(month.ToString("MMM"), ViewType.StackedBar);
+
+                        if (Convert.ToDateTime(lead.DateAdded).Month == month.Month && Convert.ToDateTime(lead.DateAdded).Year == month.Year)
+                        {
+                            countLeads++;
+                            overAll++;
+                        }
+                    }
+
+                    leadSeries.Points.Add(new DevExpress.XtraCharts.SeriesPoint(month.ToString("MMM yyyy"), countLeads));
+                    leadSeries.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Qualitative;
+                    DashboardReportDesign.seriesList1.Add(leadSeries);
+                    countLeads = 0;
+                }
+                #endregion
+
+                #region Leads per year
+                leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
+                DateTime[] years = { DateTime.Now.AddYears(-2), DateTime.Now.AddYears(-1), DateTime.Now };
+                countLeads = 0; overAll = 0;
+                DevExpress.XtraCharts.Series leadSeriesPerYear = new DevExpress.XtraCharts.Series();
+
+                foreach (var year in years)
+                {
+                    foreach (var lead in leads)
+                    {
+                        leadSeriesPerYear = new DevExpress.XtraCharts.Series(year.ToString("yyyy"), ViewType.StackedBar);
+
+                        if (Convert.ToDateTime(lead.DateAdded).Year == year.Year)
+                        {
+                            countLeads++;
+                            overAll++;
+                        }
+                    }
+
+                    leadSeriesPerYear.Points.Add(new DevExpress.XtraCharts.SeriesPoint(year.ToString("yyyy"), countLeads));
+                    leadSeriesPerYear.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Qualitative;
+                    DashboardReportDesign.seriesList2.Add(leadSeriesPerYear);
+                    countLeads = 0;
+                }
+                #endregion
+
+                #region Leads per Sales Stage
+                leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
+                var salesStages = context.SalesStages.ToList();
+                countLeads = 0; overAll = 0;
+                DevExpress.XtraCharts.Series leadSeriesPerStage = new DevExpress.XtraCharts.Series();
+                leadSeriesPerStage = new DevExpress.XtraCharts.Series("Sales Stages", ViewType.Pie);
+
+                foreach (var salesStage in salesStages)
+                {
+                    foreach (var lead in leads)
+                    {
+                        if (lead.Status == salesStage.SalesStageName)
+                        {
+                            countLeads++;
+                            overAll++;
+                        }
+                    }
+
+                    leadSeriesPerStage.Points.Add(new DevExpress.XtraCharts.SeriesPoint(salesStage.SalesStageName, countLeads));
+                    leadSeriesPerStage.LegendPointOptions.Pattern = "{A} : {V}";
+                    countLeads = 0;
+                }
+                leadSeriesPerStage.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Qualitative;
+                DashboardReportDesign.seriesList3.Add(leadSeriesPerStage);
+                #endregion
+
+                #region Overall Leads
+                leads = context.Leads.ToList();
+                List<string> statuses = new List<string>() {"Engaged client", "Active", "Not active"};
+                countLeads = 0; overAll = leads.Count(); string percent = "";
+
+                foreach (var status in statuses)
+                {
+                    foreach (var item in leads)
+                    {
+                        var customerAccount = context.CustomerAccounts.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
+
+                        if (item.IsActive == true && status == statuses[0] && customerAccount != null && item.Status == "New Customer")
+                        {
+                            countLeads++;
+                        }
+                        else if (item.IsActive == true && status == statuses[1] && customerAccount == null)
+                        {
+                            countLeads++;
+                        }
+                        else if (item.IsActive == false && status == statuses[2] && customerAccount == null)
+                        {
+                            countLeads++;
+                        }
+                    }
+
+                    Compute(countLeads, overAll, out percent);
+                    countLeads = 0;
+
+                    if (status == statuses[0])
+                    {
+                        if (Convert.ToInt32(percent) < 10)
+                        {
+                            DashboardReportDesign.lblEngaged.Text = "0" + percent + "%";
+                        }
+                        else
+                        {
+                            DashboardReportDesign.lblEngaged.Text = percent + "%";
+                        }
+                    }
+                    else if (status == statuses[1])
+                    {
+                        if (Convert.ToInt32(percent) < 10)
+                        {
+                            DashboardReportDesign.lblActive.Text = "0" + percent + "%";
+                        }
+                        else
+                        {
+                            DashboardReportDesign.lblActive.Text = percent + "%";
+                        }
+                    }
+                    else if (status == statuses[2])
+                    {
+                        if (Convert.ToInt32(percent) < 10)
+                        {
+                            DashboardReportDesign.lblNotActive.Text = "0" + percent + "%";
+                        }
+                        else
+                        {
+                            DashboardReportDesign.lblNotActive.Text = percent + "%";
+                        }
+                    }
+                }
+                #endregion
+
+                var report = new DashboardReportDesign() { };
+                ReportPrintTool printTool = new ReportPrintTool(report);
+                printTool.ShowRibbonPreviewDialog();
             }
         }
 
