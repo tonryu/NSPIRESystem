@@ -16,6 +16,10 @@ namespace NSPIREIncSystem.Reports
         public static XRLabel lblActive = new XRLabel();
         public static XRLabel lblEngaged = new XRLabel();
         public static XRLabel lblNotActive = new XRLabel();
+        public static XRLabel lblLeadsMonth = new XRLabel();
+        public static XRLabel lblLeadsYear = new XRLabel();
+        public static XRLabel lblLeadsSalesStage = new XRLabel();
+        public static XRLabel lblAllLeads = new XRLabel();
         DashboardReportData data = new DashboardReportData();
 
         public DashboardReportDesign()
@@ -60,6 +64,26 @@ namespace NSPIREIncSystem.Reports
         private void xrLabel10_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             xrLabel10.Text = lblNotActive.Text;
+        }
+
+        private void lblLeadsPerMonth_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            lblLeadsPerMonth.Text = "Total : " + lblLeadsMonth.Text;
+        }
+
+        private void lblLeadsPerYear_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            lblLeadsPerYear.Text = "Total : " + lblLeadsYear.Text;
+        }
+
+        private void lblLeadsPerSalesStage_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            lblLeadsPerSalesStage.Text = "Total : " + lblLeadsSalesStage.Text;
+        }
+
+        private void lblOverallLeads_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            lblOverallLeads.Text = "Total : " + lblAllLeads.Text;
         }
     }
 }

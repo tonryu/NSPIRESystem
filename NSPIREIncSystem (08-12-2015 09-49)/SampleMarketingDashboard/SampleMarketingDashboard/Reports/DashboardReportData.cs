@@ -15,6 +15,10 @@ namespace NSPIREIncSystem.Reports
         public string LeadsEngaged { get; set; }
         public string LeadsDidNotContinue { get; set; }
         public string OverallLeads { get; set; }
+        public int TotalLeadsMonth { get; set; }
+        public int TotalLeadsYear { get; set; }
+        public int TotalLeadsSalesStage { get; set; }
+        public int TotalLeads { get; set; }
         public List<DashboardReportDetail> details { get; set; }
 
     }

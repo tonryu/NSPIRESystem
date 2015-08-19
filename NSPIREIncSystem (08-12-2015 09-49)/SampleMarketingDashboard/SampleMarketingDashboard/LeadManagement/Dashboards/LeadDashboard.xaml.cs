@@ -571,7 +571,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             DashboardReportDesign.seriesList3.Clear();
             using (var context = new DatabaseContext())
             {
-                var dataList = new List<DashboardReportData>();
+                List<DashboardReportData> dataList = new List<DashboardReportData>();
 
                 #region Leads per month
                 var leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
@@ -602,6 +602,8 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     DashboardReportDesign.seriesList1.Add(leadSeries);
                     countLeads = 0;
                 }
+
+                DashboardReportDesign.lblLeadsMonth.Text = Convert.ToString(overAll);
                 #endregion
 
                 #region Leads per year
@@ -628,6 +630,8 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     DashboardReportDesign.seriesList2.Add(leadSeriesPerYear);
                     countLeads = 0;
                 }
+
+                DashboardReportDesign.lblLeadsYear.Text = Convert.ToString(overAll);
                 #endregion
 
                 #region Leads per Sales Stage
@@ -654,6 +658,8 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 }
                 leadSeriesPerStage.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Qualitative;
                 DashboardReportDesign.seriesList3.Add(leadSeriesPerStage);
+
+                DashboardReportDesign.lblLeadsSalesStage.Text = Convert.ToString(overAll);
                 #endregion
 
                 #region Overall Leads
@@ -718,6 +724,8 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                         }
                     }
                 }
+
+                DashboardReportDesign.lblAllLeads.Text = Convert.ToString(overAll);
                 #endregion
 
                 var report = new DashboardReportDesign() { };
