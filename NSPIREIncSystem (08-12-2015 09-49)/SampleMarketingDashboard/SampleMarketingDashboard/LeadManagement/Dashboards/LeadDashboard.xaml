@@ -350,21 +350,21 @@
                     </Grid.RowDefinitions>
                     <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="3">
                         <TextBlock Text="OVERALL LEADS" Foreground="#0069ff" FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
-                        <TextBlock Text="AS OF JULY 27, 2015, 00:00" Foreground="#0069ff" FontSize="10" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
+                        <TextBlock x:Name="lblDate" Text="AS OF MMMM d, yyyy, hh:mm" Foreground="#0069ff" FontSize="10" HorizontalAlignment="Center" Grid.ColumnSpan="3"/>
                     </StackPanel>
-                  
+                    
                     <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-                        <TextBlock x:Name="lblEngaged" Text="40%"  Foreground="#FFECE210" />
+                        <TextBlock x:Name="lblEngaged"  Foreground="#FFECE210" />
                     </Viewbox>
                     <TextBlock Text="of Leads are engaged clients" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FFECE210" Padding="10 0 10 10" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1"/>
                     
                     <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
-                        <TextBlock x:Name="lblNotContinue" Text="10%"  Foreground="#FFDC1313" />
+                        <TextBlock x:Name="lblNotContinue" Foreground="#FFDC1313" />
                     </Viewbox>
                     <TextBlock Text="of Leads did not continue" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FFDC1313" Margin="10 0 10 10" TextWrapping="Wrap"/>
                     
                     <Viewbox  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-                        <TextBlock x:Name="lblActive" Text="50%" Foreground="#FF00A600" />
+                        <TextBlock x:Name="lblActive" Foreground="#FF00A600" />
                     </Viewbox>
                     <TextBlock Text="of Leads are still active" Grid.Row="2" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" VerticalAlignment="Center" Foreground="#FF00A600" Margin="10 0 10 10" TextWrapping="Wrap"/>
                     

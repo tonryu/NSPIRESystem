@@ -377,6 +377,42 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 var leads = context.Leads.ToList();
                 List<string> statuses = new List<string>() {"Engaged client", "Active", "Not active"};
                 int countLeads = 0, overAll = leads.Count(); string percent = "";
+                DateTime dateTime = DateTime.Now;
+
+                if (dateTime.DayOfWeek == DayOfWeek.Monday)
+                {
+                    dateTime = DateTime.Now.AddDays(-1);
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
+                else if (dateTime.DayOfWeek == DayOfWeek.Tuesday)
+                {
+                    dateTime = DateTime.Now.AddDays(-2);
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
+                else if (dateTime.DayOfWeek == DayOfWeek.Wednesday)
+                {
+                    dateTime = DateTime.Now.AddDays(-3);
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
+                else if (dateTime.DayOfWeek == DayOfWeek.Thursday)
+                {
+                    dateTime = DateTime.Now.AddDays(-4);
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
+                else if (dateTime.DayOfWeek == DayOfWeek.Friday)
+                {
+                    dateTime = DateTime.Now.AddDays(-5);
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
+                else if (dateTime.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    dateTime = DateTime.Now.AddDays(-6);
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
+                else
+                {
+                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
+                }
 
                 foreach (var status in statuses)
                 {
