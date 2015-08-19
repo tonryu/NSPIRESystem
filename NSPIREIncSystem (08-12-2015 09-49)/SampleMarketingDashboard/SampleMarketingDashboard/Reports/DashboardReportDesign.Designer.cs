@@ -40,6 +40,10 @@
             DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel1 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel2 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.lblLeadsPerYear = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblLeadsPerSalesStage = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblLeadsPerMonth = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblOverallLeads = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel11 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel9 = new DevExpress.XtraReports.UI.XRLabel();
@@ -57,10 +61,6 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblOverallLeads = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblLeadsPerMonth = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblLeadsPerSalesStage = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblLeadsPerYear = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrChart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(simpleDiagram1)).BeginInit();
@@ -101,6 +101,62 @@
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
+            // lblLeadsPerYear
+            // 
+            this.lblLeadsPerYear.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeadsYear")});
+            this.lblLeadsPerYear.LocationFloat = new DevExpress.Utils.PointFloat(745.8333F, 23.54167F);
+            this.lblLeadsPerYear.Name = "lblLeadsPerYear";
+            this.lblLeadsPerYear.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
+            this.lblLeadsPerYear.SizeF = new System.Drawing.SizeF(244.1667F, 23F);
+            this.lblLeadsPerYear.StylePriority.UsePadding = false;
+            this.lblLeadsPerYear.StylePriority.UseTextAlignment = false;
+            this.lblLeadsPerYear.Text = "lblLeadsPerYear";
+            this.lblLeadsPerYear.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.lblLeadsPerYear.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblLeadsPerYear_BeforePrint);
+            // 
+            // lblLeadsPerSalesStage
+            // 
+            this.lblLeadsPerSalesStage.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeadsSalesStage")});
+            this.lblLeadsPerSalesStage.LocationFloat = new DevExpress.Utils.PointFloat(256.875F, 283.3333F);
+            this.lblLeadsPerSalesStage.Name = "lblLeadsPerSalesStage";
+            this.lblLeadsPerSalesStage.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
+            this.lblLeadsPerSalesStage.SizeF = new System.Drawing.SizeF(192.7084F, 23F);
+            this.lblLeadsPerSalesStage.StylePriority.UsePadding = false;
+            this.lblLeadsPerSalesStage.StylePriority.UseTextAlignment = false;
+            this.lblLeadsPerSalesStage.Text = "lblLeadsPerSalesStage";
+            this.lblLeadsPerSalesStage.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.lblLeadsPerSalesStage.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblLeadsPerSalesStage_BeforePrint);
+            // 
+            // lblLeadsPerMonth
+            // 
+            this.lblLeadsPerMonth.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeadsMonth")});
+            this.lblLeadsPerMonth.LocationFloat = new DevExpress.Utils.PointFloat(256.875F, 23.54169F);
+            this.lblLeadsPerMonth.Name = "lblLeadsPerMonth";
+            this.lblLeadsPerMonth.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
+            this.lblLeadsPerMonth.SizeF = new System.Drawing.SizeF(192.7084F, 23F);
+            this.lblLeadsPerMonth.StylePriority.UsePadding = false;
+            this.lblLeadsPerMonth.StylePriority.UseTextAlignment = false;
+            this.lblLeadsPerMonth.Text = "lblLeadsPerMonth";
+            this.lblLeadsPerMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.lblLeadsPerMonth.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblLeadsPerMonth_BeforePrint);
+            // 
+            // lblOverallLeads
+            // 
+            this.lblOverallLeads.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeads")});
+            this.lblOverallLeads.LocationFloat = new DevExpress.Utils.PointFloat(745.8333F, 283.3333F);
+            this.lblOverallLeads.Name = "lblOverallLeads";
+            this.lblOverallLeads.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
+            this.lblOverallLeads.SizeF = new System.Drawing.SizeF(244.1664F, 23F);
+            this.lblOverallLeads.StylePriority.UsePadding = false;
+            this.lblOverallLeads.StylePriority.UseTextAlignment = false;
+            this.lblOverallLeads.Text = "lblOverallLeads";
+            this.lblOverallLeads.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.lblOverallLeads.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblOverallLeads_BeforePrint);
+            // 
             // xrLabel11
             // 
             this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(837.9164F, 416.5833F);
@@ -132,7 +188,7 @@
             // 
             // xrLabel9
             // 
-            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(667.7083F, 497.2084F);
+            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(667.7083F, 416.5833F);
             this.xrLabel9.Name = "xrLabel9";
             this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.xrLabel9.SizeF = new System.Drawing.SizeF(152.0834F, 45.91669F);
@@ -147,7 +203,7 @@
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "LeadsEngaged")});
             this.xrLabel8.Font = new System.Drawing.Font("Arial", 50F);
             this.xrLabel8.ForeColor = System.Drawing.Color.Khaki;
-            this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(667.7083F, 386.9582F);
+            this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(667.7083F, 306.3331F);
             this.xrLabel8.Name = "xrLabel8";
             this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.xrLabel8.SizeF = new System.Drawing.SizeF(152.0834F, 110.2502F);
@@ -327,62 +383,6 @@
             this.xrLabel1.StylePriority.UseTextAlignment = false;
             this.xrLabel1.Text = "xrLabel1";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            // 
-            // lblOverallLeads
-            // 
-            this.lblOverallLeads.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeads")});
-            this.lblOverallLeads.LocationFloat = new DevExpress.Utils.PointFloat(745.8333F, 283.3333F);
-            this.lblOverallLeads.Name = "lblOverallLeads";
-            this.lblOverallLeads.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblOverallLeads.SizeF = new System.Drawing.SizeF(244.1664F, 23F);
-            this.lblOverallLeads.StylePriority.UsePadding = false;
-            this.lblOverallLeads.StylePriority.UseTextAlignment = false;
-            this.lblOverallLeads.Text = "lblOverallLeads";
-            this.lblOverallLeads.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblOverallLeads.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblOverallLeads_BeforePrint);
-            // 
-            // lblLeadsPerMonth
-            // 
-            this.lblLeadsPerMonth.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeadsMonth")});
-            this.lblLeadsPerMonth.LocationFloat = new DevExpress.Utils.PointFloat(256.875F, 23.54169F);
-            this.lblLeadsPerMonth.Name = "lblLeadsPerMonth";
-            this.lblLeadsPerMonth.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblLeadsPerMonth.SizeF = new System.Drawing.SizeF(192.7084F, 23F);
-            this.lblLeadsPerMonth.StylePriority.UsePadding = false;
-            this.lblLeadsPerMonth.StylePriority.UseTextAlignment = false;
-            this.lblLeadsPerMonth.Text = "lblLeadsPerMonth";
-            this.lblLeadsPerMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblLeadsPerMonth.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblLeadsPerMonth_BeforePrint);
-            // 
-            // lblLeadsPerSalesStage
-            // 
-            this.lblLeadsPerSalesStage.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeadsSalesStage")});
-            this.lblLeadsPerSalesStage.LocationFloat = new DevExpress.Utils.PointFloat(256.875F, 283.3333F);
-            this.lblLeadsPerSalesStage.Name = "lblLeadsPerSalesStage";
-            this.lblLeadsPerSalesStage.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblLeadsPerSalesStage.SizeF = new System.Drawing.SizeF(192.7084F, 23F);
-            this.lblLeadsPerSalesStage.StylePriority.UsePadding = false;
-            this.lblLeadsPerSalesStage.StylePriority.UseTextAlignment = false;
-            this.lblLeadsPerSalesStage.Text = "lblLeadsPerSalesStage";
-            this.lblLeadsPerSalesStage.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblLeadsPerSalesStage.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblLeadsPerSalesStage_BeforePrint);
-            // 
-            // lblLeadsPerYear
-            // 
-            this.lblLeadsPerYear.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "TotalLeadsYear")});
-            this.lblLeadsPerYear.LocationFloat = new DevExpress.Utils.PointFloat(745.8333F, 23.54167F);
-            this.lblLeadsPerYear.Name = "lblLeadsPerYear";
-            this.lblLeadsPerYear.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
-            this.lblLeadsPerYear.SizeF = new System.Drawing.SizeF(244.1667F, 23F);
-            this.lblLeadsPerYear.StylePriority.UsePadding = false;
-            this.lblLeadsPerYear.StylePriority.UseTextAlignment = false;
-            this.lblLeadsPerYear.Text = "lblLeadsPerYear";
-            this.lblLeadsPerYear.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblLeadsPerYear.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblLeadsPerYear_BeforePrint);
             // 
             // bindingSource1
             // 

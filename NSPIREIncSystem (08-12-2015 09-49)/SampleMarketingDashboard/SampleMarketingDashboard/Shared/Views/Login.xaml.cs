@@ -130,7 +130,7 @@ namespace NSPIREIncSystem.Shared.Views
         {
             using (var context = new DatabaseContext())
             {
-                var user = context.UserAccounts.FirstOrDefault(c => c.UserAccountId.ToLower() == txtUsername.Text.ToLower());
+                var user = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == txtUsername.Text);
                 string searchVal1 = txtUsername.Text, searchVal2 = txtPassword.Text;
                 byte[] data = System.Text.Encoding.Unicode.GetBytes(searchVal2);
                 //byte[] datas = System.Text.Encoding.Unicode.GetBytes(searchVal2);

@@ -129,6 +129,7 @@ namespace NSPIREIncSystem.Models
         public string Status { get; set; }
         public string DateAdded { get; set; }
         public bool IsActive { get; set; }
+        public int MarketingStrategyId { get; set; }
     }
 
     public class Territory
@@ -188,5 +189,12 @@ namespace NSPIREIncSystem.Models
         public string PhoneNo { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
+    }
+
+    public class MarketingStrategy
+    {
+        [Key]
+        public int MarketingStrategyId { get; set; }
+        public string Description { get; set; }
     }
 }

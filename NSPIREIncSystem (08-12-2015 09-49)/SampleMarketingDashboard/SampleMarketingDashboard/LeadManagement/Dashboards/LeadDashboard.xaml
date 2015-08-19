@@ -208,17 +208,6 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:BarSideBySideSeries2D DisplayName="per year" LabelsVisibility="True">
-                                    <dxc:BarSideBySideSeries2D.Model>
-                                        <dxc:OutsetBar2DModel/>
-                                    </dxc:BarSideBySideSeries2D.Model>
-                                    <dxc:BarSideBySideSeries2D.Label>
-                                        <dxc:SeriesLabel Indent="5"/>
-                                    </dxc:BarSideBySideSeries2D.Label>
-                                    <dxc:SeriesPoint Argument="2013" Value="3"/>
-                                    <dxc:SeriesPoint Argument="2014" Value="1"/>
-                                    <dxc:SeriesPoint Argument="2015" Value="2"/>
-                                </dxc:BarSideBySideSeries2D>
                             </dxc:XYDiagram2D>
                         </dxc:ChartControl>
                         <TextBlock Text="Total : 6" Grid.Row="2" Foreground="#0069ff"/>
@@ -252,17 +241,6 @@
                                         </dxc:AxisX2D.Title>
                                     </dxc:AxisX2D>
                                 </dxc:XYDiagram2D.AxisX>
-                                <dxc:BarSideBySideSeries2D DisplayName="per month" LabelsVisibility="True">
-                                    <dxc:BarSideBySideSeries2D.Model>
-                                        <dxc:OutsetBar2DModel/>
-                                    </dxc:BarSideBySideSeries2D.Model>
-                                    <dxc:BarSideBySideSeries2D.Label>
-                                        <dxc:SeriesLabel Indent="5"/>
-                                    </dxc:BarSideBySideSeries2D.Label>
-                                    <dxc:SeriesPoint Argument="December 1-31, 2013" Value="2"/>
-                                    <dxc:SeriesPoint Argument="January 1-31, 2014" Value="0"/>
-                                    <dxc:SeriesPoint Argument="February 1-28, 2014" Value="1"/>
-                                </dxc:BarSideBySideSeries2D>
                             </dxc:XYDiagram2D>
                         </dxc:ChartControl>
                         <TextBlock Text="Total : 3" Grid.Row="2" Foreground="#0069ff"/>
@@ -280,14 +258,15 @@
                             </dxc:ChartControl.Legend>
                             <dxc:SimpleDiagram2D>
                                 <dxc:PieSeries2D DisplayName="Series 1" LabelsVisibility="True">
+                                    <dxc:PieSeries2D.LegendPointOptions>
+                                        <dxc:PointOptions PointView="ArgumentAndValues" Pattern="{}{A} : {V}"/>
+                                    </dxc:PieSeries2D.LegendPointOptions>
                                     <dxc:PieSeries2D.Label>
                                         <dxc:SeriesLabel Indent="5" dxc:PieSeries.LabelPosition="Outside"/>
                                     </dxc:PieSeries2D.Label>
                                     <dxc:PieSeries2D.Model>
                                         <dxc:GlassPie2DModel/>
                                     </dxc:PieSeries2D.Model>
-                                    <dxc:SeriesPoint Argument="Bataan" Value="4"/>
-                                    <dxc:SeriesPoint Argument="Cavite" Value="3"/>
                                 </dxc:PieSeries2D>
                             </dxc:SimpleDiagram2D>
                         </dxc:ChartControl>
@@ -374,9 +353,9 @@
         </Border>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="5 5 5 10">
-            <Canvas x:Name="canvasLeadMenu" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Canvas x:Name="canvasLeadMenu" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackLeads">
-                    <Button x:Name="btnLeads" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLeads_Click" Padding="5 5 5 0">
+                    <Button x:Name="btnLeads" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLeads_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/lead-icon.png"/>
                         </Button.Background>
@@ -407,27 +386,25 @@
                     </StackPanel>
                 </StackPanel>
             </Canvas>
-            <Canvas x:Name="canvasSalesStages" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Canvas x:Name="canvasSalesStages" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <StackPanel x:Name="stackSalesStageMaster">
+                    <Button x:Name="btnSalesMaster" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSalesMaster_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/chart-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="STAGES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="MASTERDATA" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
                 <StackPanel x:Name="stackPerCompany">
                     <Button x:Name="btnPerCompany" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPerCompany_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/report-icon.png"/>
                         </Button.Background>
                     </Button>
-                    <StackPanel>
-                        <TextBlock Text="PER COMPANY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel x:Name="SalesStageMaster">
-                    <Button x:Name="btnsalesmaster" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnsalesmaster_Click">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/new images/report-icon.png"/>
-                        </Button.Background>
-                    </Button>
-                    <StackPanel>
-                        <TextBlock Text="STAGES" HorizontalAlignment="Center" Padding="5 0 5 0"/>
-                        <TextBlock Text="MASTERDATA" HorizontalAlignment="Center" Padding="5 0 5 5"/>
-                    </StackPanel>
+                    <TextBlock Text="PER COMPANY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
                 </StackPanel>
                 <StackPanel x:Name="stackBackToLeadMenu">
                     <Button x:Name="btnBackToLeadMenu" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
@@ -435,9 +412,7 @@
                             <ImageBrush ImageSource="/new images/back-icon.png"/>
                         </Button.Background>
                     </Button>
-                    <StackPanel>
-                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
-                    </StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
                 </StackPanel>
             </Canvas>
         </Grid>

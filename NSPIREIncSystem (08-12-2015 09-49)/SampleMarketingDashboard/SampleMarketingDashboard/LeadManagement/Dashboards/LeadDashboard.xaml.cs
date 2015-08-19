@@ -378,41 +378,8 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 List<string> statuses = new List<string>() {"Engaged client", "Active", "Not active"};
                 int countLeads = 0, overAll = leads.Count(); string percent = "";
                 DateTime dateTime = DateTime.Now;
-
-                if (dateTime.DayOfWeek == DayOfWeek.Monday)
-                {
-                    dateTime = DateTime.Now.AddDays(-1);
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
-                else if (dateTime.DayOfWeek == DayOfWeek.Tuesday)
-                {
-                    dateTime = DateTime.Now.AddDays(-2);
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
-                else if (dateTime.DayOfWeek == DayOfWeek.Wednesday)
-                {
-                    dateTime = DateTime.Now.AddDays(-3);
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
-                else if (dateTime.DayOfWeek == DayOfWeek.Thursday)
-                {
-                    dateTime = DateTime.Now.AddDays(-4);
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
-                else if (dateTime.DayOfWeek == DayOfWeek.Friday)
-                {
-                    dateTime = DateTime.Now.AddDays(-5);
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
-                else if (dateTime.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    dateTime = DateTime.Now.AddDays(-6);
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
-                else
-                {
-                    lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, 00:00").ToUpper();
-                }
+                
+                lblDate.Text = "AS OF " + dateTime.ToString("MMMM d, yyyy, hh:mm tt").ToUpper();
 
                 foreach (var status in statuses)
                 {
@@ -480,7 +447,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         {
             if (part > 0 && whole > 0)
             {
-                return percent = Convert.ToString(Convert.ToInt32((Convert.ToDouble((part * 100.00) / whole))));
+                return percent = Convert.ToString(Convert.ToInt32(Convert.ToDouble((part * 100.00) / whole)));
             }
             else
             {
@@ -860,7 +827,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             }
         }
 
-        private void btnsalesmaster_Click(object sender, RoutedEventArgs e)
+        private void btnSalesMaster_Click(object sender, RoutedEventArgs e)
         {
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             NSPIREIncSystem.LeadManagement.MasterDatas.SalesStage page = new MasterDatas.SalesStage();

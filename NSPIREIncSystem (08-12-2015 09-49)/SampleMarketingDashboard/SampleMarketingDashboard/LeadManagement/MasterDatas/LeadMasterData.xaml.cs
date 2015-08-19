@@ -358,24 +358,23 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
             if (_isExpanded != true && selectedLead != null)
             {
                 sb = this.FindResource("gridin") as Storyboard;
-
-                LeadDetails.LeadId = selectedLead.LeadId;
-
-                var page = new LeadDetails();
-                frame.Navigate(page);
+                sb.Begin(this);
+                _isExpanded = !_isExpanded;
             }
-            else
-            {
-                sb = this.FindResource("gridout") as Storyboard;
+            //else
+            //{
+            //    sb = this.FindResource("gridout") as Storyboard;
 
-                frame.BackNavigationMode = BackNavigationMode.Root;
-                frame.GoBack();
+            //    frame.BackNavigationMode = BackNavigationMode.Root;
+            //    frame.GoBack();
 
-                LoadMethod(txtSearch.Text);
-            }
+            //    LoadMethod(txtSearch.Text);
+            //}
 
-            sb.Begin(this);
-            _isExpanded = !_isExpanded;
+            LeadDetails.LeadId = selectedLead.LeadId;
+
+            var page = new LeadDetails();
+            frame.Navigate(page);
         }
 
         private void btnLeadActivities_Click(object sender, RoutedEventArgs e)
@@ -628,7 +627,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                     busyIndicator.IsBusy = true;
                     NullMessage();
                 }
-                LoadMethod(txtSearch.Text);
+                LoadLeads();
                 busyIndicator.IsBusy = false;
             }
         }
@@ -690,7 +689,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                     busyIndicator.IsBusy = true;
                     NullMessage();
                 }
-                LoadMethod(txtSearch.Text);
+                LoadLeads();
                 busyIndicator.IsBusy = false;
             }
         }
@@ -881,7 +880,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 frame.BackNavigationMode = BackNavigationMode.Root;
                 frame.GoBack();
 
-                LoadMethod(txtSearch.Text);
+                LoadLeads();
             }
         }
 

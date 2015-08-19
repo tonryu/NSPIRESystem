@@ -29,6 +29,7 @@ namespace NSPIREIncSystem.LeadManagement.Views
                 var territory = new Territory();
                 var salesStage = context.SalesStages.OrderBy(c => c.RankNo).Select(c => c.SalesStageName).ToList();
                 var territories = context.Territories.Select(c => c.TerritoryName).ToList();
+                var marketingStrategies = context.MarketingStrategies.Select(c => c.Description).ToList();
 
                 cbTerritory.ItemsSource = null;
                 if (territories != null) { cbTerritory.ItemsSource = territories; }
@@ -48,7 +49,20 @@ namespace NSPIREIncSystem.LeadManagement.Views
                 else
                 {
                     var windows = new Shared.Windows.NoticeWindow();
-                    Shared.Windows.NoticeWindow.message = "Sales Stage Status are empty.";
+                    Shared.Windows.NoticeWindow.message = "Sales Stage Status is empty.";
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
+
+                cbMarketingStrategy.ItemsSource = null;
+                if (marketingStrategies != null) { cbMarketingStrategy.ItemsSource = marketingStrategies; }
+                else
+                {
+                    var windows = new Shared.Windows.NoticeWindow();
+                    Shared.Windows.NoticeWindow.message = "Marketing Strategy is empty.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -60,6 +74,7 @@ namespace NSPIREIncSystem.LeadManagement.Views
                 {
                     lead = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
                     territory = context.Territories.FirstOrDefault(c => c.TerritoryID == lead.TerritoryID);
+                    var marketingStrategy = context.MarketingStrategies.FirstOrDefault(c => c.MarketingStrategyId == lead.MarketingStrategyId);
 
                     if (lead != null)
                     {
@@ -70,6 +85,11 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         txtCompanyName.Text = lead.CompanyName;
                         cbTerritory.SelectedItem = territory.TerritoryName;
                         cbStatus.Text = lead.Status;
+                        lblActiveCheck.Visibility = Visibility.Visible;
+                        tsActiveCheck.Visibility = Visibility.Visible;
+                        tsActiveCheck.IsChecked = lead.IsActive;
+                        if (marketingStrategy != null) { cbMarketingStrategy.SelectedItem = marketingStrategy.Description; }
+                        else { cbMarketingStrategy.SelectedItem = null; }
                     }
                 }
                 else
@@ -78,8 +98,11 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     txtLeadId.Visibility = Visibility.Hidden;
                     txtCompanyAddress.Text = "";
                     txtCompanyName.Text = "";
-                    cbStatus.SelectedItem = "";
+                    cbStatus.SelectedItem = null;
                     cbTerritory.SelectedItem = null;
+                    lblActiveCheck.Visibility = Visibility.Hidden;
+                    tsActiveCheck.Visibility = Visibility.Hidden;
+                    cbMarketingStrategy.SelectedItem = null;
                 }
             }
         }
@@ -93,7 +116,8 @@ namespace NSPIREIncSystem.LeadManagement.Views
 
                 if(txtCompanyAddress.Text != "" && txtCompanyName.Text != "" 
                         && (cbStatus.Text != "" || cbStatus.Text != null) 
-                        && (cbTerritory.Text != "" || cbTerritory.Text != null))
+                        && (cbTerritory.Text != "" || cbTerritory.Text != null)
+                        && (cbMarketingStrategy.Text!="" || cbMarketingStrategy.Text != null))
                 {
                     if (LeadId > 0)
                     {
@@ -111,10 +135,15 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                 if (lead.CompanyName.ToLower() == leadName.CompanyName.ToLower()
                                     && lead.CompanyAddress.ToLower() == leadName.CompanyAddress.ToLower())
                                 {
+                                    var marketingStrategy = context.MarketingStrategies.FirstOrDefault(c => c.Description.ToLower() == cbMarketingStrategy.Text.ToLower());
+
                                     lead.CompanyAddress = txtCompanyAddress.Text;
                                     lead.CompanyName = txtCompanyName.Text;
                                     lead.Status = cbStatus.Text;
                                     lead.TerritoryID = territory.TerritoryID;
+                                    lead.IsActive = tsActiveCheck.IsChecked.Value;
+                                    if (marketingStrategy != null) { lead.MarketingStrategyId = marketingStrategy.MarketingStrategyId; }
+                                    else { lead.MarketingStrategyId = 0; }
 
                                     context.SaveChanges();
                                     var windows = new Shared.Windows.NoticeWindow();
@@ -151,10 +180,16 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         {
                             lead = new Lead();
 
+                            var marketingStrategy = context.MarketingStrategies.FirstOrDefault(c => c.Description.ToLower() == cbMarketingStrategy.Text.ToLower());
+
                             lead.CompanyAddress = txtCompanyAddress.Text;
                             lead.CompanyName = txtCompanyName.Text;
                             lead.Status = cbStatus.Text;
                             lead.TerritoryID = territory.TerritoryID;
+                            lead.IsActive = true;
+                            lead.DateAdded = DateTime.Now.ToString("MM/dd/yyyy");
+                            if (marketingStrategy != null) { lead.MarketingStrategyId = marketingStrategy.MarketingStrategyId; }
+                            else { lead.MarketingStrategyId = 0; }
 
                             context.Leads.Add(lead);
                             context.SaveChanges();

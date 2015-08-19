@@ -25,12 +25,22 @@ namespace NSPIREIncSystem.LeadManagement.Views
             {
                 var lead = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
                 var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == lead.TerritoryID);
+                var marketingStrategy = context.MarketingStrategies.FirstOrDefault(c => c.MarketingStrategyId == lead.MarketingStrategyId);
 
                 txtCompanyAddress.Text = lead.CompanyAddress;
                 txtCompanyName.Text = lead.CompanyName;
                 txtLeadId.Text = Convert.ToString(lead.LeadID);
                 txtStatus.Text = lead.Status;
                 txtTerritory.Text = territory.TerritoryName;
+                txtMarketingStrategy.Text = marketingStrategy.Description;
+                if (lead.IsActive == true)
+                {
+                    txtActiveCheck.Text = "YES";
+                }
+                else
+                {
+                    txtActiveCheck.Text = "NO";
+                }
             }
         }
     }

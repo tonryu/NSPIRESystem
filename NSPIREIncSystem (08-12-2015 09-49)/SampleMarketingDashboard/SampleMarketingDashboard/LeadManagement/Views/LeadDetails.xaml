@@ -28,17 +28,23 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="LEAD ID #" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtLeadId" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtLeadId" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left" IsReadOnly="True"/>
             <TextBlock Text="COMPANY NAME" Grid.Row="1" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtCompanyName" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtCompanyName" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsReadOnly="True"/>
             <TextBlock Text="ADDRESS" Grid.Row="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtCompanyAddress" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtCompanyAddress" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsReadOnly="True"/>
             <TextBlock Text="TERRITORY" Grid.Row="3" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtTerritory" Grid.Row="3" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtTerritory" Grid.Row="3" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsReadOnly="True"/>
             <TextBlock Text="SALES STAGE STATUS" Grid.Row="4" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtStatus" Grid.Row="4" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtStatus" Grid.Row="4" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsReadOnly="True"/>
+            <TextBlock Text="MARKETING STRATEGY" Grid.Row="5" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
+            <dxe:TextEdit x:Name="txtMarketingStrategy" Grid.Row="5" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsReadOnly="True"/>
+            <TextBlock Text="IS ACTIVE?" Grid.Row="6" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
+            <dxe:TextEdit x:Name="txtActiveCheck" Grid.Row="6" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsReadOnly="True"/>
         </Grid>
     </Grid>
 </UserControl>
