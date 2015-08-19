@@ -398,6 +398,17 @@
                         <TextBlock Text="MASTERDATA" HorizontalAlignment="Center" Padding="5 0 5 5"/>
                     </StackPanel>
                 </StackPanel>
+                <StackPanel x:Name="stackMarketingStrategy">
+                    <Button x:Name="btnMarketingStrategy" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/chart-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="MARKETING" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="STRATEGY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    </StackPanel>
+                </StackPanel>
                 <StackPanel x:Name="stackPerCompany">
                     <Button x:Name="btnPerCompany" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPerCompany_Click">
                         <Button.Background>
