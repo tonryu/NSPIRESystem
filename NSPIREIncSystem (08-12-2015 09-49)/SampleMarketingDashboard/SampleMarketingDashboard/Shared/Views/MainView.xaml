@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
         <Grid Background="#0096ff">
             <StackPanel Orientation="Horizontal">
-                <Image Margin="50 30 0 10" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/images/Nspire New.png" Stretch="UniformToFill"/>
-                <TextBlock Margin="10 30 0 10" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="35" FontFamily="Segoe UI Light" Foreground="White" Text="NSPIRE System Prototype"/>
+                <!--<Image Margin="50 30 0 10" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/new images/nspire-new-logo.png" Stretch="UniformToFill"/>-->
+                <TextBlock Margin="50 30 0 10" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="35" FontFamily="Segoe UI Light" Foreground="White" Text="NSPIRE System Prototype"/>
             </StackPanel>
         </Grid>
 

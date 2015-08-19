@@ -6,7 +6,7 @@
         xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
         xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
         Title="NSPIRE Inc." WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize" 
-        Closing="Window_Closing" Icon="images/Nspire new.png">
+        Closing="Window_Closing" Icon="/new images/nspire-new-logo.png">
     <Window.Background>
         <ImageBrush ImageSource="/new images/05.jpg"/>
     </Window.Background>
@@ -20,8 +20,8 @@
             <ColumnDefinition Width="65*"/>
             <ColumnDefinition Width="35*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,0,-40,10"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-            <Image Height="320" Opacity=".25" Source="/images/Nspire new.png" />
+        <StackPanel Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0 0 10 10"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+            <Image Height="320" Opacity=".25" Source="/new images/nspire-new-logo.png" />
         </StackPanel>
         <dxwui:NavigationFrame Grid.ColumnSpan="2" Grid.RowSpan="3" Source="Login" AnimationType="Fade"/>
     </Grid>

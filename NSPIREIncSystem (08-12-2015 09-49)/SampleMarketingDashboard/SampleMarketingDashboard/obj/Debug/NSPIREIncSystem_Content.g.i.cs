@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("new%20images/01.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("new%20images/02.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("new%20images/03.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("new%20images/nspire-new-logo.png")]
 
 
