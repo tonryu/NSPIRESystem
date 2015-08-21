@@ -107,100 +107,119 @@
             </dx:DXTabItem>
         </dx:DXTabControl>
 
-        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="5 5 5 10">
             <Canvas x:Name="canvasMainMenu" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackLead">
-                    <Button x:Name="btnLead" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLead_Click">
+                    <Button x:Name="btnLead" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLead_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/lead-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="LEAD" HorizontalAlignment="Center"/>
+                        <TextBlock Text="LEAD" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel x:Name="stackTask">
-                    <Button x:Name="btnTask" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnTask_Click">
+                <StackPanel x:Name="stackSales">
+                    <Button x:Name="btnSales" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/task-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="TASK" HorizontalAlignment="Center"/>
+                        <TextBlock Text="SALES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="stackTask">
+                    <Button x:Name="btnTask" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnTask_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/task-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock Text="TASK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackCustomerService">
-                    <Button x:Name="btnCustomerService" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnCustomerService_Click">
+                    <Button x:Name="btnCustomerService" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnCustomerService_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/customer-service-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="CUSTOMER" HorizontalAlignment="Center"/>
-                        <TextBlock Text="SERVICE" HorizontalAlignment="Center"/>
+                        <TextBlock Text="CUSTOMER" HorizontalAlignment="Center" Padding="5 0 5 0"/>
+                        <TextBlock Text="SERVICE" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackSettings">
-                    <Button x:Name="btnSettings" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSettings_Click">
+                    <Button x:Name="btnSettings" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSettings_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/gear-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="SETTINGS" HorizontalAlignment="Center"/>
+                        <TextBlock Text="SETTINGS" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
             </Canvas>
+
             <Canvas x:Name="canvasSettings" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackSystemParameters">
-                    <Button x:Name="btnSysParams" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSysParams_Click">
+                    <Button x:Name="btnSysParams" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSysParams_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/sysparams-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="SYSTEM" HorizontalAlignment="Center"/>
-                        <TextBlock Text="PARAMETERS" HorizontalAlignment="Center"/>
+                        <TextBlock Text="SYSTEM" HorizontalAlignment="Center" Padding="5 0 5 0"/>
+                        <TextBlock Text="PARAMETERS" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackEmployees">
-                    <Button x:Name="btnEmployees" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEmployees_Click">
+                    <Button x:Name="btnEmployees" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEmployees_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/employee-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="EMPLOYEES" HorizontalAlignment="Center"/>
+                        <TextBlock Text="EMPLOYEES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackUsers">
-                    <Button x:Name="btnUsers" Cursor="Hand" Height="80" Width="80" Margin="3" Content="USERS" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnUsers_Click">
+                    <Button x:Name="btnUsers" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" Content="USERS" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnUsers_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/male-user-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="USERS" HorizontalAlignment="Center"/>
+                        <TextBlock Text="USERS" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackTerritories">
-                    <Button x:Name="btnTerritories" Cursor="Hand" Height="80" Width="80" Margin="3" Content="USERS" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnTerritories_Click">
+                    <Button x:Name="btnTerritories" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" Content="USERS" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnTerritories_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/office-building-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="TERRITORIES" HorizontalAlignment="Center"/>
+                        <TextBlock Text="TERRITORIES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackBackToMainMenu">
-                    <Button x:Name="btnBackToMainMenu" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToMainMenu_Click">
+                    <Button x:Name="btnBackToMainMenu" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToMainMenu_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/back-icon.png"/>
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="BACK" HorizontalAlignment="Center"/>
+                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
             </Canvas>

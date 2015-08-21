@@ -166,9 +166,6 @@
     <Compile Include="LeadManagement\Views\SalesStageForm.xaml.cs">
       <DependentUpon>SalesStageForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LeadManagement\Windows\LeadActivityWindow.xaml.cs">
-      <DependentUpon>LeadActivityWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LeadManagement\Views\LeadForm.xaml.cs">
       <DependentUpon>LeadForm.xaml</DependentUpon>
     </Compile>
@@ -176,12 +173,6 @@
     <Compile Include="Models\GridLengthAnimation.cs" />
     <Compile Include="Models\Variables.cs" />
     <Compile Include="Models\Views.cs" />
-    <Compile Include="LeadManagement\Windows\LeadDetailsWindow.xaml.cs">
-      <DependentUpon>LeadDetailsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LeadManagement\Windows\LeadWindow.xaml.cs">
-      <DependentUpon>LeadWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Reports\ContactsReportData.cs" />
     <Compile Include="Reports\ContactsReportDesign.cs">
       <SubType>Component</SubType>
@@ -213,6 +204,9 @@
     </Compile>
     <Compile Include="Reports\LeadsReportDesign.Designer.cs">
       <DependentUpon>LeadsReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Dashboards\SalesDashboard.xaml.cs">
+      <DependentUpon>SalesDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\MasterDatas\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
@@ -321,10 +315,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LeadManagement\Windows\LeadActivityWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="LeadManagement\Views\LeadForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -341,11 +331,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="LeadManagement\Windows\LeadDetailsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeadManagement\Windows\LeadWindow.xaml">
+    <Page Include="SalesManagement\Dashboards\SalesDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -762,7 +748,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomerServiceManagement\Windows\" />
-    <Folder Include="SalesManagement\" />
+    <Folder Include="SalesManagement\MasterDatas\" />
+    <Folder Include="SalesManagement\Views\" />
     <Folder Include="Settings\Reports\" />
     <Folder Include="TaskManagement\Windows\" />
   </ItemGroup>

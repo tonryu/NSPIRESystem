@@ -10,6 +10,7 @@ using NSPIREIncSystem.TaskManagement.Dashboards;
 using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
 using NSPIREIncSystem.Shared.Views;
 using System.Threading.Tasks;
+using NSPIREIncSystem.SalesManagement.Dashboards;
 
 namespace NSPIREIncSystem.Shared.Dashboards
 {
@@ -186,8 +187,6 @@ namespace NSPIREIncSystem.Shared.Dashboards
         }
         #endregion
 
-      
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             canvasMainMenu.Width = GetCanvasMinWidth(canvasMainMenu);
@@ -211,6 +210,14 @@ namespace NSPIREIncSystem.Shared.Dashboards
 
             Button clickedButton = sender as Button;
             MainView.b = clickedButton;
+        }
+
+        private void btnSales_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            SalesDashboard page = new SalesDashboard();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasMainMenu);
         }
 
         private void btnTask_Click(object sender, RoutedEventArgs e)

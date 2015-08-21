@@ -234,5 +234,17 @@ namespace NSPIREIncSystem.LeadManagement.Views
                 }
             }
         }
+
+        private void tsFinalizedCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            txtActivityDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
+            txtActivityTime.Text = DateTime.Now.ToString("HH:mm");
+        }
+
+        private void tsFinalizedCheck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtActivityDate.Text = null;
+            txtActivityTime.Text = null;
+        }
     }
 }

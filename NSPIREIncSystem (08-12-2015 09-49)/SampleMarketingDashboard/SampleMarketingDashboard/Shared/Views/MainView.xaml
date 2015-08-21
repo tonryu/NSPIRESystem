@@ -29,7 +29,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <dxwui:NavigationFrame x:Name="frameNavigate"/>
-            <TextBlock x:Name="txtHyperlink" FontSize="15" Grid.Row="1" VerticalAlignment="Center" Padding="5"/>
+            <!--<TextBlock x:Name="txtHyperlink" FontSize="15" Grid.Row="1" VerticalAlignment="Center" Padding="5"/>-->
         </Grid>
 
         <!--status bar-->

@@ -34,31 +34,31 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="lblActivityId" Text="LEAD ACTIVITY ID #" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtActivityId" IsEnabled="False" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left"/>
+            <dxe:TextEdit x:Name="txtActivityId" IsReadOnly="True" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left"/>
             <TextBlock x:Name="lblDescription" Text="DESCRIPTION" Grid.Row="1" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtDescription" IsEnabled="False" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" VerticalContentAlignment="Top" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtDescription" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" VerticalContentAlignment="Top" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblActivityDate" Text="ACTIVITY DATE" Grid.Row="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtActivityDate" IsEnabled="False" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtActivityDate" IsReadOnly="True" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblActivityTime" Text="ACTIVITY TIME" Grid.Row="3" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtActivityTime" IsEnabled="False" Grid.Row="3" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtActivityTime" IsReadOnly="True" Grid.Row="3" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblCost" Text="COST" Grid.Row="4" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtCost" IsEnabled="False" Grid.Row="4" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtCost" IsReadOnly="True" Grid.Row="4" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblContact" Text="CONTACT PERSON" Grid.Row="5" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtContact" IsEnabled="False" Grid.Row="5" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtContact" IsReadOnly="True" Grid.Row="5" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblClientResponse" Text="CLIENT RESPONSE" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtClientResponse" IsEnabled="False" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtClientResponse" IsReadOnly="True" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblTransactionDetails" Text="TRANSACTION DETAILS" Grid.Row="1" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtTransactionDetails" IsEnabled="False" Grid.Row="1" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtTransactionDetails" IsReadOnly="True" Grid.Row="1" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblSalesRep" Text="SALES REPRESENTATIVE" Grid.Row="2" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtSalesRep" IsEnabled="False" Grid.Row="2" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtSalesRep" IsReadOnly="True" Grid.Row="2" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblMarketingVoucher" Text="MARKETING VOUCHER #" Grid.Row="3" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtMarketingVoucher" IsEnabled="False" Grid.Row="3" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtMarketingVoucher" IsReadOnly="True" Grid.Row="3" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblNextStep" Text="NEXT STEP" Grid.Row="4" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtNextStep" IsEnabled="False" Grid.Row="4" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtNextStep" IsReadOnly="True" Grid.Row="4" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblNextStepDue" Text="NEXT STEP DUE DATE" Grid.Row="5" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtNextStepDue" IsEnabled="False" Grid.Row="5" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtNextStepDue" IsReadOnly="True" Grid.Row="5" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblFinalizedCheck" Text="IS FINALIZED?" Grid.Row="6" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtFinalizedCheck" IsEnabled="False" Grid.Row="6" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
+            <dxe:TextEdit x:Name="txtFinalizedCheck" IsReadOnly="True" Grid.Row="6" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
         </Grid>
     </Grid>
 </UserControl>

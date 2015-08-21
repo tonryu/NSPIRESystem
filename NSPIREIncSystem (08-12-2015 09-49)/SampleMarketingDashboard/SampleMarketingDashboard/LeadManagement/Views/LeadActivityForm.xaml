@@ -42,7 +42,7 @@
             <dxe:DateEdit x:Name="txtActivityDate" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" DateEditPopupContentType="DateTimePicker" AllowNullInput="False" IsTextEditable="False"/>
             <TextBlock x:Name="lblActivityTime"  Text="ACTIVITY TIME *" Grid.Row="3" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:TextEdit x:Name="txtActivityTime" Grid.Row="3" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" NullText="24-hour format" Mask="HH:mm"/>
-            <TextBlock x:Name="lblCost"  Text="COST *" Grid.Row="4" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
+            <TextBlock x:Name="lblCost" Text="COST *" Grid.Row="4" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:TextEdit x:Name="txtCost" Grid.Row="4" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblContact"  Text="CONTACT PERSON *" Grid.Row="5" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:ComboBoxEdit x:Name="cbContact" Grid.Row="5" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" IsTextEditable="False"/>
@@ -82,7 +82,7 @@
                                    UncheckedBackground="White"
                                    UncheckedForeground="Black"
                                    UncheckedText="NO"
-                                   Width="160"/>
+                                   Width="160" Checked="tsFinalizedCheck_Checked" Unchecked="tsFinalizedCheck_Unchecked"/>
         </Grid>
 
         <Button x:Name="btnSave" Cursor="Hand" Grid.Row="2" ToolTip="Save changes" BorderBrush="#0069ff" Style="{DynamicResource ButtonStyle1}" Margin="5" Width="50" Height="50" Click="btnSave_Click">

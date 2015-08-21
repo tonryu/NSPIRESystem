@@ -25,9 +25,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="LEAD MANAGEMENT DASHBOARD" FontSize="25" FontWeight="Bold" Margin="50 5 5 5" Grid.ColumnSpan="2" Foreground="White"/>
+        <TextBlock Text="LEAD MANAGEMENT DASHBOARD" FontSize="25" FontWeight="Bold" Margin="50 1 5 1" Grid.ColumnSpan="2" Foreground="White"/>
 
-        <dx:DXTabControl Grid.Row="1" Margin="50 5 5 5">
+        <dx:DXTabControl Grid.Row="1" Margin="50 0 5 0">
             <dx:DXTabItem Header="LEAD STATISTICS">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -179,14 +179,14 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Grid>
+                    <Grid Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="New Clients per Year" FontSize="15" Foreground="#0069ff"/>
-                        <dxc:ChartControl HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                        <dxc:ChartControl x:Name="ccEngagedPerYear" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
                             <dxc:ChartControl.Palette>
                                 <dxc:ChameleonPalette/>
                             </dxc:ChartControl.Palette>
@@ -210,16 +210,16 @@
                                 </dxc:XYDiagram2D.AxisX>
                             </dxc:XYDiagram2D>
                         </dxc:ChartControl>
-                        <TextBlock Text="Total : 6" Grid.Row="2" Foreground="#0069ff"/>
+                        <TextBlock x:Name="lblEngagedPerYear" Text="Total : 0" Grid.Row="2" Foreground="#0069ff"/>
                     </Grid>
-                    <Grid Grid.Column="1">
+                    <Grid Grid.ColumnSpan="2" Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="New Clients per Month" FontSize="15" Foreground="#0069ff"/>
-                        <dxc:ChartControl HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                        <dxc:ChartControl x:Name="ccEngagedPerMonth" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
                             <dxc:ChartControl.Palette>
                                 <dxc:ChameleonPalette/>
                             </dxc:ChartControl.Palette>
@@ -243,9 +243,9 @@
                                 </dxc:XYDiagram2D.AxisX>
                             </dxc:XYDiagram2D>
                         </dxc:ChartControl>
-                        <TextBlock Text="Total : 3" Grid.Row="2" Foreground="#0069ff"/>
+                        <TextBlock x:Name="lblEngagedPerMonth" Text="Total : 0" Grid.Row="2" Foreground="#0069ff"/>
                     </Grid>
-                    <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                    <!--<Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
@@ -271,12 +271,12 @@
                             </dxc:SimpleDiagram2D>
                         </dxc:ChartControl>
                         <TextBlock Text="Total : 7" Grid.Row="2" Foreground="#0069ff"/>
-                    </Grid>
+                    </Grid>-->
                 </Grid>
             </dx:DXTabItem>
         </dx:DXTabControl>
 
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="#0069ff" BorderThickness="2" Margin="5 5 50 5" Background="White">
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="#0069ff" BorderThickness="2" Margin="5 0 50 0" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -352,7 +352,7 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="5 5 5 10">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="5 5 5 5">
             <Canvas x:Name="canvasLeadMenu" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackLeads">
                     <Button x:Name="btnLeads" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLeads_Click">
@@ -361,7 +361,8 @@
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="LEADS" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                        <TextBlock Text="LEADS" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackSalesStage">
@@ -372,7 +373,7 @@
                     </Button>
                     <StackPanel>
                         <TextBlock Text="SALES STAGE" HorizontalAlignment="Center" Padding="5 0 5 1"/>
-                        <TextBlock Text="REPORTS" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                        <TextBlock Text="REPORTS" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackBack">
@@ -382,10 +383,12 @@
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
             </Canvas>
+
             <Canvas x:Name="canvasSalesStages" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackSalesStageMaster">
                     <Button x:Name="btnSalesMaster" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSalesMaster_Click">
@@ -395,7 +398,7 @@
                     </Button>
                     <StackPanel>
                         <TextBlock Text="STAGES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
-                        <TextBlock Text="MASTERDATA" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                        <TextBlock Text="MASTERDATA" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackMarketingStrategy">
@@ -406,7 +409,7 @@
                     </Button>
                     <StackPanel>
                         <TextBlock Text="MARKETING" HorizontalAlignment="Center" Padding="5 0 5 1"/>
-                        <TextBlock Text="STRATEGY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                        <TextBlock Text="STRATEGY" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackPerCompany">
@@ -415,7 +418,10 @@
                             <ImageBrush ImageSource="/new images/report-icon.png"/>
                         </Button.Background>
                     </Button>
-                    <TextBlock Text="PER COMPANY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <StackPanel>
+                        <TextBlock Text="PER COMPANY" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackBackToLeadMenu">
                     <Button x:Name="btnBackToLeadMenu" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBackToLeadMenu_Click">
@@ -423,7 +429,10 @@
                             <ImageBrush ImageSource="/new images/back-icon.png"/>
                         </Button.Background>
                     </Button>
-                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <StackPanel>
+                        <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    </StackPanel>
                 </StackPanel>
             </Canvas>
         </Grid>

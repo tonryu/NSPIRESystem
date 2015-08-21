@@ -73,7 +73,7 @@
             </Border>
         </Grid>
 
-        <Canvas x:Name="canvasSalesStagesMasterData" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5">
+        <Canvas x:Name="canvasSalesStagesMasterData" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 5 5 10">
             <StackPanel x:Name="stackView">
                 <Button x:Name="btnView" Cursor="Hand" Padding="5 5 5 0" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
                     <Button.Background>
@@ -81,7 +81,8 @@
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="VIEW" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <TextBlock Text="VIEW" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackAdd">
@@ -91,7 +92,7 @@
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="ADD" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <TextBlock Text="ADD" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackEdit">
@@ -101,7 +102,7 @@
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="MODIFY" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <TextBlock Text="MODIFY" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackDelete">
@@ -111,7 +112,7 @@
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="DELETE" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <TextBlock Text="DELETE" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackPrint">
@@ -121,7 +122,7 @@
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="PRINT" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <TextBlock Text="PRINT" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackBack">
@@ -131,7 +132,7 @@
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 5"/>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
         </Canvas>

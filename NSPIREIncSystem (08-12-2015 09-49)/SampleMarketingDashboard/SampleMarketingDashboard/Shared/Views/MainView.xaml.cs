@@ -40,34 +40,34 @@ namespace NSPIREIncSystem.Shared.Views
 
         public void AddHyperLink(Button button)
         {
-            button = b;
-            Run contentRun = new Run(button.Content.ToString());
-            Hyperlink existingHyperlink = hyperlinksList.FirstOrDefault(c => (c.Inlines.FirstOrDefault() as Run).Text == contentRun.Text);
-            if (existingHyperlink != null)
-            {
-                int index = hyperlinksList.IndexOf(existingHyperlink);
-                for (int i = hyperlinksList.Count() - 1; i >= index; i--) { hyperlinksList.Remove(hyperlinksList[i]); }
-            }
-            else
-            {
-                Hyperlink hlink = new Hyperlink();
-                hlink.Inlines.Add(contentRun);
-                hlink.Foreground = Brushes.Black;
+            //button = b;
+            //Run contentRun = new Run(button.Content.ToString());
+            //Hyperlink existingHyperlink = hyperlinksList.FirstOrDefault(c => (c.Inlines.FirstOrDefault() as Run).Text == contentRun.Text);
+            //if (existingHyperlink != null)
+            //{
+            //    int index = hyperlinksList.IndexOf(existingHyperlink);
+            //    for (int i = hyperlinksList.Count() - 1; i >= index; i--) { hyperlinksList.Remove(hyperlinksList[i]); }
+            //}
+            //else
+            //{
+            //    Hyperlink hlink = new Hyperlink();
+            //    hlink.Inlines.Add(contentRun);
+            //    hlink.Foreground = Brushes.Black;
 
-                hlink.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    button_Click(button, null);
-                };
+            //    hlink.Click += (object sender, RoutedEventArgs e) =>
+            //    {
+            //        button_Click(button, null);
+            //    };
 
-                hyperlinksList.Add(hlink);
-            }
+            //    hyperlinksList.Add(hlink);
+            //}
 
-            txtHyperlink.Inlines.Clear();
-            for (int i = 0; i < hyperlinksList.Count(); i++)
-            {
-                if (i > 0) { txtHyperlink.Inlines.Add(" | "); }
-                txtHyperlink.Inlines.Add(hyperlinksList[i]);
-            }
+            //txtHyperlink.Inlines.Clear();
+            //for (int i = 0; i < hyperlinksList.Count(); i++)
+            //{
+            //    if (i > 0) { txtHyperlink.Inlines.Add(" | "); }
+            //    txtHyperlink.Inlines.Add(hyperlinksList[i]);
+            //}
         }
 
         #endregion

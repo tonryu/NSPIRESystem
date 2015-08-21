@@ -40,6 +40,7 @@ namespace NSPIREIncSystem.Shared.Views
                     {
                         var user = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == str1
                             && c.Password == str2);
+
                         if (user != null)
                         {
                             empno = str1;
@@ -55,7 +56,7 @@ namespace NSPIREIncSystem.Shared.Views
                 }
                 catch (Exception ex)
                 {
-                    return "Error Message: " + ex.Message;
+                    return "Invalid username or password";
                 }
             });
         }
@@ -78,7 +79,7 @@ namespace NSPIREIncSystem.Shared.Views
             if (message != null)
             {
                 var window = new NoticeWindow();
-                NoticeWindow.message = "Invalid username or password";
+                NoticeWindow.message = message;
                 window.Height = 0;
                 window.Top = screenTopEdge + 8;
                 window.Left = (screenWidth / 2) - (window.Width / 2);
@@ -110,6 +111,8 @@ namespace NSPIREIncSystem.Shared.Views
 
                     btnOK.IsEnabled = false;
                     btnExit.IsEnabled = false;
+                    txtUsername.IsReadOnly = true;
+                    txtPassword.IsReadOnly = true;
                     var windows = new NotificationWindow();
                     NotificationWindow.username = Variables.UFirstName + " " + Variables.ULastName;
                     windows.Height = 0;
