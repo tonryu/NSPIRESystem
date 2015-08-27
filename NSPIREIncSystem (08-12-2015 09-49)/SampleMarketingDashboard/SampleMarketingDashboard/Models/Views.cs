@@ -90,6 +90,19 @@ namespace NSPIREIncSystem.Models
         public string CompanyName { get; set; }
     }
 
+    public class CustomerAccountsView
+    {
+        public string AccountNumber { get; set; }
+        public string Customer { get; set; }
+        public string Territory { get; set; }
+        public string Product { get; set; }
+        public string ModeOfPayment { get; set; }
+        public string Gross { get; set; }
+        public string Discount { get; set; }
+        public string ServiceCharge { get; set; }
+        public string NetValue { get; set; }
+    }
+
     // Classes
 
     public class UserAccount
@@ -178,7 +191,7 @@ namespace NSPIREIncSystem.Models
         public int RankNo { get; set; }
     }
 
-    public class CustomerAccount
+    public class Customer
     {
         [Key]
         public int CustomerID { get; set; }
@@ -196,5 +209,28 @@ namespace NSPIREIncSystem.Models
         [Key]
         public int MarketingStrategyId { get; set; }
         public string Description { get; set; }
+    }
+
+    public class CustomerAccount
+    {
+        [Key]
+        public string AccountNumber { get; set; }
+        public int CustomerID { get; set; }
+        public int TerritoryID { get; set; }
+        public int ProductID { get; set; }
+        public string ModeOfPayment { get; set; }
+        public string Gross { get; set; }
+        public string Discount { get; set; }
+        public string ServiceCharge { get; set; }
+        public string NetValue { get; set; }
+    }
+
+    public class Product
+    {
+        [Key]
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string Cost { get; set; }
+        public int CategoryID { get; set; }
     }
 }

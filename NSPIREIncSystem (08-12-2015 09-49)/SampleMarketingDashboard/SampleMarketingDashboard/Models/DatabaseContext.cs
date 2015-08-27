@@ -12,8 +12,10 @@ namespace NSPIREIncSystem.Models
         public DbSet<LeadActivity> LeadActivities { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<SalesStage> SalesStages { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerAccount> CustomerAccounts { get; set; }
         public DbSet<MarketingStrategy> MarketingStrategies { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,8 +27,10 @@ namespace NSPIREIncSystem.Models
             modelBuilder.Entity<LeadActivity>().ToTable("LeadActivities", "public");
             modelBuilder.Entity<Contact>().ToTable("Contacts", "public");
             modelBuilder.Entity<SalesStage>().ToTable("SalesStages", "public");
-            modelBuilder.Entity<CustomerAccount>().ToTable("CustomerDetails", "public");
+            modelBuilder.Entity<Customer>().ToTable("CustomerDetails", "public");
+            modelBuilder.Entity<CustomerAccount>().ToTable("CustomerAccounts", "public");
             modelBuilder.Entity<MarketingStrategy>().ToTable("MarketingStrategies", "public");
+            modelBuilder.Entity<Product>().ToTable("Products", "public");
         }
 
         public class Initializer : IDatabaseInitializer<DatabaseContext>

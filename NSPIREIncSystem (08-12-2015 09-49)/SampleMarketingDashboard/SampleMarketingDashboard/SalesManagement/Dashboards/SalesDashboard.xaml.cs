@@ -17,6 +17,7 @@ using DevExpress.Xpf.Charts;
 using DevExpress.Xpf.WindowsUI;
 using DevExpress.XtraCharts;
 using NSPIREIncSystem.Models;
+using NSPIREIncSystem.SalesManagement.MasterDatas;
 
 namespace NSPIREIncSystem.SalesManagement.Dashboards
 {
@@ -207,6 +208,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                 int countCustomers = 0, overAll = 0;
                 var chart = new DevExpress.XtraCharts.Series("", ViewType.Funnel);
 
+                //ccSalesFunnel.Diagram.Series[0].Points.Clear();
                 if (salesStages != null)
                 {
                     foreach (var salesStage in salesStages)
@@ -217,9 +219,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                         {
                             foreach (var lead in leads)
                             {
-                                var potentialClient = context.Leads.FirstOrDefault(c => c.Status == salesStage.SalesStageName);
-
-                                if (potentialClient != null)
+                                if (lead.Status == salesStage.SalesStageName)
                                 {
                                     countCustomers++;
                                     overAll++;
@@ -228,7 +228,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                         }
 
                         chart.Points.Add(new DevExpress.XtraCharts.SeriesPoint(salesStage.SalesStageName, countCustomers));
-                        ccSalesFunnel.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(chart.Points));
+                        //ccSalesFunnel.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(chart));
                         ccSalesFunnel.ToolTipEnabled = true;
                         countCustomers = 0;
                     }
@@ -245,6 +245,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                 var marketingStrategies = context.MarketingStrategies.ToList();
                 int countCustomers = 0, overAll = 0;
 
+                ccEffective.Diagram.Series[0].Points.Clear();
                 if (marketingStrategies != null)
                 {
                     foreach (var marketingStrategy in marketingStrategies)
@@ -305,15 +306,17 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
 
             using (var context = new DatabaseContext())
             {
-                var customerAccounts = context.CustomerAccounts.ToList();
+                var customerAccounts = context.Customers.ToList();
 
                 if (customerAccounts != null)
                 {
                     lbCustomerAccounts.ItemsSource = customerAccounts.Select(c => c.CompanyName).ToList();
+                    lblTotalAccounts.Text = "Total Customer Accounts : " + lbCustomerAccounts.Items.Count;
                 }
                 else
                 {
                     lbCustomerAccounts.ItemsSource = null;
+                    lblTotalAccounts.Text = "Total Customer Accounts : 0";
                 }
             }
         }
@@ -326,7 +329,10 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
 
         private void btnAccounts_Click(object sender, RoutedEventArgs e)
         {
-
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            NSPIREIncSystem.SalesManagement.MasterDatas.CustomerAccounts page = new NSPIREIncSystem.SalesManagement.MasterDatas.CustomerAccounts();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasSalesMenu);
         }
 
         private void btnReports_Click(object sender, RoutedEventArgs e)

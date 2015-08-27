@@ -208,6 +208,22 @@
     <Compile Include="SalesManagement\Dashboards\SalesDashboard.xaml.cs">
       <DependentUpon>SalesDashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalesManagement\MasterDatas\CustomerAccounts.xaml.cs">
+      <DependentUpon>CustomerAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomerAccountsReportData.cs" />
+    <Compile Include="SalesManagement\Reports\CustomerAccountsReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomerAccountsReportDesign.Designer.cs">
+      <DependentUpon>CustomerAccountsReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomerAccountDetails.xaml.cs">
+      <DependentUpon>CustomerAccountDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomerAccountsForm.xaml.cs">
+      <DependentUpon>CustomerAccountsForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\MasterDatas\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
@@ -332,6 +348,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SalesManagement\Dashboards\SalesDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SalesManagement\MasterDatas\CustomerAccounts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomerAccountDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomerAccountsForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -467,8 +495,12 @@
     <EmbeddedResource Include="Reports\LeadsReportDesign.resx">
       <DependentUpon>LeadsReportDesign.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SalesManagement\Reports\CustomerAccountsReportDesign.resx">
+      <DependentUpon>CustomerAccountsReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\NSPIREIncSystem.Reports.DashboardReportData.datasource" />
+    <None Include="Properties\DataSources\NSPIREIncSystem.SalesManagement.Reports.CustomerAccountsReportData.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -748,8 +780,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomerServiceManagement\Windows\" />
-    <Folder Include="SalesManagement\MasterDatas\" />
-    <Folder Include="SalesManagement\Views\" />
     <Folder Include="Settings\Reports\" />
     <Folder Include="TaskManagement\Windows\" />
   </ItemGroup>

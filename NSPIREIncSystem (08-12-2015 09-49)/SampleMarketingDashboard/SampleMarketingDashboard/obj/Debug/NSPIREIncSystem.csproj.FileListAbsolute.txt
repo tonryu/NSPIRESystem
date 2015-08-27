@@ -532,3 +532,10 @@ C:\Users\charisse\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-4
 C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.Reports.DashboardReportDesign.resources
 C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Dashboards\SalesDashboard.baml
 C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Dashboards\SalesDashboard.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\MasterDatas\CustomerAccounts.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\MasterDatas\CustomerAccounts.baml
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Views\CustomerAccountsForm.baml
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Views\CustomerAccountsForm.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Views\CustomerAccountDetails.baml
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Views\CustomerAccountDetails.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.SalesManagement.Reports.CustomerAccountsReportDesign.resources

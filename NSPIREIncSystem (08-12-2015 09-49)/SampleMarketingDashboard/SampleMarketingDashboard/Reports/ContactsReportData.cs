@@ -13,8 +13,9 @@ namespace NSPIREIncSystem.Reports
         public string ReportTitle { get; set; }
         public int TotalContacts { get; set; }
 
-         public List<ContactsReportDetail> details { get; set; }
+        public List<ContactsReportDetail> details { get; set; }
     }
+
     class ContactsReportDetail
     {
         public ContactsReportDetail() { }
@@ -23,6 +24,5 @@ namespace NSPIREIncSystem.Reports
         public string ContactPerson  { get; set; }
         public string Position { get; set; }
         public string PhoneNo { get; set; }
-      
     }
 }

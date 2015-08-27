@@ -385,7 +385,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 {
                     foreach (var item in leads)
                     {
-                        var customerAccount = context.CustomerAccounts.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
+                        var customerAccount = context.Customers.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
 
                         if (item.IsActive == true && status == "Engaged client" && customerAccount != null && item.Status == "New Customer")
                         {
@@ -674,7 +674,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 {
                     foreach (var item in leads)
                     {
-                        var customerAccount = context.CustomerAccounts.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
+                        var customerAccount = context.Customers.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
 
                         if (item.IsActive == true && status == statuses[0] && customerAccount != null && item.Status == "New Customer")
                         {
