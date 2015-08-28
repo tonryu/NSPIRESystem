@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
-using DevExpress.Xpf.Charts;
 using DevExpress.XtraCharts;
 using DevExpress.XtraReports.UI;
 using NSPIREIncSystem.LeadManagement.MasterDatas;

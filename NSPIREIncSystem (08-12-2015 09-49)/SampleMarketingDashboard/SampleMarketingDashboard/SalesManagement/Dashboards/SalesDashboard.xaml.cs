@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -277,21 +278,41 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
         #endregion
 
         #region Load details
-        #endregion
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private Task<string> QueryLoad()
         {
-            canvasSalesMenu.Width = GetCanvasMinWidth(canvasSalesMenu);
-            canvasSalesMenu.Height = GetCanvasMinHeight(canvasSalesMenu);
-            canvasSalesMenu.Visibility = Visibility.Collapsed;
-            canvasSalesMenu.Opacity = 0;
-            FoldInnerCanvasSideward(canvasSalesMenu);
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    using (var context = new DatabaseContext())
+                    {
+                        var customerAccounts = context.Customers.ToList();
 
-            canvasMasterData.Width = GetCanvasMinWidth(canvasMasterData);
-            canvasMasterData.Height = GetCanvasMinHeight(canvasMasterData);
-            canvasMasterData.Visibility = Visibility.Collapsed;
-            canvasMasterData.Opacity = 0;
+                        if (customerAccounts != null)
+                        {
+                            lbCustomerAccounts.ItemsSource = customerAccounts.Select(c => c.CompanyName).ToList();
+                            lblTotalAccounts.Text = "Total Customer Accounts : " + lbCustomerAccounts.Items.Count;
+                        }
+                        else
+                        {
+                            lbCustomerAccounts.ItemsSource = null;
+                            lblTotalAccounts.Text = "Total Customer Accounts : 0";
+                        }
+                    }
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    return "Error Message: " + ex.Message;
+                }
+            });
+        }
 
+        private async void Loading()
+        {
+            var message = await QueryLoad();
+
+            busyIndicator.IsBusy = true;
             FillAll();
 
             using (var context = new DatabaseContext())
@@ -309,6 +330,30 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                     lblTotalAccounts.Text = "Total Customer Accounts : 0";
                 }
             }
+
+            busyIndicator.IsBusy = false;
+        }
+
+        private void LoadDashboardDetails()
+        {
+            Loading();
+        }
+        #endregion
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            canvasSalesMenu.Width = GetCanvasMinWidth(canvasSalesMenu);
+            canvasSalesMenu.Height = GetCanvasMinHeight(canvasSalesMenu);
+            canvasSalesMenu.Visibility = Visibility.Collapsed;
+            canvasSalesMenu.Opacity = 0;
+            FoldInnerCanvasSideward(canvasSalesMenu);
+
+            canvasMasterData.Width = GetCanvasMinWidth(canvasMasterData);
+            canvasMasterData.Height = GetCanvasMinHeight(canvasMasterData);
+            canvasMasterData.Visibility = Visibility.Collapsed;
+            canvasMasterData.Opacity = 0;
+
+            LoadDashboardDetails();
         }
 
         private void btnMasterData_Click(object sender, RoutedEventArgs e)
