@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Animation;
+using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem
 {
@@ -23,6 +25,17 @@ namespace NSPIREIncSystem
             anim.Completed += (s, _) => this.Close();
             this.BeginAnimation(UIElement.OpacityProperty, anim);
             #endregion
+
+            using (var context = new DatabaseContext())
+            {
+                var log = new Log();
+                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                log.Description = NotificationWindow.username + " logs out on "
+                    + DateTime.Now.ToString("MMMM d, yyyy") + " at " + DateTime.Now.ToString("HH:mm") + ".";
+                context.Logs.Add(log);
+                context.SaveChanges();
+            }
         }
     }
 }

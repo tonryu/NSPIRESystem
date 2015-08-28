@@ -132,7 +132,7 @@ namespace NSPIREIncSystem.Shared.Views
                     log.Date = DateTime.Now.ToString("MM/dd/yyyy");
                     log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                     log.Description = NotificationWindow.username + " logs in on "
-                        + DateTime.Now.ToString("MMMM d, yyyy") + " at " + log.Time + ".";
+                        + DateTime.Now.ToString("MMMM d, yyyy") + " at " + DateTime.Now.ToString("HH:mm") + ".";
                     context.Logs.Add(log);
                     context.SaveChanges();
 

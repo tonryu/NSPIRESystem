@@ -161,8 +161,8 @@ namespace NSPIREIncSystem.LeadManagement.Views
                             var lead = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
                             var log = new Log();
                             log.Date = DateTime.Now.ToString("MM/dd/yyyy");
-                            log.Description = NotificationWindow.username + " created "
-                                + txtContactName.Text + " for " + lead.CompanyName + ".";
+                            log.Description = NotificationWindow.username + " created a contact ("
+                                + txtContactName.Text + ") for " + lead.CompanyName + ".";
                             log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                             context.Logs.Add(log);
 

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
+using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Shared.Views;
+using NSPIREIncSystem.Shared.Windows;
 using NSPIREIncSystem.TaskManagement.MasterDatas;
 
 namespace NSPIREIncSystem.TaskManagement.Dashboards
@@ -178,6 +182,52 @@ namespace NSPIREIncSystem.TaskManagement.Dashboards
         }
         #endregion
 
+        #region Add access to log
+        private Task<string> LogAccess()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            });
+        }
+
+        private async void Loading()
+        {
+            var message = await LogAccess();
+
+            if (message != null)
+            {
+
+            }
+
+            using (var context = new DatabaseContext())
+            {
+                var userAccount = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == MainView.Username);
+                if (userAccount != null)
+                {
+                    var log = new Log();
+                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                    log.Description = NotificationWindow.username + " accesses the Task Management Module.";
+                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    context.Logs.Add(log);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        private void LoadDashboard()
+        {
+            Loading();
+        }
+        #endregion
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             canvasTaskMenu.Width = GetCanvasMinWidth(canvasTaskMenu);
@@ -190,6 +240,8 @@ namespace NSPIREIncSystem.TaskManagement.Dashboards
             canvasSchedules.Height = GetCanvasMinHeight(canvasSchedules);
             canvasSchedules.Visibility = Visibility.Collapsed;
             canvasSchedules.Opacity = 0;
+
+            LoadDashboard();
         }
 
         private void btnTasks_Click(object sender, RoutedEventArgs e)

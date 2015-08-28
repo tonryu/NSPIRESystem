@@ -325,6 +325,13 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                         {
                             context.Territories.Remove(terri);
 
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            log.Description = NotificationWindow.username + " deleted "
+                                + selectedterritories.TerritoryName + " territory.";
+                            context.Logs.Add(log);
+
                             var windows = new Shared.Windows.NoticeWindow();
                             Shared.Windows.NoticeWindow.message = "Territory successfully deleted";
                             windows.Height = 0;
@@ -355,7 +362,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
 
         private void NullMessage()
         {
-            var windows = new Shared.Windows.NoticeWindow();
+            var windows = new NoticeWindow();
             NoticeWindow.message = "Please select a record.";
             windows.Height = 0;
             windows.Top = screenTopEdge + 8;

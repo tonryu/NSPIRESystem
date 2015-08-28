@@ -652,89 +652,96 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
         private void btnDeleteLead_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new DatabaseContext())
+            try
             {
-                var selectedLead = dcLeadsList.SelectedItem as LeadsView;
-
-                if (selectedLead != null)
+                using (var context = new DatabaseContext())
                 {
-                    var lead = context.Leads.FirstOrDefault(c => c.LeadID == selectedLead.LeadId);
+                    var selectedLead = dcLeadsList.SelectedItem as LeadsView;
 
-                    if (lead != null)
+                    if (selectedLead != null)
                     {
-                        var window = new MessageBoxWindow("Are you sure you want to delete this lead?");
-                        window.Height = 0;
-                        window.Top = screenTopEdge + 8;
-                        window.Left = (screenWidth / 2) - (window.Width / 2);
-                        if (screenLeftEdge > 0 || screenLeftEdge < -8) { window.Left += screenLeftEdge; }
-                        window.ShowDialog();
+                        var lead = context.Leads.FirstOrDefault(c => c.LeadID == selectedLead.LeadId);
 
-                        if (Variables.yesClicked == true)
+                        if (lead != null)
                         {
-                            var activity = context.LeadActivities.Where(c => ((c.ActivityDate == null || c.ActivityDate == "")
-                                || (c.ActivityTime == null || c.ActivityTime == "")) && (c.IsFinalized == false)).FirstOrDefault(c => c.LeadID == lead.LeadID);
+                            var window = new MessageBoxWindow("Are you sure you want to delete this lead?");
+                            window.Height = 0;
+                            window.Top = screenTopEdge + 8;
+                            window.Left = (screenWidth / 2) - (window.Width / 2);
+                            if (screenLeftEdge > 0 || screenLeftEdge < -8) { window.Left += screenLeftEdge; }
+                            window.ShowDialog();
 
-                            if (activity != null)
+                            if (Variables.yesClicked == true)
                             {
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "Lead still has an existing activity";
-                                windows.Height = 0;
-                                windows.Top = screenTopEdge + 8;
-                                windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                                windows.ShowDialog();
+                                var activity = context.LeadActivities.Where(c => ((c.ActivityDate == null || c.ActivityDate == "")
+                                    || (c.ActivityTime == null || c.ActivityTime == "")) && (c.IsFinalized == false)).FirstOrDefault(c => c.LeadID == lead.LeadID);
 
-                                var log = new Log();
-                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
-                                log.Description = lead.CompanyName
-                                    + " is not deleted due to existing activity(ies).";
-                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
-                                context.Logs.Add(log);
-                                context.SaveChanges();
-                            }
-                            else
-                            {
-                                busyIndicator.IsBusy = true;
-                                context.Leads.Remove(lead);
-
-                                var contacts = context.Contacts.ToList();
-
-                                foreach (var contact in contacts)
+                                if (activity != null)
                                 {
-                                    if (contact.LeadId == lead.LeadID)
-                                    {
-                                        context.Contacts.Remove(contact);
-                                    }
+                                    var windows = new Shared.Windows.NoticeWindow();
+                                    Shared.Windows.NoticeWindow.message = "Lead still has an existing activity";
+                                    windows.Height = 0;
+                                    windows.Top = screenTopEdge + 8;
+                                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                                    windows.ShowDialog();
+
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Description = lead.CompanyName
+                                        + " is not deleted due to existing activity(ies).";
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    context.Logs.Add(log);
+                                    context.SaveChanges();
                                 }
+                                else
+                                {
+                                    busyIndicator.IsBusy = true;
+                                    context.Leads.Remove(lead);
 
-                                var log = new Log();
-                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
-                                log.Description = NotificationWindow.username + " deleted " +
-                                    lead.CompanyName + ". All contacts of " +
-                                    lead.CompanyName + " is deleted as well.";
-                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
-                                context.Logs.Add(log);
+                                    var contacts = context.Contacts.ToList();
 
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "Lead successfully deleted";
-                                windows.Height = 0;
-                                windows.Top = screenTopEdge + 8;
-                                windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                                windows.ShowDialog();
+                                    foreach (var contact in contacts)
+                                    {
+                                        if (contact.LeadId == lead.LeadID)
+                                        {
+                                            context.Contacts.Remove(contact);
+                                        }
+                                    }
 
-                                context.SaveChanges();
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Description = NotificationWindow.username + " deleted " +
+                                        lead.CompanyName + ". Note: All contacts of " +
+                                        lead.CompanyName + " is deleted as well.";
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    context.Logs.Add(log);
+
+                                    var windows = new Shared.Windows.NoticeWindow();
+                                    Shared.Windows.NoticeWindow.message = "Lead successfully deleted";
+                                    windows.Height = 0;
+                                    windows.Top = screenTopEdge + 8;
+                                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                                    windows.ShowDialog();
+
+                                    context.SaveChanges();
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        busyIndicator.IsBusy = true;
+                        NullMessage();
+                    }
+                    LoadLeads();
+                    busyIndicator.IsBusy = false;
                 }
-                else
-                {
-                    busyIndicator.IsBusy = true;
-                    NullMessage();
-                }
-                LoadLeads();
-                busyIndicator.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,6 +7,7 @@ using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
 using NSPIREIncSystem.LeadManagement.Dashboards;
+using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Settings.MasterDatas;
 using NSPIREIncSystem.TaskManagement.Dashboards;
 
@@ -18,6 +20,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
     {
         double screenHeight = Application.Current.MainWindow.Height;
         double screenWidth = Application.Current.MainWindow.Width;
+        public List<TextBlock> textBlockList { get; set; }
 
         public AdminDashboard()
         {
@@ -196,6 +199,47 @@ namespace NSPIREIncSystem.Shared.Dashboards
             canvasSettings.Height = GetCanvasMinHeight(canvasSettings);
             canvasSettings.Visibility = Visibility.Collapsed;
             canvasSettings.Opacity = 0;
+
+            #region Logs
+            using (var context = new DatabaseContext())
+            {
+                var textBlock = new TextBlock();
+                var logs = context.Logs.ToList();
+                bool isDesc = true; Thickness margin = textBlock.Margin;
+                textBlock.TextWrapping = TextWrapping.Wrap;
+
+                foreach (var log in logs)
+                {
+                    if (isDesc != false)
+                    {
+                        textBlock = new TextBlock();
+                        textBlock.Text = log.Description;
+                        margin.Top = 10;
+                        margin.Bottom = 0;
+                        margin.Left = 10;
+                        margin.Right = 10;
+                        textBlock.Margin = margin;
+                        //textBlockList.Add(textBlock);
+                        sbLogs.Children.Add(textBlock);
+                        isDesc = false;
+                    }
+                    else
+                    {
+                        textBlock = new TextBlock();
+                        textBlock.Text = Convert.ToDateTime(log.Date).ToString("MMMM d, yyyy") + " " 
+                            + Convert.ToDateTime(log.Time).ToString("HH:mm:ss");
+                        margin.Top = 5;
+                        margin.Bottom = 10;
+                        margin.Left = 10;
+                        margin.Right = 20;
+                        textBlock.Margin = margin;
+                        //textBlockList.Add(textBlock);
+                        sbLogs.Children.Add(textBlock);
+                        isDesc = true;
+                    }
+                }
+            }
+            #endregion
         }
 
         private void btnLead_Click(object sender, RoutedEventArgs e)
