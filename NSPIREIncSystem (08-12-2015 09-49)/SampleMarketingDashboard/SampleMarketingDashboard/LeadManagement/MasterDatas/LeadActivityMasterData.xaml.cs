@@ -196,7 +196,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         }
         #endregion
 
-        #region LOAD DETAILS
+        #region Load details
         private Task<string> QueryLoadLeadActivity()
         {
             return Task.Factory.StartNew(() =>
@@ -260,7 +260,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
                 if (message != null)
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
+                    var windows = new NoticeWindow();
                     NoticeWindow.message = message;
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
@@ -290,7 +290,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 }
                 if (activityList.Count == 0)
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
+                    var windows = new NoticeWindow();
                     NoticeWindow.message = "List has no Activity.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;

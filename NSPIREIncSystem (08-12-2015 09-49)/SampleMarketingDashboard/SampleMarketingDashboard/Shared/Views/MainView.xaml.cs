@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Shared.Dashboards;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.Shared.Views
 {
@@ -70,81 +71,6 @@ namespace NSPIREIncSystem.Shared.Views
         }
 
         #endregion
-
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            lblTimer.Content = DateTime.Now.ToString("MMMM dd, yyyy - h:mm:ss tt");
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            updateTimer = new System.Windows.Threading.DispatcherTimer();
-            updateTimer.Tick += new EventHandler(UpdateUserProfileEvent);
-            updateTimer.Interval = TimeSpan.FromSeconds(0.1);
-            updateTimer.Start();
-
-            using(var context = new DatabaseContext())
-            {
-                var emp = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == Username);
-
-                if (emp.IsAdmin != true && (emp.CustomerServiceAccess != "Full" || emp.LeadManagementAccess != "Full"
-                    || emp.TaskManagementAccess != "Full"))
-                {
-                    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
-                    UserDashboard page = new UserDashboard();
-                    frame.Navigate(page);
-
-                    tbUsertype.Text = "User";
-                }
-                //else if (emp.IsAdmin == true && emp.LeadManagementAccess == "Full" && emp.TaskManagementAccess != "Full"
-                //    && emp.CustomerServiceAccess != "Full")
-                //{
-                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
-                //    LeadDashboard page = new LeadDashboard();
-                //    frame.Navigate(page);
-
-                //    tbUsertype.Text = "Lead Administrator";
-                //}
-                //else if (emp.IsAdmin == true && emp.TaskManagementAccess == "Full" && emp.LeadManagementAccess != "Full"
-                //    && emp.CustomerServiceAccess != "Full")
-                //{
-                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
-                //    TaskManagementDashboard page = new TaskManagementDashboard();
-                //    frame.Navigate(page);
-
-                //    tbUsertype.Text = "Task Administrator";
-                //}
-                //else if (emp.IsAdmin == true && emp.CustomerServiceAccess == "Full" && emp.TaskManagementAccess != "Full" 
-                //    && emp.LeadManagementAccess != "Full")
-                //{
-                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
-                //    CustomerServiceDashboard page = new CustomerServiceDashboard();
-                //    frame.Navigate(page);
-                    
-                //    tbUsertype.Text = "Customer Service Administrator";
-                //}
-                else if (emp.IsAdmin == true && (emp.CustomerServiceAccess == "Full" && emp.LeadManagementAccess == "Full" 
-                    && emp.TaskManagementAccess == "Full"))
-                {
-                    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
-                    AdminDashboard page = new AdminDashboard();
-                    frame.Navigate(page);
-
-                    tbUsertype.Text = "Administrator";
-                }
-                else
-                {
-
-                }
-            }
-
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Start();
-
-            stackUserContent.Height = 0;
-            tbDisplayName.Text = Shared.Windows.NotificationWindow.username;
-        }
 
         #region Measure StackPanel
         private double GetStackPanelHeight(StackPanel stackPanel)
@@ -335,6 +261,81 @@ namespace NSPIREIncSystem.Shared.Views
         }
         #endregion
 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            lblTimer.Content = DateTime.Now.ToString("MMMM dd, yyyy - h:mm:ss tt");
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            updateTimer = new System.Windows.Threading.DispatcherTimer();
+            updateTimer.Tick += new EventHandler(UpdateUserProfileEvent);
+            updateTimer.Interval = TimeSpan.FromSeconds(0.1);
+            updateTimer.Start();
+
+            using (var context = new DatabaseContext())
+            {
+                var emp = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == Username);
+
+                if (emp.IsAdmin != true && (emp.CustomerServiceAccess != "Full" || emp.LeadManagementAccess != "Full"
+                    || emp.TaskManagementAccess != "Full"))
+                {
+                    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                    UserDashboard page = new UserDashboard();
+                    frame.Navigate(page);
+
+                    tbUsertype.Text = "User";
+                }
+                //else if (emp.IsAdmin == true && emp.LeadManagementAccess == "Full" && emp.TaskManagementAccess != "Full"
+                //    && emp.CustomerServiceAccess != "Full")
+                //{
+                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                //    LeadDashboard page = new LeadDashboard();
+                //    frame.Navigate(page);
+
+                //    tbUsertype.Text = "Lead Administrator";
+                //}
+                //else if (emp.IsAdmin == true && emp.TaskManagementAccess == "Full" && emp.LeadManagementAccess != "Full"
+                //    && emp.CustomerServiceAccess != "Full")
+                //{
+                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                //    TaskManagementDashboard page = new TaskManagementDashboard();
+                //    frame.Navigate(page);
+
+                //    tbUsertype.Text = "Task Administrator";
+                //}
+                //else if (emp.IsAdmin == true && emp.CustomerServiceAccess == "Full" && emp.TaskManagementAccess != "Full" 
+                //    && emp.LeadManagementAccess != "Full")
+                //{
+                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                //    CustomerServiceDashboard page = new CustomerServiceDashboard();
+                //    frame.Navigate(page);
+
+                //    tbUsertype.Text = "Customer Service Administrator";
+                //}
+                else if (emp.IsAdmin == true && (emp.CustomerServiceAccess == "Full" && emp.LeadManagementAccess == "Full"
+                    && emp.TaskManagementAccess == "Full"))
+                {
+                    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                    AdminDashboard page = new AdminDashboard();
+                    frame.Navigate(page);
+
+                    tbUsertype.Text = "Administrator";
+                }
+                else
+                {
+
+                }
+            }
+
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+
+            stackUserContent.Height = 0;
+            tbDisplayName.Text = NotificationWindow.username;
+        }
+
         private void UpdateUserProfileEvent(object source, EventArgs e)
         {
             //for detecting the user profile for collapsing
@@ -355,7 +356,7 @@ namespace NSPIREIncSystem.Shared.Views
         {
             FoldStackPanelUpwardButton(stackUserContent);
 
-            var window = new Shared.Windows.MessageBoxLogout();
+            var window = new MessageBoxLogout();
             double screenWidth = Application.Current.MainWindow.Width;
             window.Height = 0;
             window.Top = Application.Current.MainWindow.Top + 8;
@@ -367,6 +368,17 @@ namespace NSPIREIncSystem.Shared.Views
             window.ShowDialog();
             if (Variables.yesClicked == true)
             {
+                using (var context = new DatabaseContext())
+                {
+                    var log = new Log();
+                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    log.Description = NotificationWindow.username + " logs out on "
+                        + DateTime.Now.ToString("MMMM d, yyyy") + " at " + log.Time + ".";
+                    context.Logs.Add(log);
+                    context.SaveChanges();
+                }
+
                 var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
                 frame.BackNavigationMode = BackNavigationMode.Root;
                 frame.GoBack();
@@ -377,7 +389,7 @@ namespace NSPIREIncSystem.Shared.Views
         {
             FoldStackPanelUpwardButton(stackUserContent);
 
-            var window = new Shared.Windows.MessageBoxWindow("Are you sure you want to exit?");
+            var window = new MessageBoxWindow("Are you sure you want to exit?");
             double screenWidth = Application.Current.MainWindow.Width;
             window.Height = 0;
             window.Top = Application.Current.MainWindow.Top + 8;
@@ -389,6 +401,17 @@ namespace NSPIREIncSystem.Shared.Views
             window.ShowDialog();
             if (Variables.yesClicked == true)
             {
+                using (var context = new DatabaseContext())
+                {
+                    var log = new Log();
+                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    log.Description = NotificationWindow.username + " logs out on "
+                        + log.Date + " at " + log.Time + ".";
+                    context.Logs.Add(log);
+                    context.SaveChanges();
+                }
+
                 Application.Current.MainWindow.Close();
             }
         }

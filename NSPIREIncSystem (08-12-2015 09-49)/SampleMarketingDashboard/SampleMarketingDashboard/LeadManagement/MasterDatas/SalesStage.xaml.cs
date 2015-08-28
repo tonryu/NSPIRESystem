@@ -1,15 +1,15 @@
-﻿using DevExpress.Xpf.WindowsUI;
-using NSPIREIncSystem.LeadManagement.Views;
-using NSPIREIncSystem.Models;
-using NSPIREIncSystem.Settings.Views;
-using NSPIREIncSystem.Shared.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using DevExpress.Xpf.WindowsUI;
+using NSPIREIncSystem.LeadManagement.Views;
+using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Settings.Views;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.MasterDatas
 {
@@ -282,7 +282,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
          private void UserControl_Loaded(object sender, RoutedEventArgs e)
          {
-            
              LoadActivity();
              canvasSalesStagesMasterData.Width = GetCanvasMinWidth(canvasSalesStagesMasterData);
              canvasSalesStagesMasterData.Height = GetCanvasMinHeight(canvasSalesStagesMasterData);
@@ -385,8 +384,16 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                          if (Variables.yesClicked == true)
                          {
                              context.SalesStages.Remove(salestage);
-                             var windows = new Shared.Windows.NoticeWindow();
-                             Shared.Windows.NoticeWindow.message = "SALE STAGE SUCCESSFULLY DELETED";
+
+                             var log = new Log();
+                             log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                             log.Description = NotificationWindow.username + " deleted "
+                                 + salestage.SalesStageName + ".";
+                             log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                             context.Logs.Add(log);
+
+                             var windows = new NoticeWindow();
+                             NoticeWindow.message = "Sales stage successfully deleted";
                              windows.Height = 0;
                              windows.Top = screenTopEdge + 8;
                              windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -394,7 +401,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                              windows.ShowDialog();
 
                              context.SaveChanges();
-
                          }
                      }
                      else
@@ -402,7 +408,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                          NullMessage();
                      }
                  }
-
                  LoadActivity();
              }
             
@@ -422,7 +427,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
          private void NullMessage()
          {
-             var windows = new Shared.Windows.NoticeWindow();
+             var windows = new NoticeWindow();
              NoticeWindow.message = "Please select a record.";
              windows.Height = 0;
              windows.Top = screenTopEdge + 8;

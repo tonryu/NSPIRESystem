@@ -1,18 +1,9 @@
-﻿using NSPIREIncSystem.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.Views
 {
@@ -52,9 +43,6 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         txtSalesStageName.Text = stage.SalesStageName;
 
                     }
-
-                    SalesStageId = 0;
-
                 }
                 else
                 {
@@ -92,9 +80,16 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                     sales.RankNo = Convert.ToInt32(txtRankNo.Text);
                                     sales.SalesStageName = txtSalesStageName.Text;
 
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Description = NotificationWindow.username + " modified "
+                                        + sales.SalesStageName + "'s details.";
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    context.Logs.Add(log);
+
                                     context.SaveChanges();
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "Sale Stage successfully updated";
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "Sales Stage successfully updated";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -104,8 +99,17 @@ namespace NSPIREIncSystem.LeadManagement.Views
 
                                 else
                                 {
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "Similar Stage detected";
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Description = NotificationWindow.username + " failed to modify "
+                                        + sales.SalesStageName
+                                        + "'s details due to a similar stage is already existing.";
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    context.Logs.Add(log);
+                                    context.SaveChanges();
+
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "Similar Stage detected";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -127,6 +131,13 @@ namespace NSPIREIncSystem.LeadManagement.Views
                             Stages.SalesStageName = txtSalesStageName.Text;
                             Stages.RankNo =Convert.ToInt32 (txtRankNo.Text);
 
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Description = NotificationWindow.username + " created a sales stage. ("
+                                + txtSalesStageName.Text + ")";
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            context.Logs.Add(log);
+
                             context.SalesStages.Add(Stages);
                             context.SaveChanges();
                             var windows = new Shared.Windows.NoticeWindow();
@@ -139,8 +150,16 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         }
                         else
                         {
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "Sale Stage already exist";
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Description = NotificationWindow.username
+                                + " failed to create due to a similar stage is already existing.";
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            context.Logs.Add(log);
+                            context.SaveChanges();
+
+                            var windows = new NoticeWindow();
+                            NoticeWindow.message = "Sale Stage already exists";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -152,8 +171,8 @@ namespace NSPIREIncSystem.LeadManagement.Views
 
                 else
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    Shared.Windows.NoticeWindow.message = "PLEASE PROVIDE ALL ASSOCIATED WITH ASTERISKS(*)";
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "Please provide all fields associated with an asterisk(*).";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);

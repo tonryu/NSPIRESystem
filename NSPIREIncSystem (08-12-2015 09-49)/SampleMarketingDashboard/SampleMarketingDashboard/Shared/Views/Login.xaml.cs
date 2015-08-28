@@ -25,11 +25,7 @@ namespace NSPIREIncSystem.Shared.Views
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            txtUsername.Focus();
-        }
-
+        #region Load validation
         private Task<string> QueryValidateUser(string str1, string str2)
         {
             return Task.Factory.StartNew(() =>
@@ -88,6 +84,16 @@ namespace NSPIREIncSystem.Shared.Views
                     window.Left += screenLeftEdge;
                 }
                 window.ShowDialog();
+
+                using (var context = new DatabaseContext())
+                {
+                    var log = new Log();
+                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    log.Description = "An unknown user tries to log in with the username " + txtUsername.Text + ".";
+                    context.Logs.Add(log);
+                    context.SaveChanges();
+                }
                 
                 txtUsername.Text = "";
                 txtPassword.Text = "";
@@ -120,7 +126,15 @@ namespace NSPIREIncSystem.Shared.Views
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
                     if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
                     windows.ShowDialog();
-                    Shared.Views.MainView.Username = txtUsername.Text;
+                    MainView.Username = txtUsername.Text;
+
+                    var log = new Log();
+                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    log.Description = NotificationWindow.username + " logs in on "
+                        + DateTime.Now.ToString("MMMM d, yyyy") + " at " + log.Time + ".";
+                    context.Logs.Add(log);
+                    context.SaveChanges();
 
                     var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
                     MainView page = new MainView();
@@ -143,6 +157,12 @@ namespace NSPIREIncSystem.Shared.Views
                 if (searchVal1 != "" && searchVal2 != "") { Refresh(searchVal1, hash); }
                 else { Refresh("", ""); }
             }
+        }
+        #endregion
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtUsername.Focus();
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)

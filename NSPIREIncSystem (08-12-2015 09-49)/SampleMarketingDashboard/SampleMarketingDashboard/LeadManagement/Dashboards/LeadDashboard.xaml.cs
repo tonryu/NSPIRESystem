@@ -11,6 +11,7 @@ using DevExpress.XtraReports.UI;
 using NSPIREIncSystem.LeadManagement.MasterDatas;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Reports;
+using NSPIREIncSystem.Shared.Views;
 using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.Dashboards
@@ -518,6 +519,52 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         }
         #endregion
 
+        #region Add access to log
+        private Task<string> LogAccess()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            });
+        }
+
+        private async void Loading()
+        {
+            var message = await LogAccess();
+
+            if (message != null)
+            {
+
+            }
+
+            using (var context = new DatabaseContext())
+            {
+                var userAccount = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == MainView.Username);
+                if (userAccount != null)
+                {
+                    var log = new Log();
+                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                    log.Description = NotificationWindow.username + " accesses the Lead Management Module.";
+                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    context.Logs.Add(log);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        private void LoadDashboard()
+        {
+            Loading();
+        }
+        #endregion
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             canvasLeadMenu.Width = GetCanvasMinWidth(canvasLeadMenu);
@@ -533,6 +580,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
 
             //FillCharts();
             LoadLeadDashboard();
+            LoadDashboard();
 
             //using (var context = new DatabaseContext())
             //{

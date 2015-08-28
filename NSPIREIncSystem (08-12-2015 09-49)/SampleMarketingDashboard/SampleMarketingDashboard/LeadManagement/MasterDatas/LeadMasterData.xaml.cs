@@ -12,6 +12,7 @@ using NSPIREIncSystem.LeadManagement.Reports;
 using DevExpress.XtraReports.UI;
 using NSPIREIncSystem.Reports;
 using System.Threading.Tasks;
+using NSPIREIncSystem.Shared.Views;
 
 namespace NSPIREIncSystem.LeadManagement.MasterDatas
 {
@@ -603,11 +604,28 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
                                 if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
                                 windows.ShowDialog();
+
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = contact.ContactPersonName
+                                    + " is not deleted due to unaccomplished activity(ies).";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+                                context.SaveChanges();
                             }
                             else
                             {
                                 busyIndicator.IsBusy = true;
                                 context.Contacts.Remove(contact);
+
+                                var lead = context.Leads.FirstOrDefault(c => c.LeadID == contact.LeadId);
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = NotificationWindow.username + " deleted " 
+                                    + contact.ContactPersonName + " from " + lead.CompanyName 
+                                    + " contacts.";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
 
                                 var windows = new Shared.Windows.NoticeWindow();
                                 Shared.Windows.NoticeWindow.message = "Contact person successfully deleted";
@@ -665,11 +683,37 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
                                 if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
                                 windows.ShowDialog();
+
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = lead.CompanyName
+                                    + " is not deleted due to existing activity(ies).";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+                                context.SaveChanges();
                             }
                             else
                             {
                                 busyIndicator.IsBusy = true;
                                 context.Leads.Remove(lead);
+
+                                var contacts = context.Contacts.ToList();
+
+                                foreach (var contact in contacts)
+                                {
+                                    if (contact.LeadId == lead.LeadID)
+                                    {
+                                        context.Contacts.Remove(contact);
+                                    }
+                                }
+
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = NotificationWindow.username + " deleted " +
+                                    lead.CompanyName + ". All contacts of " +
+                                    lead.CompanyName + " is deleted as well.";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
 
                                 var windows = new Shared.Windows.NoticeWindow();
                                 Shared.Windows.NoticeWindow.message = "Lead successfully deleted";

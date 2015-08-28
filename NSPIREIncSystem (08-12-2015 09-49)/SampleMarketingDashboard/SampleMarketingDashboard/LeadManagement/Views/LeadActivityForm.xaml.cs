@@ -155,6 +155,14 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                 activity.ContacId = contact.ContactID;
                                 activity.IsFinalized = tsFinalizedCheck.IsChecked.Value;
 
+                                var lead = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = NotificationWindow.username + " modified "
+                                    + lead.CompanyName + "'s activity.";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+
                                 context.SaveChanges();
                                 NoticeWindow.message = "Successfully updated";
                                 windows.Height = 0;
@@ -185,8 +193,8 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         }
                         else
                         {
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "Please provide all that is associated with an asterisks.";
+                            var windows = new NoticeWindow();
+                            NoticeWindow.message = "Please provide all that is associated with an asterisk(*).";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -210,11 +218,19 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         activity.SalesRep = txtSalesRep.Text;
                         activity.ContacId = contact.ContactID;
                         activity.IsFinalized = false;
-
                         context.LeadActivities.Add(activity);
+
+                        var lead = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
+                        var log = new Log();
+                        log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                        log.Description = NotificationWindow.username + " created an activity for "
+                            + lead.CompanyName + ".";
+                        log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                        context.Logs.Add(log);
+
                         context.SaveChanges();
-                        var windows = new Shared.Windows.NoticeWindow();
-                        Shared.Windows.NoticeWindow.message = "Successfully created";
+                        var windows = new NoticeWindow();
+                        NoticeWindow.message = "Successfully created";
                         windows.Height = 0;
                         windows.Top = screenTopEdge + 8;
                         windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -223,8 +239,8 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     }
                     else
                     {
-                        var windows = new Shared.Windows.NoticeWindow();
-                        Shared.Windows.NoticeWindow.message = "Please provide all that is associated with an asterisks.";
+                        var windows = new NoticeWindow();
+                        NoticeWindow.message = "Please provide all that is associated with an asterisk (*).";
                         windows.Height = 0;
                         windows.Top = screenTopEdge + 8;
                         windows.Left = (screenWidth / 2) - (windows.Width / 2);

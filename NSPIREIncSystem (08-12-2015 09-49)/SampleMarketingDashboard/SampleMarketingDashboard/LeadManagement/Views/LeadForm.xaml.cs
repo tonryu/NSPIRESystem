@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using NSPIREIncSystem.Models;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.Views
 {
@@ -145,9 +146,16 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                     if (marketingStrategy != null) { lead.MarketingStrategyId = marketingStrategy.MarketingStrategyId; }
                                     else { lead.MarketingStrategyId = 0; }
 
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Description = NotificationWindow.username + " modified "
+                                        + lead.CompanyName + ".";
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    context.Logs.Add(log);
+
                                     context.SaveChanges();
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "Lead successfully updated";
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "Lead successfully updated";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -156,13 +164,21 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                 }
                                 else
                                 {
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "Similar Lead detected";
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "Similar Lead detected";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
                                     if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
                                     windows.ShowDialog();
+
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Description = NotificationWindow.username + " failed to modify "
+                                        + lead.CompanyName + " due to a similar lead is detected.";
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    context.Logs.Add(log);
+                                    context.SaveChanges();
                                 }
                             }
                         }
@@ -190,8 +206,15 @@ namespace NSPIREIncSystem.LeadManagement.Views
                             lead.DateAdded = DateTime.Now.ToString("MM/dd/yyyy");
                             if (marketingStrategy != null) { lead.MarketingStrategyId = marketingStrategy.MarketingStrategyId; }
                             else { lead.MarketingStrategyId = 0; }
-
                             context.Leads.Add(lead);
+
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Description = NotificationWindow.username + " created a lead. ("
+                                + txtCompanyName.Text + ")";
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            context.Logs.Add(log);
+
                             context.SaveChanges();
                             var windows = new Shared.Windows.NoticeWindow();
                             Shared.Windows.NoticeWindow.message = "Lead successfully created";
@@ -203,6 +226,13 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         }
                         else
                         {
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Description = NotificationWindow.username + " failed to create a lead due to the lead is already existing.";
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            context.Logs.Add(log);
+                            context.SaveChanges();
+
                             var windows = new Shared.Windows.NoticeWindow();
                             Shared.Windows.NoticeWindow.message = "Lead already exist";
                             windows.Height = 0;
@@ -216,7 +246,7 @@ namespace NSPIREIncSystem.LeadManagement.Views
                 else
                 {
                     var windows = new Shared.Windows.NoticeWindow();
-                    Shared.Windows.NoticeWindow.message = "PLEASE PROVIDE ALL ASSOCIATED WITH ASTERISKS(*)";
+                    Shared.Windows.NoticeWindow.message = "Please provide all fields associated with an asterisk(*).";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);

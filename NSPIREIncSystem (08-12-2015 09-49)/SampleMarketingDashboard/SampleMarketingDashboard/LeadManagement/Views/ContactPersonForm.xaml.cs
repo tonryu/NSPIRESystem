@@ -92,8 +92,15 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                 contact.PhoneNo = txtPhoneNo.Text;
                                 contact.Position = txtPosition.Text;
 
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = NotificationWindow.username + " modified "
+                                    + contact.ContactPersonName + "'s details.";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+
                                 context.SaveChanges();
-                                var windows = new Shared.Windows.NoticeWindow();
+                                var windows = new NoticeWindow();
                                 NoticeWindow.message = "Contact person successfully updated";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
@@ -103,8 +110,8 @@ namespace NSPIREIncSystem.LeadManagement.Views
                             }
                             else
                             {
-                                var windows = new Shared.Windows.NoticeWindow();
-                                NoticeWindow.message = "Please provide all associated with an asterisk.";
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Please provide all fields associated with an asterisk(*).";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -114,7 +121,17 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         }
                         else
                         {
-                            var windows = new Shared.Windows.NoticeWindow();
+                            contact = context.Contacts.FirstOrDefault(c => c.ContactID == ContactId);
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Description = NotificationWindow.username + " failed to modify "
+                                + contact.ContactPersonName 
+                                + "'s details due to an existing contact with a similar name.";
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            context.Logs.Add(log);
+                            context.SaveChanges();
+
+                            var windows = new NoticeWindow();
                             NoticeWindow.message = "A similar name already exist.";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
@@ -139,10 +156,18 @@ namespace NSPIREIncSystem.LeadManagement.Views
                             contact.LeadId = LeadId;
                             contact.PhoneNo = txtPhoneNo.Text;
                             contact.Position = txtPosition.Text;
-
                             context.Contacts.Add(contact);
+
+                            var lead = context.Leads.FirstOrDefault(c => c.LeadID == LeadId);
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Description = NotificationWindow.username + " created "
+                                + txtContactName.Text + " for " + lead.CompanyName + ".";
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            context.Logs.Add(log);
+
                             context.SaveChanges();
-                            var windows = new Shared.Windows.NoticeWindow();
+                            var windows = new NoticeWindow();
                             NoticeWindow.message = "Contact person successfully created";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
@@ -152,7 +177,7 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         }
                         else
                         {
-                            var windows = new Shared.Windows.NoticeWindow();
+                            var windows = new NoticeWindow();
                             NoticeWindow.message = "Please provide all associated with an asterisk.";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
@@ -163,7 +188,15 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     }
                     else
                     {
-                        var windows = new Shared.Windows.NoticeWindow();
+                        var log = new Log();
+                        log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                        log.Description = NotificationWindow.username + " failed to create a contact "
+                            + "due to an existing contact with a similar name.";
+                        log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                        context.Logs.Add(log);
+                        context.SaveChanges();
+
+                        var windows = new NoticeWindow();
                         NoticeWindow.message = "The contact person already exist.";
                         windows.Height = 0;
                         windows.Top = screenTopEdge + 8;
