@@ -208,6 +208,12 @@
     <Compile Include="SalesManagement\Dashboards\SalesDashboard.xaml.cs">
       <DependentUpon>SalesDashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalesManagement\MasterDatas\AgentsMasterData.xaml.cs">
+      <DependentUpon>AgentsMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\MasterDatas\CustomersMasterData.xaml.cs">
+      <DependentUpon>CustomersMasterData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalesManagement\MasterDatas\CustomerAccounts.xaml.cs">
       <DependentUpon>CustomerAccounts.xaml</DependentUpon>
     </Compile>
@@ -227,8 +233,14 @@
     <Compile Include="Settings\MasterDatas\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\MasterDatas\Territories.xaml.cs">
+      <DependentUpon>Territories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\MasterDatas\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\TerritoryDetails.xaml.cs">
+      <DependentUpon>TerritoryDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\Windows\EmployeeSelectionWindow.xaml.cs">
       <DependentUpon>EmployeeSelectionWindow.xaml</DependentUpon>
@@ -351,6 +363,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SalesManagement\MasterDatas\AgentsMasterData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\MasterDatas\CustomersMasterData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SalesManagement\MasterDatas\CustomerAccounts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -367,9 +387,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Settings\MasterDatas\Territories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Settings\MasterDatas\Users.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\TerritoryDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Shared\Windows\EmployeeSelectionWindow.xaml">
       <SubType>Designer</SubType>

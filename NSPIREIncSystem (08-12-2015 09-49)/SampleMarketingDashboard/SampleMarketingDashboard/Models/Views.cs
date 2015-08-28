@@ -103,6 +103,25 @@ namespace NSPIREIncSystem.Models
         public string NetValue { get; set; }
     }
 
+    public class TerritoryView
+    {
+        public int TerritoryID { get; set; }
+        public string TerritoryName { get; set; }
+        public string PhoneNo { get; set; }
+        public string Address { get; set; }
+    }
+
+    public class CustomersView
+    {
+        public int CustomerID { get; set; }
+        public string CompanyName { get; set; }
+        public string DateSigned { get; set; }
+        public string CompanyAddress { get; set; }
+        public string PhoneNo { get; set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
+    }
+    
     // Classes
 
     public class UserAccount

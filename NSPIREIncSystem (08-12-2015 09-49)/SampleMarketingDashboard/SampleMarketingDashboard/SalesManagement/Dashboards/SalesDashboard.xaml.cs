@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using DevExpress.Xpf.Charts;
 using DevExpress.Xpf.WindowsUI;
 using DevExpress.XtraCharts;
@@ -330,7 +320,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
         private void btnAccounts_Click(object sender, RoutedEventArgs e)
         {
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
-            NSPIREIncSystem.SalesManagement.MasterDatas.CustomerAccounts page = new NSPIREIncSystem.SalesManagement.MasterDatas.CustomerAccounts();
+            CustomerAccounts page = new CustomerAccounts();
             frame.Navigate(page);
             FoldInnerCanvasSideward(canvasSalesMenu);
         }
@@ -340,22 +330,28 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
 
         }
 
+        private void btnCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            CustomersMasterData page = new CustomersMasterData();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasMasterData);
+        }
+
+        private void btnAgents_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            AgentsMasterData page = new AgentsMasterData();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasMasterData);
+        }
+
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             frame.BackNavigationMode = BackNavigationMode.PreviousScreen;
             frame.GoBack();
             FoldInnerCanvasSideward(canvasSalesMenu);
-        }
-
-        private void btnCustomers_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAgents_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void btnBackToSalesMenu_Click(object sender, RoutedEventArgs e)

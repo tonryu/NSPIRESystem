@@ -539,3 +539,11 @@ C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49
 C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Views\CustomerAccountDetails.baml
 C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\Views\CustomerAccountDetails.g.cs
 C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\NSPIREIncSystem.SalesManagement.Reports.CustomerAccountsReportDesign.resources
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\Views\TerritoryDetails.baml
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\MasterDatas\Territories.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\Views\TerritoryDetails.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\Settings\MasterDatas\Territories.baml
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\MasterDatas\AgentsMasterData.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\MasterDatas\CustomersMasterData.g.cs
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\MasterDatas\AgentsMasterData.baml
+C:\Users\dominic\Documents\GitHub\NSPIRESystem\NSPIREIncSystem (08-12-2015 09-49)\SampleMarketingDashboard\SampleMarketingDashboard\obj\Debug\SalesManagement\MasterDatas\CustomersMasterData.baml

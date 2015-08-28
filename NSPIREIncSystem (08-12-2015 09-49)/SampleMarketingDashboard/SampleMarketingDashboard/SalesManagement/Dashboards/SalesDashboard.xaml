@@ -26,7 +26,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
-        <TextBlock Text="SALES MANAGEMENT DASHBOARD" FontSize="25" FontWeight="Bold" FontFamily="Arial" Margin="50 5 5 5" Grid.ColumnSpan="2" Foreground="White"/>
+        <TextBlock Text="SALES MANAGEMENT DASHBOARD" FontSize="25" FontWeight="Bold" FontFamily="Arial" Margin="50 10 50 0" Grid.ColumnSpan="2" Foreground="White"/>
 
         <Grid Margin="50 0 5 0" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -203,8 +203,8 @@
                         </Button.Background>
                     </Button>
                     <StackPanel>
-                        <TextBlock Text="SALES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
-                        <TextBlock Text="REPORTS" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="MONTHLY SALES" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                        <TextBlock Text="REPORT" HorizontalAlignment="Center" Padding="5 0 5 1"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackBack">

@@ -117,10 +117,10 @@ namespace NSPIREIncSystem.SalesManagement.Views
                     Grid.SetRow(lblModeOfPayment, 3);
                     Grid.SetRow(cbModeOfPayment, 3); Grid.SetColumn(cbModeOfPayment, 1);
 
-                    txtDiscount.Text = "";
-                    txtGross.Text = "";
-                    txtNetValue.Text = "";
-                    txtServiceCharge.Text = "";
+                    txtDiscount.Text = "₱";
+                    txtGross.Text = "₱";
+                    txtNetValue.Text = "₱";
+                    txtServiceCharge.Text = "₱";
                     cbCompanyName.SelectedItem = "";
                     cbModeOfPayment.SelectedItem = "";
                     cbProduct.SelectedItem = "";
@@ -217,12 +217,12 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                     account.AccountNumber = Convert.ToString(maxNumber2);
                                 }
                                 account.CustomerID = customer.CustomerID;
-                                account.Discount = "PHP " + txtDiscount.Text;
-                                account.Gross = "PHP " + txtGross.Text;
+                                account.Discount = txtDiscount.Text;
+                                account.Gross = txtGross.Text;
                                 account.ModeOfPayment = cbModeOfPayment.SelectedItem.ToString();
-                                account.NetValue = "PHP " + txtNetValue.Text;
+                                account.NetValue = txtNetValue.Text;
                                 account.ProductID = product.ProductID;
-                                account.ServiceCharge = "PHP " + txtServiceCharge.Text;
+                                account.ServiceCharge = txtServiceCharge.Text;
                                 account.TerritoryID = territory.TerritoryID;
 
                                 context.CustomerAccounts.Add(account);

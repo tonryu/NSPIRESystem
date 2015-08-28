@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -8,7 +9,6 @@ using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Settings.Windows;
 using NSPIREIncSystem.Shared.Windows;
-using System.Threading.Tasks;
 
 namespace NSPIREIncSystem.Settings.MasterDatas
 {
@@ -187,7 +187,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
         }
         #endregion
 
-        #region Load 
+        #region Load Details
         private Task<string> QueryLoadEmployees()
         {
             return Task.Factory.StartNew(() =>
@@ -225,7 +225,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             });
         }
 
-        private async void Refreshtale(string str)
+        private async void RefreshTable(string str)
         {
             using (var context = new DatabaseContext())
             {
@@ -244,7 +244,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                     windows.ShowDialog();
                 }
 
-                dcEmployeesList.ItemsSource = employeeList.Where(c => c.EmployeeName.ToLower().Contains(txtSearch.Text))
+                dcEmployeesList.ItemsSource = employeeList.Where(c => c.EmployeeName.ToLower().Contains(str.ToLower()))
                    .OrderBy(c => c.EmployeeId).ToList();
 
                 viewEmployee.BestFitColumns();
@@ -252,7 +252,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                 if (employeeList.Count == 0)
                 {
                     var windows = new Shared.Windows.NoticeWindow();
-                    NoticeWindow.message = "List has no Record.";
+                    NoticeWindow.message = "List has no record.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -263,10 +263,11 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             }
         }
 
-
-
+        private void LoadEmployees()
+        {
+            RefreshTable(txtSearch.Text);
+        }
         #endregion
-
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -276,7 +277,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             canvasEmployeeMasterData.Opacity = 0;
             FoldInnerCanvasSideward(canvasEmployeeMasterData);
 
-            LoadMethod(txtSearch.Text);
+            LoadEmployees();
         }
 
         private void LoadMethod(string text)
@@ -318,7 +319,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
             var window = new EmployeeWindow();
             window.ShowDialog();
 
-            LoadMethod(txtSearch.Text);
+            LoadEmployees();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -341,7 +342,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                 {
                     NullMessage();
                 }
-                LoadMethod(txtSearch.Text);
+                LoadEmployees();
 
                 EmployeeWindow.EmployeeId = 0;
             }
@@ -392,7 +393,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                         }
                     }
                 }
-                LoadMethod(txtSearch.Text);
+                LoadEmployees();
             }
         }
 
@@ -405,7 +406,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            LoadMethod(txtSearch.Text);
+            LoadEmployees();
         }
 
         private void NullMessage()

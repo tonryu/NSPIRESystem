@@ -3,14 +3,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using NSPIREIncSystem.LeadManagement.Dashboards;
 using DevExpress.Xpf.WindowsUI;
-using NSPIREIncSystem.Settings.MasterDatas;
-using NSPIREIncSystem.TaskManagement.Dashboards;
 using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
-using NSPIREIncSystem.Shared.Views;
-using System.Threading.Tasks;
+using NSPIREIncSystem.LeadManagement.Dashboards;
 using NSPIREIncSystem.SalesManagement.Dashboards;
+using NSPIREIncSystem.Settings.MasterDatas;
+using NSPIREIncSystem.Shared.Views;
+using NSPIREIncSystem.TaskManagement.Dashboards;
 
 namespace NSPIREIncSystem.Shared.Dashboards
 {
@@ -265,7 +264,10 @@ namespace NSPIREIncSystem.Shared.Dashboards
 
         private void btnTerritories_Click(object sender, RoutedEventArgs e)
         {
-
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            var page = new Territories();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasSettings);
         }
 
         private void btnBackToMainMenu_Click(object sender, RoutedEventArgs e)
@@ -273,6 +275,5 @@ namespace NSPIREIncSystem.Shared.Dashboards
             FoldInnerCanvasSideward(canvasSettings);
             FoldInnerCanvasSideward(canvasMainMenu);
         }
-
     }
 }
