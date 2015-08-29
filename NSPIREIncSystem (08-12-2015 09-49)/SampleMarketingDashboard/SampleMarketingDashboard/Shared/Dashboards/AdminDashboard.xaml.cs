@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
@@ -207,11 +208,13 @@ namespace NSPIREIncSystem.Shared.Dashboards
                 var logs = context.Logs.OrderByDescending(c => c.LogId).ToList();
                 bool isDesc = true; Thickness margin = textBlock.Margin;
                 textBlock.TextWrapping = TextWrapping.Wrap;
+                var stackPanel = new StackPanel();
 
                 foreach (var log in logs)
                 {
                     if (isDesc != false)
                     {
+                        stackPanel = new StackPanel();
                         textBlock = new TextBlock();
                         textBlock.Text = log.Description;
                         margin.Top = 10;
@@ -219,8 +222,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
                         margin.Left = 10;
                         margin.Right = 10;
                         textBlock.Margin = margin;
-                        //textBlockList.Add(textBlock);
-                        stackLogs.Children.Add(textBlock);
+                        stackPanel.Children.Add(textBlock);
                         isDesc = false;
                     }
                     else
@@ -233,9 +235,11 @@ namespace NSPIREIncSystem.Shared.Dashboards
                         margin.Left = 10;
                         margin.Right = 20;
                         textBlock.Margin = margin;
-                        //textBlockList.Add(textBlock);
-                        stackLogs.Children.Add(textBlock);
+                        stackPanel.Children.Add(textBlock);
                         isDesc = true;
+                        var stackPanel2 = new StackPanel();
+                        stackPanel2.Children.Add(stackPanel);
+                        gridLogs.Children.Add(stackPanel2);
                     }
                 }
             }
@@ -295,7 +299,10 @@ namespace NSPIREIncSystem.Shared.Dashboards
 
         private void btnTerritories_Click(object sender, RoutedEventArgs e)
         {
-
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            var page = new Territories();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasSettings);
         }
 
         private void btnBackToMainMenu_Click(object sender, RoutedEventArgs e)

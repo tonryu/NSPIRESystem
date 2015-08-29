@@ -69,14 +69,12 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="ACTIVITIES" Margin="10 10 0 0" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="SYSTEM LOGS" Margin="10 10 0 0" Foreground="#0069ff" FontSize="18" FontWeight="Bold"/>
                     <Separator Grid.Row="1" BorderBrush="#0069ff" BorderThickness="10"/>
-                    <dxlc:ScrollBox x:Name="sbLogs" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <Border ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <StackPanel x:Name="stackLogs">
-                            </StackPanel>
-                        </Border>
-                    </dxlc:ScrollBox>
+                    <ScrollViewer x:Name="sbLogs" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <Grid x:Name="gridLogs" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="Statistics" FontSize="15" Cursor="Hand">

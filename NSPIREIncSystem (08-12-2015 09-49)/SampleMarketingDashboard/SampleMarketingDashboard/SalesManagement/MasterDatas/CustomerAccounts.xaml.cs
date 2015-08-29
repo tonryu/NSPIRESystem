@@ -425,6 +425,13 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
 
                         if (Variables.yesClicked == true)
                         {
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd//yyyy");
+                            log.Time = DateTime.Now.ToString("HH:mm");
+                            log.Description = NotificationWindow.username + " deleted "
+                                + selectedAccount.Customer + "'s customer account.";
+                            context.Logs.Add(log);
+
                             context.CustomerAccounts.Remove(account);
                             var windows = new Shared.Windows.NoticeWindow();
                             Shared.Windows.NoticeWindow.message = "Customer Account successfully deleted";

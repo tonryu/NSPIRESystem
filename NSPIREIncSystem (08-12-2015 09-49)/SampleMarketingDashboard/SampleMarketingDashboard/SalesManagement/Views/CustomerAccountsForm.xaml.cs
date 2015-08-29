@@ -164,6 +164,14 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                 account.ServiceCharge = txtServiceCharge.Text;
                                 account.TerritoryID = territory.TerritoryID;
 
+                                customer = context.Customers.FirstOrDefault(c=> c.CustomerID == account.CustomerID);
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
+                                log.Time = DateTime.Now.ToString("HH:mm");
+                                log.Description = NotificationWindow.username + " modified "
+                                    + customer.CompanyName + "'s customer account.";
+                                context.Logs.Add(log);
+
                                 context.SaveChanges();
 
                                 var windows = new Shared.Windows.NoticeWindow();
@@ -176,6 +184,15 @@ namespace NSPIREIncSystem.SalesManagement.Views
                             }
                             else
                             {
+                                customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
+                                log.Time = DateTime.Now.ToString("HH:mm");
+                                log.Description = NotificationWindow.username + " failed to modify "
+                                    + customer.CompanyName + "'s customer account due to it cannot change its product.";
+                                context.Logs.Add(log);
+                                context.SaveChanges();
+
                                 var windows = new Shared.Windows.NoticeWindow();
                                 NoticeWindow.message = "Customer account cannot change a product.";
                                 windows.Height = 0;
@@ -224,8 +241,17 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                 account.ProductID = product.ProductID;
                                 account.ServiceCharge = txtServiceCharge.Text;
                                 account.TerritoryID = territory.TerritoryID;
-
                                 context.CustomerAccounts.Add(account);
+
+                                customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
+                                log.Time = DateTime.Now.ToString("HH:mm");
+                                log.Description = NotificationWindow.username + " created "
+                                    + "a customer account for '" + customer.CompanyName +
+                                    "' with the product '" + product.ProductName + "'.";
+                                context.Logs.Add(log);
+
                                 context.SaveChanges();
 
                                 var windows = new Shared.Windows.NoticeWindow();
@@ -238,6 +264,16 @@ namespace NSPIREIncSystem.SalesManagement.Views
                             }
                             else
                             {
+                                customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
+                                log.Time = DateTime.Now.ToString("HH:mm");
+                                log.Description = NotificationWindow.username +
+                                    " tried to create a customer account but the account for '" +
+                                    customer.CompanyName + "' already exists.";
+                                context.Logs.Add(log);
+                                context.SaveChanges();
+
                                 var windows = new Shared.Windows.NoticeWindow();
                                 NoticeWindow.message = "Customer account is already existing.";
                                 windows.Height = 0;
