@@ -204,7 +204,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
             using (var context = new DatabaseContext())
             {
                 var textBlock = new TextBlock();
-                var logs = context.Logs.ToList();
+                var logs = context.Logs.OrderByDescending(c => c.LogId).ToList();
                 bool isDesc = true; Thickness margin = textBlock.Margin;
                 textBlock.TextWrapping = TextWrapping.Wrap;
 
@@ -220,7 +220,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
                         margin.Right = 10;
                         textBlock.Margin = margin;
                         //textBlockList.Add(textBlock);
-                        sbLogs.Children.Add(textBlock);
+                        stackLogs.Children.Add(textBlock);
                         isDesc = false;
                     }
                     else
@@ -234,7 +234,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
                         margin.Right = 20;
                         textBlock.Margin = margin;
                         //textBlockList.Add(textBlock);
-                        sbLogs.Children.Add(textBlock);
+                        stackLogs.Children.Add(textBlock);
                         isDesc = true;
                     }
                 }

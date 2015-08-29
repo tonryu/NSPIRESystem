@@ -1,4 +1,5 @@
-﻿<UserControl xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  x:Class="NSPIREIncSystem.Shared.Dashboards.AdminDashboard" 
+﻿<UserControl x:Class="NSPIREIncSystem.Shared.Dashboards.AdminDashboard" 
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -70,7 +71,11 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="ACTIVITIES" Margin="10 10 0 0" FontSize="18" FontWeight="Bold"/>
                     <Separator Grid.Row="1" BorderBrush="#0069ff" BorderThickness="10"/>
-                    <dxlc:ScrollBox x:Name="sbLogs" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                    <dxlc:ScrollBox x:Name="sbLogs" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <Border ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="stackLogs">
+                            </StackPanel>
+                        </Border>
                     </dxlc:ScrollBox>
                 </Grid>
             </dx:DXTabItem>

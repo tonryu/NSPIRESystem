@@ -12,7 +12,6 @@
 using DevExpress.Core;
 using DevExpress.Xpf.Charts;
 using DevExpress.Xpf.Core;
-using DevExpress.Xpf.Core.ConditionalFormatting;
 using DevExpress.Xpf.Core.DataSources;
 using DevExpress.Xpf.Core.Serialization;
 using DevExpress.Xpf.Core.ServerMode;
@@ -21,7 +20,6 @@ using DevExpress.Xpf.Editors.DataPager;
 using DevExpress.Xpf.Editors.DateNavigator;
 using DevExpress.Xpf.Editors.ExpressionEditor;
 using DevExpress.Xpf.Editors.Filtering;
-using DevExpress.Xpf.Editors.Flyout;
 using DevExpress.Xpf.Editors.Popups;
 using DevExpress.Xpf.Editors.Popups.Calendar;
 using DevExpress.Xpf.Editors.RangeControl;
