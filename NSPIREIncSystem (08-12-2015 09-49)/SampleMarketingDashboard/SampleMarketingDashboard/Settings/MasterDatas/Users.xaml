@@ -1,15 +1,28 @@
-﻿<UserControl x:Class="NSPIREIncSystem.Settings.MasterDatas.Users"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+﻿<UserControl x:Class="NSPIREIncSystem.Settings.MasterDatas.Users" 
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:anim="clr-namespace:NSPIREIncSystem" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
               xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core" 
-             dxc:ThemeManager.ThemeName="DeepBlue"
+             dxc:ThemeManager.ThemeName="Office2013" 
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
-    <Grid Background="White">
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded" FontFamily="Arial">
+    <UserControl.Background>
+        <ImageBrush ImageSource="/new images/05.jpg"/>
+    </UserControl.Background>
+    <UserControl.Resources>
+        <Storyboard x:Key="gridin">
+            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="0" To="450"/>
+        </Storyboard>
+        <Storyboard x:Key="gridout">
+            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="450" To="0"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -20,7 +33,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="USERS" FontSize="25" Margin="10" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="#FF0096FF"/>
+        <TextBlock Text="USERS" FontSize="25" Margin="50 10 50 0" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
 
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
@@ -35,68 +48,82 @@
             </Button>
         </Grid>
 
-        <dxg:GridControl x:Name="dcUsersList" Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5">
-            <dxg:GridControl.View>
-                <dxg:TableView x:Name="viewUser" ShowGroupPanel="False" NavigationStyle="Row" AllowEditing="False"/>
-            </dxg:GridControl.View>
-            <dxg:GridControl.Columns>
-                <dxg:GridColumn Header="Employee Name" FieldName="EmployeeName"/>
-                <dxg:GridColumn Header="Username" FieldName="UserAccountId"/>
-                <dxg:GridColumn Header="Lead Management Access" FieldName="LeadManagementAccess"/>
-                <dxg:GridColumn Header="Customer Service Management Access" FieldName="CustomerServiceManagementAccess"/>
-                <dxg:GridColumn Header="Task Management Access" FieldName="TaskManagementAccess"/>
-            </dxg:GridControl.Columns>
-        </dxg:GridControl>
-
-        <Canvas x:Name="canvasUserMasterData" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="secondColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <!--users-->
+            <Border Background="White" Margin="0 0 5 0" BorderBrush="#0069ff" BorderThickness="3">
+                <dxg:GridControl x:Name="dcUsersList">
+                    <dxg:GridControl.View>
+                        <dxg:TableView x:Name="viewUser" ShowGroupPanel="False" NavigationStyle="Row" AllowEditing="False"/>
+                    </dxg:GridControl.View>
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn Header="Username" FieldName="UserAccountId"/>
+                        <dxg:GridColumn Header="Employee Name" FieldName="EmployeeName"/>
+                        <dxg:GridColumn Header="Lead Management Access" FieldName="LeadManagementAccess"/>
+                        <dxg:GridColumn Header="Customer Service Management Access" FieldName="CustomerServiceManagementAccess"/>
+                        <dxg:GridColumn Header="Task Management Access" FieldName="TaskManagementAccess"/>
+                    </dxg:GridControl.Columns>
+                </dxg:GridControl>
+            </Border>
+            <!--navigation frame-->
+            <Border Background="White" Grid.Column="1" Margin="5 0 0 0" BorderBrush="#0069ff" BorderThickness="3">
+                <dxwui:NavigationFrame AnimationType="Fade"/>
+            </Border>
+        </Grid>
+        
+        <Canvas x:Name="canvasUserMasterData" Margin="5" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <StackPanel x:Name="stackView">
-                <Button x:Name="btnView" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
+                <Button x:Name="btnView" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/new images/view-details-icon.png"/>
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="VIEW" HorizontalAlignment="Center"/>
+                    <TextBlock Text="VIEW" HorizontalAlignment="Center" Margin="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Margin="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackAdd">
-                <Button x:Name="btnAdd" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAdd_Click">
+                <Button x:Name="btnAdd" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAdd_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/new images/add-icon.png"/>
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="ADD" HorizontalAlignment="Center"/>
+                    <TextBlock Text="ADD" HorizontalAlignment="Center" Margin="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackEdit">
-                <Button x:Name="btnEdit" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEdit_Click">
+                <Button x:Name="btnEdit" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEdit_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/new images/edit-icon.png"/>
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="MODIFY" HorizontalAlignment="Center"/>
+                    <TextBlock Text="MODIFY" HorizontalAlignment="Center" Margin="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackDelete">
-                <Button x:Name="btnDelete" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDelete_Click">
+                <Button x:Name="btnDelete" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDelete_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/new images/trash-mail-icon.png"/>
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="DELETE" HorizontalAlignment="Center"/>
+                    <TextBlock Text="DELETE" HorizontalAlignment="Center" Margin="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="stackBack">
-                <Button x:Name="btnBack" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                <Button x:Name="btnBack" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/new images/back-icon.png"/>
                     </Button.Background>
                 </Button>
                 <StackPanel>
-                    <TextBlock Text="BACK" HorizontalAlignment="Center"/>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Margin="5 0 5 1"/>
                 </StackPanel>
             </StackPanel>
         </Canvas>

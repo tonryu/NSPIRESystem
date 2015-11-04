@@ -6,7 +6,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         Title="UserAccountWindow" Height="1000" Width="500" WindowStyle="None" Background="White" 
-        ResizeMode="NoResize" Loaded="Window_Loaded" Closing="Window_Closing">
+        ResizeMode="NoResize" Loaded="Window_Loaded" Closing="Window_Closing" FontFamily="Arial">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Text="User Accounts" Grid.Row="0" Margin="10 40 10 10" FontFamily="Segoe UI" FontWeight="Bold" Foreground="#0069ff" FontSize="25"/>
+        <TextBlock Text="User Accounts" Grid.Row="0" Margin="10" FontFamily="Segoe UI" FontWeight="Bold" Foreground="#0069ff" FontSize="25"/>
         
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

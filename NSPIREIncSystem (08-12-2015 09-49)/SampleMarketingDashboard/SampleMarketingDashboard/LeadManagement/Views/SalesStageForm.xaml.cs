@@ -26,8 +26,6 @@ namespace NSPIREIncSystem.LeadManagement.Views
         {
             using (var context = new DatabaseContext())
             {
-                var SaleStage = new SalesStage();
-
                 if (SalesStageId > 0)
                 {
                     var stage = context.SalesStages.FirstOrDefault(c => c.SalesStageID == SalesStageId);
@@ -35,21 +33,25 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     {
                         lblsaleId.Visibility = Visibility.Visible;
                         txtSalesId.Visibility = Visibility.Visible;
-                        txtSalesId.IsReadOnly = true;
-                        txtSalesStageName.IsEnabled = IsEnabled;
-                        txtRankNo.IsEnabled = IsEnabled;
+                        Grid.SetRow(lblSaleName, 1);
+                        Grid.SetRow(txtSalesStageName, 1); Grid.SetColumn(txtSalesStageName, 1);
+                        Grid.SetRow(lblRAnk, 2);
+                        Grid.SetRow(txtRankNo, 2); Grid.SetColumn(txtRankNo, 1);
+
                         txtSalesId.Text = Convert.ToString(stage.SalesStageID);
                         txtRankNo.Text = Convert.ToString(stage.RankNo);
                         txtSalesStageName.Text = stage.SalesStageName;
-
                     }
                 }
                 else
                 {
                     lblsaleId.Visibility = Visibility.Hidden;
-                    txtSalesStageName.IsEnabled = IsEnabled;
-                    txtRankNo.IsEnabled = IsEnabled;
                     txtSalesId.Visibility = Visibility.Hidden;
+                    Grid.SetRow(lblSaleName, 0);
+                    Grid.SetRow(txtSalesStageName, 0); Grid.SetColumn(txtSalesStageName, 1);
+                    Grid.SetRow(lblRAnk, 1);
+                    Grid.SetRow(txtRankNo, 1); Grid.SetColumn(txtRankNo, 1);
+
                     txtSalesStageName.Text = "";
                     txtRankNo.Text = "";
                 }
@@ -116,6 +118,27 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                     if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
                                     windows.ShowDialog();
                                 }
+                            }
+                            else
+                            {
+                                sales.RankNo = Convert.ToInt32(txtRankNo.Text);
+                                sales.SalesStageName = txtSalesStageName.Text;
+
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = NotificationWindow.username + " modified "
+                                    + sales.SalesStageName + "'s details.";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+
+                                context.SaveChanges();
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Sales Stage successfully updated";
+                                windows.Height = 0;
+                                windows.Top = screenTopEdge + 8;
+                                windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                                windows.ShowDialog();
                             }
                         }
                     }

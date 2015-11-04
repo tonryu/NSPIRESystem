@@ -10,7 +10,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              dx:ThemeManager.ThemeName="Office2013" 
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded" FontFamily="Arial">
     <UserControl.Resources>
         <Storyboard x:Key="gridin">
             <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="0" To="950"/>
@@ -19,10 +19,10 @@
             <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="950" To="0"/>
         </Storyboard>
     </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/new images/05.jpg"/>
+    </UserControl.Background>
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/new images/05.jpg"/>
-        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -82,7 +82,7 @@
             </Border>
         </Grid>
 
-        <Canvas x:Name="canvasLeadActivityMasterData" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 5 5 10">
+        <Canvas x:Name="canvasLeadActivityMasterData" TextBlock.FontSize="11" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 5 5 10">
             <StackPanel x:Name="stackView">
                 <Button x:Name="btnView" Cursor="Hand" Padding="5 5 5 0" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
                     <Button.Background>
@@ -155,7 +155,5 @@
                             Grid.ColumnSpan="3" Margin="116 0 116 13" 
                             Width="162" Height="68" Grid.RowSpan="3" FontWeight="Bold" 
                             Foreground="Black"/>
-
-        <Border x:Name="borderTransparent" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="White" Opacity=".65" Visibility="Hidden"/>
     </Grid>
 </UserControl>

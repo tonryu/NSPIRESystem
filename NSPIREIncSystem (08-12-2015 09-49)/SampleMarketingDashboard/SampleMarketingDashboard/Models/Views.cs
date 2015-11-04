@@ -37,13 +37,13 @@ namespace NSPIREIncSystem.Models
     {
         public LeadsView() { }
         public int LeadId { get; set; }
-        public string ContactPerson { get; set; }
-        public string Position { get; set; }
         public string TerritoryName { get; set; }
         public string CompanyName { get; set; }
         public string CompanyAddress { get; set; }
-        public string PhoneNo { get; set; }
         public string SalesStageStatus { get; set; }
+        public string DateAdded { get; set; }
+        public string MarketingStrategy { get; set; }
+        public bool IsActive { get; set; }
     }
 
     public class ActivityView
@@ -64,7 +64,7 @@ namespace NSPIREIncSystem.Models
         public string ContactPerson { get; set; }
         public bool IsFinalized { get; set; }
     }
-
+    
     public class ContactView
     {
         public ContactView() { }
@@ -81,7 +81,6 @@ namespace NSPIREIncSystem.Models
         public int SalesStageID { get; set; }
         public string SalesStageName { get; set; }
         public int RankNo { get; set; }
-
     }
 
     public class LeadsListBox
@@ -101,6 +100,7 @@ namespace NSPIREIncSystem.Models
         public string Discount { get; set; }
         public string ServiceCharge { get; set; }
         public string NetValue { get; set; }
+        public string Agent { get; set; }
     }
 
     public class TerritoryView
@@ -120,6 +120,37 @@ namespace NSPIREIncSystem.Models
         public string PhoneNo { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
+    }
+
+    public class AgentsView
+    {
+        public int AgentId { get; set; }
+        public string AgentName { get; set; }
+        public string Position { get; set; }
+        public string ContactNo { get; set; }
+        public string Territory { get; set; }
+        public bool IsEmployee { get; set; }
+    }
+
+    public class ProductView
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public double Cost { get; set; }
+        public string Category { get; set; }
+    }
+
+    public class ProductCategoryView
+    {
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+    }
+
+    public class ProductsByLeadsView
+    {
+        public int ListId { get; set; }
+        public string Lead { get; set; }
+        public string Product { get; set; }
     }
     
     // Classes
@@ -242,6 +273,7 @@ namespace NSPIREIncSystem.Models
         public string Discount { get; set; }
         public string ServiceCharge { get; set; }
         public string NetValue { get; set; }
+        public int AgentId { get; set; }
     }
 
     public class Product
@@ -249,7 +281,7 @@ namespace NSPIREIncSystem.Models
         [Key]
         public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public string Cost { get; set; }
+        public double Cost { get; set; }
         public int CategoryID { get; set; }
     }
 
@@ -260,5 +292,31 @@ namespace NSPIREIncSystem.Models
         public string Description { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
+    }
+
+    public class Agent
+    {
+        [Key]
+        public int AgentId { get; set; }
+        public string AgentName { get; set; }
+        public string Position { get; set; }
+        public string ContactNo { get; set; }
+        public string Territory { get; set; }
+        public bool IsEmployee { get; set; }
+    }
+
+    public class ProductCategory
+    {
+        [Key]
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+    }
+
+    public class LeadsProduct
+    {
+        [Key]
+        public int ListId { get; set; }
+        public int ProductId { get; set; }
+        public int LeadId { get; set; }
     }
 }

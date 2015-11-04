@@ -1,7 +1,7 @@
 ﻿<Application x:Class="NSPIREIncSystem.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml" Startup="OnAppStartup_UpdateThemeName">
     <Application.Resources>
 
         <Style x:Key="ButtonMetroStyle3" TargetType="{x:Type Button}">

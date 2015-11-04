@@ -7,8 +7,8 @@
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             dxc:ThemeManager.ThemeName="DeepBlue"
-             d:DesignHeight="700" d:DesignWidth="1000" Loaded="UserControl_Loaded">
+             dxc:ThemeManager.ThemeName="Office2013"
+             d:DesignHeight="700" d:DesignWidth="1000" Loaded="UserControl_Loaded" FontFamily="Arial">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

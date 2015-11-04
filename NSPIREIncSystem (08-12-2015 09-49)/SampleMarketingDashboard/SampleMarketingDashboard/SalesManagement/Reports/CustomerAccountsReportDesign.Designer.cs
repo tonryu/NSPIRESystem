@@ -1,4 +1,4 @@
-﻿namespace NSPIREIncSystem.SalesManagement.Reports
+﻿namespace NSPIREIncSystem.LeadManagement.Reports
 {
     partial class CustomerAccountsReportDesign
     {
@@ -175,7 +175,7 @@
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(NSPIREIncSystem.SalesManagement.Reports.CustomerAccountsReportData);
+            this.bindingSource1.DataSource = typeof(NSPIREIncSystem.LeadManagement.Reports.CustomerAccountsReportData);
             // 
             // xrTable1
             // 

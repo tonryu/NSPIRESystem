@@ -144,7 +144,7 @@ namespace NSPIREIncSystem.Settings.Windows
             {
                 byte[] data = System.Text.Encoding.Unicode.GetBytes(txtOldPassword.Text);
                 data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                String hash = System.Text.Encoding.ASCII.GetString(data);
+                String hash = System.Text.Encoding.Unicode.GetString(data);
                 
                 if (UserAccountId != "" && UserAccountId != null)
                 {
@@ -169,9 +169,16 @@ namespace NSPIREIncSystem.Settings.Windows
                                 user.TaskManagementAccess = cbTaskAccess.Text;
                                 user.IsAdmin = tsAdminCheck.IsChecked.Value;
 
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " modifies "
+                                    + txtEmployeeName.Text + "'s user account details.";
+                                context.Logs.Add(log);
+
                                 context.SaveChanges();
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "User updated";
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "User updated";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -181,8 +188,16 @@ namespace NSPIREIncSystem.Settings.Windows
                             }
                             else
                             {
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "This username is already used.";
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " fails to modify "
+                                    + txtEmployeeName.Text + "'s user account details due to the username is already used.";
+                                context.Logs.Add(log);
+                                context.SaveChanges();
+
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "This username is already used.";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -199,9 +214,16 @@ namespace NSPIREIncSystem.Settings.Windows
                             user.TaskManagementAccess = cbTaskAccess.Text;
                             user.IsAdmin = tsAdminCheck.IsChecked.Value;
 
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            log.Description = NotificationWindow.username + " modifies "
+                                + txtEmployeeName.Text + "'s user account details.";
+                            context.Logs.Add(log);
+
                             context.SaveChanges();
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "User updated";
+                            var windows = new NoticeWindow();
+                            NoticeWindow.message = "User updated";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -216,8 +238,16 @@ namespace NSPIREIncSystem.Settings.Windows
 
                         if (hash != user.Password)
                         {
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "Old password is incorrect.";
+                            var log = new Log();
+                            log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                            log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                            log.Description = NotificationWindow.username + " fails to modify "
+                                + txtEmployeeName.Text + "'s user account details due to the old password is not correct.";
+                            context.Logs.Add(log);
+                            context.SaveChanges();
+
+                            var windows = new NoticeWindow();
+                            NoticeWindow.message = "Old password is incorrect.";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -228,7 +258,7 @@ namespace NSPIREIncSystem.Settings.Windows
                         {
                             data = System.Text.Encoding.Unicode.GetBytes(txtNewPassword.Text);
                             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                            hash = System.Text.Encoding.ASCII.GetString(data);
+                            hash = System.Text.Encoding.Unicode.GetString(data);
                             var employee = context.Employees.FirstOrDefault
                                 (c => c.FirstName.ToLower() + " " + c.MiddleName.ToLower() + " " + c.LastName.ToLower()
                                  == txtEmployeeName.Text.ToLower());
@@ -247,9 +277,16 @@ namespace NSPIREIncSystem.Settings.Windows
                                     user.IsAdmin = tsAdminCheck.IsChecked.Value;
                                     user.Password = hash;
 
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    log.Description = NotificationWindow.username + " modifies "
+                                        + txtEmployeeName.Text + "'s user account details.";
+                                    context.Logs.Add(log);
+
                                     context.SaveChanges();
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "User updated";
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "User updated";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -259,8 +296,16 @@ namespace NSPIREIncSystem.Settings.Windows
                                 }
                                 else
                                 {
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "This username is already used.";
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    log.Description = NotificationWindow.username + " fails to modify "
+                                        + txtEmployeeName.Text + "'s user account details due to the username is already used.";
+                                    context.Logs.Add(log);
+                                    context.SaveChanges();
+
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "This username is already used.";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -278,9 +323,16 @@ namespace NSPIREIncSystem.Settings.Windows
                                 user.IsAdmin = tsAdminCheck.IsChecked.Value;
                                 user.Password = hash;
 
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " modifies "
+                                    + txtEmployeeName.Text + "'s user account details.";
+                                context.Logs.Add(log);
+
                                 context.SaveChanges();
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "User updated";
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "User updated";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -325,9 +377,17 @@ namespace NSPIREIncSystem.Settings.Windows
                                         IsAdmin = tsAdminCheck.IsChecked.Value,
                                         Password = hash
                                     });
+
+                                    var log = new Log();
+                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                    log.Description = NotificationWindow.username + " creates a new user account for "
+                                        + txtEmployeeName.Text + ".";
+                                    context.Logs.Add(log);
+
                                     context.SaveChanges();
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "New user account created";
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "New user account created";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -337,8 +397,10 @@ namespace NSPIREIncSystem.Settings.Windows
                                 }
                                 else
                                 {
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "This username is already used.";
+
+
+                                    var windows = new NoticeWindow();
+                                    NoticeWindow.message = "This username is already used.";
                                     windows.Height = 0;
                                     windows.Top = screenTopEdge + 8;
                                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -348,20 +410,26 @@ namespace NSPIREIncSystem.Settings.Windows
                             }
                             else
                             {
-                                context.UserAccounts.Add(
-                                    new UserAccount
-                                    {
-                                        EmployeeId = employee.EmployeeId,
-                                        UserAccountId = txtUsername.Text,
-                                        CustomerServiceAccess = cbCustomerServiceAccess.Text,
-                                        LeadManagementAccess = cbLeadAccess.Text,
-                                        TaskManagementAccess = cbTaskAccess.Text,
-                                        IsAdmin = tsAdminCheck.IsChecked.Value,
-                                        Password = hash
-                                    });
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " creates a new user account for "
+                                        + txtEmployeeName.Text + ".";
+                                context.Logs.Add(log);
+
+                                context.UserAccounts.Add(new UserAccount
+                                {
+                                    EmployeeId = employee.EmployeeId,
+                                    UserAccountId = txtUsername.Text,
+                                    CustomerServiceAccess = cbCustomerServiceAccess.Text,
+                                    LeadManagementAccess = cbLeadAccess.Text,
+                                    TaskManagementAccess = cbTaskAccess.Text,
+                                    IsAdmin = tsAdminCheck.IsChecked.Value,
+                                    Password = hash
+                                });
                                 context.SaveChanges();
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "New user account created";
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "New user account created";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -372,8 +440,8 @@ namespace NSPIREIncSystem.Settings.Windows
                         }
                         else
                         {
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "This user already have an account";
+                            var windows = new NoticeWindow();
+                            NoticeWindow.message = "This user already have an account";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -396,8 +464,19 @@ namespace NSPIREIncSystem.Settings.Windows
 
         private void IncorrectPasswordMessage()
         {
-            var windows = new Shared.Windows.NoticeWindow();
-            Shared.Windows.NoticeWindow.message = "The passwords did not match";
+            using (var context = new DatabaseContext())
+            {
+                var log = new Log();
+                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                log.Description = NotificationWindow.username + " fails to modify "
+                    + txtEmployeeName.Text + "'s user account details due to the new password does not match with the verification of the password.";
+                context.Logs.Add(log);
+                context.SaveChanges();
+            }
+
+            var windows = new NoticeWindow();
+            NoticeWindow.message = "The passwords did not match";
             windows.Height = 0;
             windows.Top = screenTopEdge + 8;
             windows.Left = (screenWidth / 2) - (windows.Width / 2);

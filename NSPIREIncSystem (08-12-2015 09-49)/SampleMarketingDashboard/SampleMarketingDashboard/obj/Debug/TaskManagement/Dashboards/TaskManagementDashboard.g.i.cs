@@ -11,10 +11,12 @@
 
 using DevExpress.Core;
 using DevExpress.Xpf.Core;
+using DevExpress.Xpf.Core.ConditionalFormatting;
 using DevExpress.Xpf.Core.DataSources;
 using DevExpress.Xpf.Core.Serialization;
 using DevExpress.Xpf.Core.ServerMode;
 using DevExpress.Xpf.Scheduler;
+using DevExpress.Xpf.Scheduler.Commands;
 using DevExpress.Xpf.Scheduler.Reporting;
 using DevExpress.Xpf.Scheduler.UI;
 using System;

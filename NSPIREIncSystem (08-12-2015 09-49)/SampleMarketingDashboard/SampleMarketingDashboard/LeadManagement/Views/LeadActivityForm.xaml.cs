@@ -67,6 +67,7 @@ namespace NSPIREIncSystem.LeadManagement.Views
                         Grid.SetRow(txtSalesRep, 2); Grid.SetColumn(txtSalesRep, 3);
                         Grid.SetRow(lblContact, 5); Grid.SetColumn(lblContact, 0);
                         Grid.SetRow(cbContact, 5); Grid.SetColumn(cbContact, 1);
+
                         txtActivityId.Text = Convert.ToString(activity.ActivityID);
                         txtActivityTime.Text = activity.ActivityTime;
                         txtClientResponse.Text = activity.ClientResponse;
@@ -100,11 +101,6 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     txtActivityDate.Visibility = Visibility.Hidden;
                     lblFinalizedCheck.Visibility = Visibility.Hidden;
                     tsFinalizedCheck.Visibility = Visibility.Hidden;
-                    txtCost.Text = "";
-                    txtDescription.Text = "";
-                    txtMarketingVoucher.Text = "";
-                    txtSalesRep.Text = "";
-                    cbContact.SelectedItem = null;
                     Grid.SetRow(lblDescription, 0); Grid.SetColumn(lblDescription, 0);
                     Grid.SetRow(txtDescription, 0); Grid.SetColumn(txtDescription, 1);
                     Grid.SetRow(lblCost, 1); Grid.SetColumn(lblCost, 0);
@@ -115,6 +111,12 @@ namespace NSPIREIncSystem.LeadManagement.Views
                     Grid.SetRow(txtSalesRep, 0); Grid.SetColumn(txtSalesRep, 3);
                     Grid.SetRow(lblContact, 2); Grid.SetColumn(lblContact, 0);
                     Grid.SetRow(cbContact, 2); Grid.SetColumn(cbContact, 1);
+
+                    txtCost.Text = "";
+                    txtDescription.Text = "";
+                    txtMarketingVoucher.Text = "";
+                    txtSalesRep.Text = "";
+                    cbContact.SelectedItem = null;
                 }
             }
         }
@@ -140,9 +142,9 @@ namespace NSPIREIncSystem.LeadManagement.Views
                             if (Convert.ToDateTime(txtActivityDate.Text).Date >= DateTime.Now.Date && 
                                 Convert.ToDateTime(txtNextStepDue.Text).Date >= Convert.ToDateTime(txtActivityDate.Text).Date)
                             {
-                                activity.ActivityDate = Convert.ToDateTime(txtActivityDate.Text).ToShortDateString();
+                                activity.ActivityDate = Convert.ToDateTime(txtActivityDate.Text).ToString("MM/dd/yyyy");
                                 activity.ActivityID = Convert.ToInt32(txtActivityId.Text);
-                                activity.ActivityTime = Convert.ToDateTime(txtActivityTime.Text).ToShortTimeString();
+                                activity.ActivityTime = Convert.ToDateTime(txtActivityTime.Text).ToString("HH:mm");
                                 if (txtClientResponse.Text != null) { activity.ClientResponse = txtClientResponse.Text; }
                                 activity.Cost = Convert.ToDouble(txtCost.Text);
                                 if (txtDescription.Text != null) { activity.Description = txtDescription.Text; }
@@ -189,7 +191,6 @@ namespace NSPIREIncSystem.LeadManagement.Views
                                 if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
                                 windows.ShowDialog();
                             }
-                            
                         }
                         else
                         {

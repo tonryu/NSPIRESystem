@@ -6,7 +6,6 @@ using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
 using NSPIREIncSystem.LeadManagement.Dashboards;
-using NSPIREIncSystem.SalesManagement.Dashboards;
 using NSPIREIncSystem.Settings.MasterDatas;
 using NSPIREIncSystem.Shared.Views;
 using NSPIREIncSystem.TaskManagement.Dashboards;
@@ -198,6 +197,11 @@ namespace NSPIREIncSystem.Shared.Dashboards
             canvasSettings.Height = GetCanvasMinHeight(canvasSettings);
             canvasSettings.Visibility = Visibility.Collapsed;
             canvasSettings.Opacity = 0;
+
+            canvasSystemData.Width = GetCanvasMinWidth(canvasSystemData);
+            canvasSystemData.Height = GetCanvasMinHeight(canvasSystemData);
+            canvasSystemData.Visibility = Visibility.Collapsed;
+            canvasSystemData.Opacity = 0;
         }
 
         private void btnLead_Click(object sender, RoutedEventArgs e)
@@ -251,7 +255,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             Employees page = new Employees();
             frame.Navigate(page);
-            FoldInnerCanvasSideward(canvasSettings);
+            FoldInnerCanvasSideward(canvasSystemData);
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
@@ -259,7 +263,7 @@ namespace NSPIREIncSystem.Shared.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             Users page = new Users();
             frame.Navigate(page);
-            FoldInnerCanvasSideward(canvasSettings);
+            FoldInnerCanvasSideward(canvasSystemData);
         }
 
         private void btnTerritories_Click(object sender, RoutedEventArgs e)
@@ -267,10 +271,27 @@ namespace NSPIREIncSystem.Shared.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             var page = new Territories();
             frame.Navigate(page);
-            FoldInnerCanvasSideward(canvasSettings);
+            FoldInnerCanvasSideward(canvasSystemData);
         }
 
         private void btnBackToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            FoldInnerCanvasSideward(canvasSystemData);
+            FoldInnerCanvasSideward(canvasSettings);
+        }
+
+        private void btnSysData_Click(object sender, RoutedEventArgs e)
+        {
+            FoldInnerCanvasSideward(canvasSettings);
+            FoldInnerCanvasSideward(canvasSystemData);
+        }
+
+        private void btnAuditTrail_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnGoToMainMenu_Click(object sender, RoutedEventArgs e)
         {
             FoldInnerCanvasSideward(canvasSettings);
             FoldInnerCanvasSideward(canvasMainMenu);

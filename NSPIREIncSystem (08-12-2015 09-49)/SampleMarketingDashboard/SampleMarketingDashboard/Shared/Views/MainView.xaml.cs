@@ -286,6 +286,14 @@ namespace NSPIREIncSystem.Shared.Views
 
                     tbUsertype.Text = "User";
                 }
+                if (emp.IsAdmin != true)
+                {
+                    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                    UserDashboard page = new UserDashboard();
+                    frame.Navigate(page);
+
+                    tbUsertype.Text = "User";
+                }
                 //else if (emp.IsAdmin == true && emp.LeadManagementAccess == "Full" && emp.TaskManagementAccess != "Full"
                 //    && emp.CustomerServiceAccess != "Full")
                 //{
@@ -313,8 +321,16 @@ namespace NSPIREIncSystem.Shared.Views
 
                 //    tbUsertype.Text = "Customer Service Administrator";
                 //}
-                else if (emp.IsAdmin == true && (emp.CustomerServiceAccess == "Full" && emp.LeadManagementAccess == "Full"
-                    && emp.TaskManagementAccess == "Full"))
+                //else if (emp.IsAdmin == true && (emp.CustomerServiceAccess == "Full" && emp.LeadManagementAccess == "Full"
+                //    && emp.TaskManagementAccess == "Full"))
+                //{
+                //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
+                //    AdminDashboard page = new AdminDashboard();
+                //    frame.Navigate(page);
+
+                //    tbUsertype.Text = "Administrator";
+                //}
+                else if (emp.IsAdmin == true)
                 {
                     var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frameNavigate);
                     AdminDashboard page = new AdminDashboard();
@@ -379,6 +395,7 @@ namespace NSPIREIncSystem.Shared.Views
                     context.SaveChanges();
                 }
 
+                Variables.yesClicked = false;
                 var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
                 frame.BackNavigationMode = BackNavigationMode.Root;
                 frame.GoBack();
@@ -412,6 +429,7 @@ namespace NSPIREIncSystem.Shared.Views
                     context.SaveChanges();
                 }
 
+                Variables.yesClicked = false;
                 Application.Current.MainWindow.Close();
             }
         }

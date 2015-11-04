@@ -5,19 +5,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
-using DevExpress.XtraCharts;
+using NSPIREIncSystem.LeadManagement.MasterDatas;
 using NSPIREIncSystem.Models;
-using NSPIREIncSystem.SalesManagement.MasterDatas;
 using NSPIREIncSystem.Shared.Views;
 using NSPIREIncSystem.Shared.Windows;
 
-namespace NSPIREIncSystem.SalesManagement.Dashboards
+namespace NSPIREIncSystem.LeadManagement.Dashboards
 {
     /// <summary>
     /// Interaction logic for SalesDashboard.xaml
     /// </summary>
     public partial class SalesDashboard : UserControl
     {
+        static bool isEntered = false;
+
         public SalesDashboard()
         {
             InitializeComponent();
@@ -198,9 +199,8 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
             {
                 var salesStages = context.SalesStages.ToList();
                 int countCustomers = 0, overAll = 0;
-                var chart = new DevExpress.XtraCharts.Series("", ViewType.Funnel);
 
-                //ccSalesFunnel.Diagram.Series[0].Points.Clear();
+                ccSalesFunnel.Diagram.Series[0].Points.Clear();
                 if (salesStages != null)
                 {
                     foreach (var salesStage in salesStages)
@@ -219,8 +219,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                             }
                         }
 
-                        chart.Points.Add(new DevExpress.XtraCharts.SeriesPoint(salesStage.SalesStageName, countCustomers));
-                        //ccSalesFunnel.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(chart));
+                        ccSalesFunnel.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(salesStage.SalesStageName, countCustomers));
                         ccSalesFunnel.ToolTipEnabled = true;
                         countCustomers = 0;
                     }
@@ -248,7 +247,8 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                         {
                             foreach (var lead in leads)
                             {
-                                var campaign = context.MarketingStrategies.FirstOrDefault(c => c.MarketingStrategyId == marketingStrategy.MarketingStrategyId);
+                                var campaign = context.MarketingStrategies.FirstOrDefault
+                                    (c => c.MarketingStrategyId == marketingStrategy.MarketingStrategyId);
 
                                 if(lead.MarketingStrategyId == campaign.MarketingStrategyId)
                                 {
@@ -258,7 +258,8 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                             }
                         }
 
-                        ccEffective.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint(marketingStrategy.Description, countCustomers));
+                        ccEffective.Diagram.Series[0].Points.Add(new DevExpress.Xpf.Charts.SeriesPoint
+                            (marketingStrategy.Description, countCustomers));
                         ccEffective.ToolTipEnabled = true;
                         countCustomers = 0;
                     }
@@ -269,17 +270,23 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
 
         private void FillIncome()
         {
-
+            using (var context = new DatabaseContext())
+            {
+                var customerAccounts = context.CustomerAccounts.ToList();
+            }
         }
 
         private void FillExpense()
         {
+            using (var context = new DatabaseContext())
+            {
 
+            }
         }
         #endregion
 
         #region Load details
-        private Task<string> QueryLoad()
+        private Task<string> QueryLoadDashboard()
         {
             return Task.Factory.StartNew(() =>
             {
@@ -311,9 +318,10 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
 
         private async void Loading()
         {
-            var message = await QueryLoad();
+            var message = await QueryLoadDashboard();
 
             busyIndicator.IsBusy = true;
+            if (isEntered != true) { AddLogAccess(); }
             FillAll();
 
             using (var context = new DatabaseContext())
@@ -377,11 +385,12 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
                     log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                     context.Logs.Add(log);
                     context.SaveChanges();
+                    isEntered = true;
                 }
             }
         }
 
-        private void LoadDashboard()
+        private void AddLogAccess()
         {
             AddingToLog();
         }
@@ -401,7 +410,6 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
             canvasMasterData.Opacity = 0;
 
             LoadDashboardDetails();
-            LoadDashboard();
         }
 
         private void btnMasterData_Click(object sender, RoutedEventArgs e)
@@ -445,6 +453,7 @@ namespace NSPIREIncSystem.SalesManagement.Dashboards
             frame.BackNavigationMode = BackNavigationMode.PreviousScreen;
             frame.GoBack();
             FoldInnerCanvasSideward(canvasSalesMenu);
+            isEntered = false;
         }
 
         private void btnBackToSalesMenu_Click(object sender, RoutedEventArgs e)

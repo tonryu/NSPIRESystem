@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using NSPIREIncSystem.Models;
-using NSPIREIncSystem.Shared.Windows;
 using DevExpress.Xpf.WindowsUI;
-using NSPIREIncSystem.LeadManagement.Views;
-using NSPIREIncSystem.LeadManagement.Reports;
 using DevExpress.XtraReports.UI;
+using NSPIREIncSystem.LeadManagement.Reports;
+using NSPIREIncSystem.LeadManagement.Views;
+using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Reports;
-using System.Threading.Tasks;
-using NSPIREIncSystem.Shared.Views;
+using NSPIREIncSystem.Shared.Windows;
 
 namespace NSPIREIncSystem.LeadManagement.MasterDatas
 {
@@ -23,6 +22,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
     {
         public List<LeadsView> leadsList = new List<LeadsView>();
         public List<ContactView> contactsList = new List<ContactView>();
+        public List<ProductsByLeadsView> leadsProductsList = new List<ProductsByLeadsView>();
         double screenLeftEdge = Application.Current.MainWindow.Left;
         double screenTopEdge = Application.Current.MainWindow.Top;
         double screenWidth = Application.Current.MainWindow.Width;
@@ -241,7 +241,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
             if (message != null)
             {
-                var windows = new Shared.Windows.NoticeWindow();
+                var windows = new NoticeWindow();
                 NoticeWindow.message = message;
                 windows.Height = 0;
                 windows.Top = screenTopEdge + 8;
@@ -250,16 +250,18 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 windows.ShowDialog();
             }
 
-            dcLeadsList.ItemsSource = leadsList.Where(c => c.CompanyAddress.ToLower().Contains(txtSearch.Text.ToLower())
-                || c.CompanyName.ToLower().Contains(txtSearch.Text.ToLower()) || c.SalesStageStatus.ToLower().Contains(txtSearch.Text.ToLower())
-                || c.TerritoryName.ToLower().Contains(txtSearch.Text.ToLower())).OrderBy(c => c.LeadId).ToList();
-
-            viewLead.BestFitColumns();
-            viewContact.BestFitColumns();
-
-            if (leadsList.Count == 0)
+            if (leadsList.Count() > 0)
             {
-                var windows = new Shared.Windows.NoticeWindow();
+                dcLeadsList.ItemsSource = leadsList.Where(c => c.CompanyAddress.ToLower().Contains(txtSearch.Text.ToLower())
+                    || c.CompanyName.ToLower().Contains(txtSearch.Text.ToLower()) || c.SalesStageStatus.ToLower().Contains(txtSearch.Text.ToLower())
+                    || c.TerritoryName.ToLower().Contains(txtSearch.Text.ToLower())).OrderBy(c => c.LeadId).ToList();
+
+                viewLead.BestFitColumns();
+                viewContact.BestFitColumns();
+            }
+            else
+            {
+                var windows = new NoticeWindow();
                 NoticeWindow.message = "List has no leads.";
                 windows.Height = 0;
                 windows.Top = screenTopEdge + 8;
@@ -309,44 +311,43 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
             busyIndicator.IsBusy = false;
         }
 
-        private void LoadMethod(string text)
-        {
-            busyIndicator.IsBusy = true;
-            using (var context = new DatabaseContext())
-            {
-                var lead = context.Leads.ToList();
+        //private void LoadMethod(string text)
+        //{
+        //    busyIndicator.IsBusy = true;
+        //    using (var context = new DatabaseContext())
+        //    {
+        //        var lead = context.Leads.ToList();
 
-                if (lead != null)
-                {
-                    leadsList.Clear();
-                    foreach (var item in lead)
-                    {
-                        var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == item.TerritoryID);
+        //        if (lead != null)
+        //        {
+        //            leadsList.Clear();
+        //            foreach (var item in lead)
+        //            {
+        //                var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == item.TerritoryID);
 
-                        leadsList.Add(new LeadsView
-                        {
-                            CompanyAddress = item.CompanyAddress,
-                            CompanyName = item.CompanyName,
-                            LeadId = item.LeadID,
-                            SalesStageStatus = item.Status,
-                            TerritoryName = territory.TerritoryName
-                        });
-                    }
-                    dcLeadsList.ItemsSource = leadsList.Where(c => c.CompanyAddress.ToLower().Contains(text.ToLower())
-                        || c.CompanyName.ToLower().Contains(text.ToLower()) || c.SalesStageStatus.ToLower().Contains(text.ToLower())
-                        || c.TerritoryName.ToLower().Contains(text.ToLower())).OrderBy(c => c.LeadId).ToList();
+        //                leadsList.Add(new LeadsView
+        //                {
+        //                    CompanyAddress = item.CompanyAddress,
+        //                    CompanyName = item.CompanyName,
+        //                    LeadId = item.LeadID,
+        //                    SalesStageStatus = item.Status,
+        //                    TerritoryName = territory.TerritoryName
+        //                });
+        //            }
+        //            dcLeadsList.ItemsSource = leadsList.Where(c => c.CompanyAddress.ToLower().Contains(text.ToLower())
+        //                || c.CompanyName.ToLower().Contains(text.ToLower()) || c.SalesStageStatus.ToLower().Contains(text.ToLower())
+        //                || c.TerritoryName.ToLower().Contains(text.ToLower())).OrderBy(c => c.LeadId).ToList();
 
-                    viewLead.BestFitColumns();
-                }
+        //            viewLead.BestFitColumns();
+        //        }
 
-                viewContact.BestFitColumns();
-            }
-            busyIndicator.IsBusy = false;
-        }
+        //        viewContact.BestFitColumns();
+        //    }
+        //    busyIndicator.IsBusy = false;
+        //}
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            //LoadMethod(txtSearch.Text);
             LoadLeads();
         }
 
@@ -356,26 +357,35 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
             Storyboard sb;
 
-            if (_isExpanded != true && selectedLead != null)
+            if (selectedLead != null)
             {
-                sb = this.FindResource("gridin") as Storyboard;
-                sb.Begin(this);
-                _isExpanded = !_isExpanded;
+                if (_isExpanded != true)
+                {
+                    sb = this.FindResource("gridin") as Storyboard;
+                    sb.Begin(this);
+                    _isExpanded = !_isExpanded;
+
+                    LeadDetails.LeadId = selectedLead.LeadId;
+
+                    var page = new LeadDetails();
+                    frame.Navigate(page);
+                }
+                else
+                {
+                    sb = this.FindResource("gridout") as Storyboard;
+                    sb.Begin(this);
+                    _isExpanded = !_isExpanded;
+
+                    frame.BackNavigationMode = BackNavigationMode.Root;
+                    frame.GoBack();
+
+                    LoadLeads();
+                }
             }
-            //else
-            //{
-            //    sb = this.FindResource("gridout") as Storyboard;
-
-            //    frame.BackNavigationMode = BackNavigationMode.Root;
-            //    frame.GoBack();
-
-            //    LoadMethod(txtSearch.Text);
-            //}
-
-            LeadDetails.LeadId = selectedLead.LeadId;
-
-            var page = new LeadDetails();
-            frame.Navigate(page);
+            else
+            {
+                NullMessage();
+            }
         }
 
         private void btnLeadActivities_Click(object sender, RoutedEventArgs e)
@@ -452,55 +462,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
             FoldInnerCanvasSideward(canvasEdit);
         }
 
-        private void btnEditContact_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedContact = dcContactsList.SelectedItem as ContactView;
-
-            using (var context = new DatabaseContext())
-            {
-                if (selectedContact != null)
-                {
-                    var activity = context.LeadActivities.Where
-                        (c => (c.ActivityDate == null || c.ActivityTime == null) 
-                            && c.IsFinalized != true).FirstOrDefault
-                            (c => c.ContacId == selectedContact.ContactId);
-
-                    if (activity == null)
-                    {
-                        Storyboard sb;
-                        if (_isExpanded != true)
-                        {
-                            sb = this.FindResource("gridin") as Storyboard;
-                            sb.Begin(this);
-                            _isExpanded = !_isExpanded;
-                        }
-
-                        ContactPersonForm.ContactId = selectedContact.ContactId;
-
-                        var navigate = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frame);
-                        var page = new ContactPersonForm();
-                        navigate.Navigate(page);
-                    }
-                    else
-                    {
-                        var windows = new Shared.Windows.NoticeWindow();
-                        Shared.Windows.NoticeWindow.message = "Contact still has an unaccomplished activity";
-                        windows.Height = 0;
-                        windows.Top = screenTopEdge + 8;
-                        windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                        if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                        windows.ShowDialog();
-                    }
-                }
-                else
-                {
-                    busyIndicator.IsBusy = true;
-                    NullMessage();
-                }
-            }
-            busyIndicator.IsBusy = false;
-        }
-
         private void btEditLead_Click(object sender, RoutedEventArgs e)
         {
             var selectedLead = dcLeadsList.SelectedItem as LeadsView;
@@ -509,45 +470,19 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
             {
                 if (selectedLead != null)
                 {
-                    var activity = context.LeadActivities.Where
-                        (c => (c.ActivityDate == null || c.ActivityTime == null) 
-                            && c.IsFinalized != true).FirstOrDefault(c => c.LeadID == selectedLead.LeadId);
-
-                    if (activity == null)
+                    Storyboard sb;
+                    if (_isExpanded != true)
                     {
-                        Storyboard sb;
-                        if (_isExpanded != true)
-                        {
-                            sb = this.FindResource("gridin") as Storyboard;
-                            sb.Begin(this);
-                            _isExpanded = !_isExpanded;
-                        }
-
-                        LeadForm.LeadId = selectedLead.LeadId;
-
-                        //borderTransparent.Visibility = Visibility.Visible;
-                        //var window = new LeadWindow();
-                        //window.Top = Application.Current.MainWindow.Top + 98;
-                        //window.Height = screenHeight - 115;
-                        //window.Width = (screenWidth - 90) * 0.35;
-                        //window.ShowDialog();
-                        //busyIndicator.IsBusy = true;
-                        //borderTransparent.Visibility = Visibility.Hidden;
-
-                        var navigate = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frame);
-                        var page = new LeadForm();
-                        navigate.Navigate(page);
+                        sb = this.FindResource("gridin") as Storyboard;
+                        sb.Begin(this);
+                        _isExpanded = !_isExpanded;
                     }
-                    else
-                    {
-                        var windows = new Shared.Windows.NoticeWindow();
-                        Shared.Windows.NoticeWindow.message = "Lead still has an existing activity";
-                        windows.Height = 0;
-                        windows.Top = screenTopEdge + 8;
-                        windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                        if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                        windows.ShowDialog();
-                    }
+
+                    LeadForm.LeadId = selectedLead.LeadId;
+
+                    var navigate = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frame);
+                    var page = new LeadForm();
+                    navigate.Navigate(page);
                 }
                 else
                 {
@@ -556,12 +491,37 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 }
             }
 
-            //if (window.DialogResult != true)
-            //{
-            //LoadMethod(txtSearch.Text);
-            //}
+            busyIndicator.IsBusy = false;
+        }
 
-            //LeadWindow_Dummy_.LeadId = 0;
+        private void btnEditContact_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedContact = dcContactsList.SelectedItem as ContactView;
+
+            using (var context = new DatabaseContext())
+            {
+                if (selectedContact != null)
+                {
+                    Storyboard sb;
+                    if (_isExpanded != true)
+                    {
+                        sb = this.FindResource("gridin") as Storyboard;
+                        sb.Begin(this);
+                        _isExpanded = !_isExpanded;
+                    }
+
+                    ContactPersonForm.ContactId = selectedContact.ContactId;
+
+                    var navigate = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(frame);
+                    var page = new ContactPersonForm();
+                    navigate.Navigate(page);
+                }
+                else
+                {
+                    busyIndicator.IsBusy = true;
+                    NullMessage();
+                }
+            }
             busyIndicator.IsBusy = false;
         }
 
@@ -569,6 +529,94 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         {
             FoldInnerCanvasSideward(canvasLeadMasterData);
             FoldInnerCanvasSideward(canvasDelete);
+        }
+
+        private void btnDeleteLead_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectedLead = dcLeadsList.SelectedItem as LeadsView;
+
+                if (selectedLead != null)
+                {
+                    var lead = context.Leads.FirstOrDefault(c => c.LeadID == selectedLead.LeadId);
+
+                    if (lead != null)
+                    {
+                        var window = new MessageBoxWindow("Are you sure you want to delete this lead?");
+                        window.Height = 0;
+                        window.Top = screenTopEdge + 8;
+                        window.Left = (screenWidth / 2) - (window.Width / 2);
+                        if (screenLeftEdge > 0 || screenLeftEdge < -8) { window.Left += screenLeftEdge; }
+                        window.ShowDialog();
+
+                        if (Variables.yesClicked == true)
+                        {
+                            var activity = context.LeadActivities.Where(c => ((c.ActivityDate == null || c.ActivityDate == "")
+                                || (c.ActivityTime == null || c.ActivityTime == "")) && (c.IsFinalized == false)).FirstOrDefault(c => c.LeadID == lead.LeadID);
+
+                            if (activity != null)
+                            {
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Lead still has an existing activity";
+                                windows.Height = 0;
+                                windows.Top = screenTopEdge + 8;
+                                windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                                windows.ShowDialog();
+
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = lead.CompanyName
+                                    + " is not deleted due to existing activity(ies).";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+                                busyIndicator.IsBusy = true;
+                                context.Leads.Remove(lead);
+
+                                var contacts = context.Contacts.ToList();
+
+                                foreach (var contact in contacts)
+                                {
+                                    if (contact.LeadId == lead.LeadID)
+                                    {
+                                        context.Contacts.Remove(contact);
+                                    }
+                                }
+
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Description = NotificationWindow.username + " deleted " +
+                                    lead.CompanyName + ". Note: All contacts of " +
+                                    lead.CompanyName + " is deleted as well.";
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                context.Logs.Add(log);
+
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Lead successfully deleted";
+                                windows.Height = 0;
+                                windows.Top = screenTopEdge + 8;
+                                windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                                windows.ShowDialog();
+
+                                context.SaveChanges();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    busyIndicator.IsBusy = true;
+                    NullMessage();
+                }
+                LoadLeads();
+                busyIndicator.IsBusy = false;
+            }
         }
 
         private void btnDeleteContact_Click(object sender, RoutedEventArgs e)
@@ -597,8 +645,8 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
                             if (activity != null)
                             {
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "Contact person still has an unaccomplished activity.";
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Contact person still has an unaccomplished activity.";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -627,8 +675,8 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                                 log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                                 context.Logs.Add(log);
 
-                                var windows = new Shared.Windows.NoticeWindow();
-                                Shared.Windows.NoticeWindow.message = "Contact person successfully deleted";
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Contact person successfully deleted";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
                                 windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -650,101 +698,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
             }
         }
 
-        private void btnDeleteLead_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (var context = new DatabaseContext())
-                {
-                    var selectedLead = dcLeadsList.SelectedItem as LeadsView;
-
-                    if (selectedLead != null)
-                    {
-                        var lead = context.Leads.FirstOrDefault(c => c.LeadID == selectedLead.LeadId);
-
-                        if (lead != null)
-                        {
-                            var window = new MessageBoxWindow("Are you sure you want to delete this lead?");
-                            window.Height = 0;
-                            window.Top = screenTopEdge + 8;
-                            window.Left = (screenWidth / 2) - (window.Width / 2);
-                            if (screenLeftEdge > 0 || screenLeftEdge < -8) { window.Left += screenLeftEdge; }
-                            window.ShowDialog();
-
-                            if (Variables.yesClicked == true)
-                            {
-                                var activity = context.LeadActivities.Where(c => ((c.ActivityDate == null || c.ActivityDate == "")
-                                    || (c.ActivityTime == null || c.ActivityTime == "")) && (c.IsFinalized == false)).FirstOrDefault(c => c.LeadID == lead.LeadID);
-
-                                if (activity != null)
-                                {
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "Lead still has an existing activity";
-                                    windows.Height = 0;
-                                    windows.Top = screenTopEdge + 8;
-                                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                                    windows.ShowDialog();
-
-                                    var log = new Log();
-                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
-                                    log.Description = lead.CompanyName
-                                        + " is not deleted due to existing activity(ies).";
-                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
-                                    context.Logs.Add(log);
-                                    context.SaveChanges();
-                                }
-                                else
-                                {
-                                    busyIndicator.IsBusy = true;
-                                    context.Leads.Remove(lead);
-
-                                    var contacts = context.Contacts.ToList();
-
-                                    foreach (var contact in contacts)
-                                    {
-                                        if (contact.LeadId == lead.LeadID)
-                                        {
-                                            context.Contacts.Remove(contact);
-                                        }
-                                    }
-
-                                    var log = new Log();
-                                    log.Date = DateTime.Now.ToString("MM/dd/yyyy");
-                                    log.Description = NotificationWindow.username + " deleted " +
-                                        lead.CompanyName + ". Note: All contacts of " +
-                                        lead.CompanyName + " is deleted as well.";
-                                    log.Time = DateTime.Now.ToString("hh:mm:ss tt");
-                                    context.Logs.Add(log);
-
-                                    var windows = new Shared.Windows.NoticeWindow();
-                                    Shared.Windows.NoticeWindow.message = "Lead successfully deleted";
-                                    windows.Height = 0;
-                                    windows.Top = screenTopEdge + 8;
-                                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                                    windows.ShowDialog();
-
-                                    context.SaveChanges();
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        busyIndicator.IsBusy = true;
-                        NullMessage();
-                    }
-                    LoadLeads();
-                    busyIndicator.IsBusy = false;
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             FoldInnerCanvasSideward(canvasLeadMasterData);
@@ -755,22 +708,20 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         {
             using (var context = new DatabaseContext())
             {
-                var leads = context.Leads.ToList();
                 int itemNo = 0;
-                if (leads.Count() > 0)
+                if (leadsList.Count() > 0)
                 {
                     List<LeadsReportData> dataList = new List<LeadsReportData>();
                     List<LeadsReportDetail> detailsList = new List<LeadsReportDetail>();
-                    foreach (var lead in leads)
+                    foreach (var lead in leadsList)
                     {
                         itemNo++;
                         var detail = new LeadsReportDetail();
-                        var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == lead.TerritoryID);
                         detail.Address = lead.CompanyAddress;
                         detail.CompanyName = lead.CompanyName;
                         detail.LeadNo = itemNo;
-                        detail.SalesStageStatus = lead.Status;
-                        detail.Territory = territory.TerritoryName;
+                        detail.SalesStageStatus = lead.SalesStageStatus;
+                        detail.Territory = lead.TerritoryName;
                         detailsList.Add(detail);
                     }
                     dataList.Add(new LeadsReportData()
@@ -795,8 +746,8 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 }
                 else
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    Shared.Windows.NoticeWindow.message = "No data to print.";
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "No data to print.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -810,19 +761,17 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         {
             using (var context = new DatabaseContext())
             {
-                var contacts = context.Contacts.ToList();
                 int itemNo = 0;
-                if (contacts.Count() > 0)
+                if (contactsList.Count() > 0)
                 {
                     List<ContactsReportData> dataList = new List<ContactsReportData>();
                     List<ContactsReportDetail> detailsList = new List<ContactsReportDetail>();
-                    foreach (var contact in contacts)
+                    foreach (var contact in contactsList)
                     {
                         itemNo++;
                         var detail = new ContactsReportDetail();
-                        var lead = context.Leads.FirstOrDefault(c => c.LeadID == contact.LeadId);
 
-                        detail.CompanyName = lead.CompanyName;
+                        detail.CompanyName = contact.Company;
                         detail.ContactNo = itemNo;
                         detail.ContactPerson = contact.ContactPersonName;
                         detail.PhoneNo = contact.PhoneNo;
@@ -851,8 +800,8 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 }
                 else
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    Shared.Windows.NoticeWindow.message = "No details to print.";
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "No details to print.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -876,38 +825,69 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
             using (var context = new DatabaseContext())
             {
                 var selectedRow = dcLeadsList.SelectedItem as LeadsView;
-                var lead = context.Leads.FirstOrDefault(c => c.LeadID == selectedRow.LeadId);
 
-                lblLeadContacts.Text = lead.CompanyName;
-
-                if (dcLeadsList.SelectedItem != null)
+                if (selectedRow != null)
                 {
-                    var allContacts = context.Contacts.ToList();
+                    var lead = context.Leads.FirstOrDefault(c => c.LeadID == selectedRow.LeadId);
 
-                    if (allContacts.Count > 0)
+                    lblLeadContacts.Text = lead.CompanyName;
+
+                    if (dcLeadsList.SelectedItem != null)
                     {
-                        contactsList.Clear();
+                        var allContacts = context.Contacts.ToList();
 
-                        foreach (var item in allContacts)
+                        if (allContacts.Count > 0)
                         {
-                            lead = context.Leads.FirstOrDefault(c => c.LeadID == item.LeadId);
+                            contactsList.Clear();
 
-                            contactsList.Add(new ContactView
+                            foreach (var item in allContacts)
                             {
-                                Company = lead.CompanyName,
-                                ContactId = item.ContactID,
-                                ContactPersonName = item.ContactPersonName,
-                                PhoneNo = item.PhoneNo,
-                                Position = item.Position
-                            });
+                                lead = context.Leads.FirstOrDefault(c => c.LeadID == item.LeadId);
+
+                                contactsList.Add(new ContactView
+                                {
+                                    Company = lead.CompanyName,
+                                    ContactId = item.ContactID,
+                                    ContactPersonName = item.ContactPersonName,
+                                    PhoneNo = item.PhoneNo,
+                                    Position = item.Position
+                                });
+                            }
+
+                            var leads = context.Leads.FirstOrDefault(c => c.LeadID == selectedRow.LeadId);
+
+                            dcContactsList.ItemsSource = contactsList.Where
+                                (c => c.Company.ToLower() == leads.CompanyName.ToLower());
+
+                            viewContact.BestFitColumns();
                         }
 
-                        var leads = context.Leads.FirstOrDefault(c => c.LeadID == selectedRow.LeadId);
+                        var allLeadsProducts = context.LeadsProducts.ToList();
 
-                        dcContactsList.ItemsSource = contactsList.Where
-                            (c => c.Company.ToLower() == leads.CompanyName.ToLower());
+                        if (allLeadsProducts.Count > 0)
+                        {
+                            leadsProductsList.Clear();
 
-                        viewContact.BestFitColumns();
+                            foreach (var leadsProduct in allLeadsProducts)
+                            {
+                                var leadProduct = context.LeadsProducts.FirstOrDefault(c => c.ListId == leadsProduct.ListId);
+                                lead = context.Leads.FirstOrDefault(c => c.LeadID == leadProduct.LeadId);
+                                var product = context.Products.FirstOrDefault(c => c.ProductID == leadProduct.ProductId);
+
+                                leadsProductsList.Add(new ProductsByLeadsView
+                                {
+                                    Lead = lead.CompanyName,
+                                    ListId = leadProduct.ListId,
+                                    Product = product.ProductName
+                                });
+                            }
+
+                            var selectedLead = context.Leads.FirstOrDefault(c => c.LeadID == selectedRow.LeadId);
+
+                            dcProductsList.ItemsSource = leadsProductsList.Where(c => c.Lead.ToLower() == selectedLead.CompanyName.ToLower());
+
+                            viewProducts.BestFitColumns();
+                        }
                     }
                 }
             }
@@ -973,7 +953,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
         private void NullMessage()
         {
-            var windows = new Shared.Windows.NoticeWindow();
+            var windows = new NoticeWindow();
             NoticeWindow.message = "Please select a record.";
             windows.Height = 0;
             windows.Top = screenTopEdge + 8;

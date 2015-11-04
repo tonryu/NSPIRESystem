@@ -27,6 +27,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         double screenTopEdge = Application.Current.MainWindow.Top;
         double screenWidth = Application.Current.MainWindow.Width;
         double screenHeight = Application.Current.MainWindow.Height;
+        public static bool isEntered = false;
 
         public LeadDashboard()
         {
@@ -385,7 +386,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                 {
                     foreach (var item in leads)
                     {
-                        var customerAccount = context.Customers.FirstOrDefault(c => c != null && c.LeadID == item.LeadID);
+                        var customerAccount = context.Customers.FirstOrDefault(c => c.LeadID == item.LeadID);
 
                         if (item.IsActive == true && status == "Engaged client" && customerAccount != null && item.Status == "New Customer")
                         {
@@ -488,6 +489,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         private async void RefreshTables(string str)
         {
             FillCharts();
+            if (isEntered != true) { AddLogAccess(); }
             using (var context = new DatabaseContext())
             {
                 string message = "";
@@ -505,7 +507,22 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     windows.ShowDialog();
                 }
 
-                lbeLeads.ItemsSource = leadListBox.Select(c => c.CompanyName).ToList();
+                if (leadListBox.Count() > 0)
+                {
+                    lbeLeads.ItemsSource = leadListBox.Select(c => c.CompanyName).ToList();
+                }
+                else
+                {
+                    lbeLeads.ItemsSource = null;
+
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "No leads in the list.";
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
 
                 lblTotalLead.Text = "Total Leads : " + leadListBox.Count();
 
@@ -555,11 +572,12 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                     context.Logs.Add(log);
                     context.SaveChanges();
+                    isEntered = true;
                 }
             }
         }
 
-        private void LoadDashboard()
+        private void AddLogAccess()
         {
             Loading();
         }
@@ -578,26 +596,18 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             canvasSalesStages.Visibility = Visibility.Collapsed;
             canvasSalesStages.Opacity = 0;
 
-            //FillCharts();
+            canvasMasterData.Width = GetCanvasMinWidth(canvasMasterData);
+            canvasMasterData.Height = GetCanvasMinHeight(canvasMasterData);
+            canvasMasterData.Visibility = Visibility.Collapsed;
+            canvasMasterData.Opacity = 0;
+
             LoadLeadDashboard();
-            LoadDashboard();
+        }
 
-            //using (var context = new DatabaseContext())
-            //{
-            //    var lead = context.Leads.ToList();
-
-            //    leadListBox.Clear();
-            //    foreach (var item in lead)
-            //    {
-            //        leadListBox.Add(new LeadsListBox
-            //        {
-            //            CompanyName = item.CompanyName
-            //        });
-            //    }
-            //    lbeLeads.ItemsSource = leadListBox.Select(c => c.CompanyName).ToList();
-
-            //    lblTotalLead.Text = "Total Lead : " + leadListBox.Count();
-            //}
+        private void btnMasterdata_Click(object sender, RoutedEventArgs e)
+        {
+            FoldInnerCanvasSideward(canvasLeadMenu);
+            FoldInnerCanvasSideward(canvasMasterData);
         }
 
         private void btnLeads_Click(object sender, RoutedEventArgs e)
@@ -605,7 +615,15 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             LeadMasterData page = new LeadMasterData();
             frame.Navigate(page);
-            FoldInnerCanvasSideward(canvasLeadMenu);
+            FoldInnerCanvasSideward(canvasMasterData);
+        }
+
+        private void btnProducts_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            ProductsMasterData page = new ProductsMasterData();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasMasterData);
         }
 
         private void btnSalesStage_Click(object sender, RoutedEventArgs e)
@@ -614,7 +632,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             FoldInnerCanvasSideward(canvasSalesStages);
         }
 
-        private void btnPerCompany_Click(object sender, RoutedEventArgs e)
+        private void btnGraphReport_Click(object sender, RoutedEventArgs e)
         {
             DashboardReportDesign.seriesList1.Clear();
             DashboardReportDesign.seriesList2.Clear();
@@ -625,13 +643,14 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
 
                 #region Leads per month
                 var leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
+                int LeadsMonth = 0;
                 DateTime[] months = { DateTime.Now.AddMonths(-2), DateTime.Now.AddMonths(-1), DateTime.Now };
                 if (months[0].Month >= DateTime.Now.Month && months[1].Month >= DateTime.Now.Month)
                 {
                     months[0].AddYears(-1);
                     months[1].AddYears(-1);
                 }
-                int countLeads = 0, overAll = 0;
+                int countLeads = 0;
                 DevExpress.XtraCharts.Series leadSeries = new DevExpress.XtraCharts.Series();
 
                 foreach (var month in months)
@@ -643,7 +662,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                         if (Convert.ToDateTime(lead.DateAdded).Month == month.Month && Convert.ToDateTime(lead.DateAdded).Year == month.Year)
                         {
                             countLeads++;
-                            overAll++;
+                            LeadsMonth++;
                         }
                     }
 
@@ -652,14 +671,12 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     DashboardReportDesign.seriesList1.Add(leadSeries);
                     countLeads = 0;
                 }
-
-                DashboardReportDesign.lblLeadsMonth.Text = Convert.ToString(overAll);
                 #endregion
 
                 #region Leads per year
                 leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
                 DateTime[] years = { DateTime.Now.AddYears(-2), DateTime.Now.AddYears(-1), DateTime.Now };
-                countLeads = 0; overAll = 0;
+                countLeads = 0; int LeadsYear = 0;
                 DevExpress.XtraCharts.Series leadSeriesPerYear = new DevExpress.XtraCharts.Series();
 
                 foreach (var year in years)
@@ -671,7 +688,7 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                         if (Convert.ToDateTime(lead.DateAdded).Year == year.Year)
                         {
                             countLeads++;
-                            overAll++;
+                            LeadsYear++;
                         }
                     }
 
@@ -680,14 +697,12 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     DashboardReportDesign.seriesList2.Add(leadSeriesPerYear);
                     countLeads = 0;
                 }
-
-                DashboardReportDesign.lblLeadsYear.Text = Convert.ToString(overAll);
                 #endregion
 
                 #region Leads per Sales Stage
                 leads = (from c in context.Leads.ToList() select c).Distinct().ToList();
                 var salesStages = context.SalesStages.ToList();
-                countLeads = 0; overAll = 0;
+                countLeads = 0; int LeadsStatus = 0;
                 DevExpress.XtraCharts.Series leadSeriesPerStage = new DevExpress.XtraCharts.Series();
                 leadSeriesPerStage = new DevExpress.XtraCharts.Series("Sales Stages", ViewType.Doughnut);
 
@@ -698,24 +713,22 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                         if (lead.Status == salesStage.SalesStageName)
                         {
                             countLeads++;
-                            overAll++;
+                            LeadsStatus++;
                         }
                     }
 
                     leadSeriesPerStage.Points.Add(new DevExpress.XtraCharts.SeriesPoint(salesStage.SalesStageName, countLeads));
-                    leadSeriesPerStage.LegendPointOptions.Pattern = "{A} : {V}";
+                    leadSeriesPerStage.LegendTextPattern = "{A} : {V}";
                     countLeads = 0;
                 }
                 leadSeriesPerStage.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Qualitative;
                 DashboardReportDesign.seriesList3.Add(leadSeriesPerStage);
-
-                DashboardReportDesign.lblLeadsSalesStage.Text = Convert.ToString(overAll);
                 #endregion
 
                 #region Overall Leads
                 leads = context.Leads.ToList();
                 List<string> statuses = new List<string>() {"Engaged client", "Active", "Not active"};
-                countLeads = 0; overAll = leads.Count(); string percent = "";
+                countLeads = 0; int overAll = leads.Count(); string percent = "";
 
                 foreach (var status in statuses)
                 {
@@ -774,13 +787,28 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                         }
                     }
                 }
-
-                DashboardReportDesign.lblAllLeads.Text = Convert.ToString(overAll);
                 #endregion
 
-                var report = new DashboardReportDesign() { };
-                ReportPrintTool printTool = new ReportPrintTool(report);
-                printTool.ShowRibbonPreviewDialog();
+                dataList.Add(new DashboardReportData
+                {
+                    ReportHeader = "NSPIRE INC.",
+                    ReportTitle = "GRAPH REPORT as of " + DateTime.Now.ToString("MMMM d, yyyy"),
+                    TotalLeads = overAll,
+                    TotalLeadsMonth = LeadsMonth,
+                    TotalLeadsSalesStage = LeadsStatus,
+                    TotalLeadsYear = LeadsYear
+                });
+
+                var report = new DashboardReportDesign()
+                {
+                    DataSource = dataList.Distinct(),
+                    Name = "GRAPH REPORT as of " + DateTime.Now.ToString("MMMM d, yyyy")
+                };
+
+                using (ReportPrintTool printTool = new ReportPrintTool(report))
+                {
+                    printTool.ShowRibbonPreviewDialog();
+                }
             }
         }
 
@@ -789,11 +817,14 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             frame.BackNavigationMode = BackNavigationMode.PreviousScreen;
             frame.GoBack();
+            FoldInnerCanvasSideward(canvasLeadMenu);
+            isEntered = false;
         }
 
         private void btnBackToLeadMenu_Click(object sender, RoutedEventArgs e)
         {
-            FoldInnerCanvasSideward(canvasSalesStages);
+            if (canvasSalesStages.Visibility == Visibility.Visible) { FoldInnerCanvasSideward(canvasSalesStages); }
+            if (canvasMasterData.Visibility == Visibility.Visible) { FoldInnerCanvasSideward(canvasMasterData); }
             FoldInnerCanvasSideward(canvasLeadMenu);
         }
 
@@ -811,65 +842,66 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
                     {
                         var allActivities = context.LeadActivities.ToList();
 
-                        if (allActivities.Count > 0)
+                        if (allActivities.Count() > 0)
                         {
                             activityList.Clear();
 
-                            foreach (var item in allActivities)
+                            foreach (var activity in allActivities)
                             {
-                                lead = context.Leads.FirstOrDefault(c => c.LeadID == item.LeadID);
-                                var contact = context.Contacts.FirstOrDefault(c => c.ContactID == item.ContacId);
+                                lead = context.Leads.FirstOrDefault(c => c.LeadID == activity.LeadID);
+                                var contact = context.Contacts.FirstOrDefault(c => c.ContactID == activity.ContacId);
 
-                                if (contact != null)
+                                if (lead != null)
                                 {
-                                    activityList.Add(new ActivityView
+                                    if (contact != null)
                                     {
-                                        ActivityDate = item.ActivityDate,
-                                        ActivityId = item.ActivityID,
-                                        ActivityTime = item.ActivityTime,
-                                        ClientResponse = item.ClientResponse,
-                                        CompanyName = lead.CompanyName,
-                                        Cost = item.Cost,
-                                        Description = item.Description,
-                                        MarketingVoucher = item.MarketingVoucherNo,
-                                        NextStep = item.NextStep,
-                                        NextStepDueDate = item.DueDateOfNextStep,
-                                        SalesRep = item.SalesRep,
-                                        TransactionDetails = item.DetailsOfTransaction,
-                                        ContactPerson = contact.ContactPersonName,
-                                        IsFinalized = item.IsFinalized
-                                    });
-                                }
-                                else
-                                {
-                                    activityList.Add(new ActivityView
+                                        activityList.Add(new ActivityView
+                                        {
+                                            ActivityDate = activity.ActivityDate,
+                                            ActivityId = activity.ActivityID,
+                                            ActivityTime = activity.ActivityTime,
+                                            ClientResponse = activity.ClientResponse,
+                                            CompanyName = lead.CompanyName,
+                                            Cost = activity.Cost,
+                                            Description = activity.Description,
+                                            MarketingVoucher = activity.MarketingVoucherNo,
+                                            NextStep = activity.NextStep,
+                                            NextStepDueDate = activity.DueDateOfNextStep,
+                                            SalesRep = activity.SalesRep,
+                                            TransactionDetails = activity.DetailsOfTransaction,
+                                            ContactPerson = contact.ContactPersonName,
+                                            IsFinalized = activity.IsFinalized
+                                        });
+                                    }
+                                    else
                                     {
-                                        ActivityDate = item.ActivityDate,
-                                        ActivityId = item.ActivityID,
-                                        ActivityTime = item.ActivityTime,
-                                        ClientResponse = item.ClientResponse,
-                                        CompanyName = lead.CompanyName,
-                                        Cost = item.Cost,
-                                        Description = item.Description,
-                                        MarketingVoucher = item.MarketingVoucherNo,
-                                        NextStep = item.NextStep,
-                                        NextStepDueDate = item.DueDateOfNextStep,
-                                        SalesRep = item.SalesRep,
-                                        TransactionDetails = item.DetailsOfTransaction,
-                                        ContactPerson = null,
-                                        IsFinalized = item.IsFinalized
-                                    }); 
+                                        activityList.Add(new ActivityView
+                                        {
+                                            ActivityDate = activity.ActivityDate,
+                                            ActivityId = activity.ActivityID,
+                                            ActivityTime = activity.ActivityTime,
+                                            ClientResponse = activity.ClientResponse,
+                                            CompanyName = lead.CompanyName,
+                                            Cost = activity.Cost,
+                                            Description = activity.Description,
+                                            MarketingVoucher = activity.MarketingVoucherNo,
+                                            NextStep = activity.NextStep,
+                                            NextStepDueDate = activity.DueDateOfNextStep,
+                                            SalesRep = activity.SalesRep,
+                                            TransactionDetails = activity.DetailsOfTransaction,
+                                            ContactPerson = null,
+                                            IsFinalized = activity.IsFinalized
+                                        });
+                                    }
                                 }
                             }
 
-                            dcActivity.ItemsSource = activityList.Where(c => c.CompanyName == selectedRow
-                                && c.IsFinalized != true);
+                            dcActivity.ItemsSource = activityList.Where(c => c.CompanyName == selectedRow);
 
                             viewActivity.BestFitColumns();
                         }
                     }
-                    lblTotalLeadActivity.Text = "Total Lead Activities : " + activityList.Where(c => c.CompanyName == selectedRow
-                                && c.IsFinalized != true).Count();
+                    lblTotalLeadActivity.Text = "Total Lead Activities : " + activityList.Count();
                 }
             }
         }
@@ -877,9 +909,25 @@ namespace NSPIREIncSystem.LeadManagement.Dashboards
         private void btnSalesMaster_Click(object sender, RoutedEventArgs e)
         {
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
-            NSPIREIncSystem.LeadManagement.MasterDatas.SalesStage page = new MasterDatas.SalesStage();
+            MasterDatas.SalesStage page = new MasterDatas.SalesStage();
             frame.Navigate(page);
             FoldInnerCanvasSideward(canvasSalesStages);
+        }
+
+        private void btnMarketingStrategy_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            var page = new MarketingStrategyMasterData();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasSalesStages);
+        }
+
+        private void btnProdCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            MasterDatas.ProductCategory page = new MasterDatas.ProductCategory();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasMasterData);
         }
     }
 }

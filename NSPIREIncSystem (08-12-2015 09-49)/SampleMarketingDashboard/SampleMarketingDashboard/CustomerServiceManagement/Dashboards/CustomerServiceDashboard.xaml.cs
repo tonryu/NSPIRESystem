@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
 using NSPIREIncSystem.CustomerServiceManagement.MasterDatas;
+using NSPIREIncSystem.LeadManagement.MasterDatas;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Shared.Views;
 using NSPIREIncSystem.Shared.Windows;
@@ -17,6 +18,8 @@ namespace NSPIREIncSystem.CustomerServiceManagement.Dashboards
     /// </summary>
     public partial class CustomerServiceDashboard : UserControl
     {
+        static bool isEntered = false;
+
         public CustomerServiceDashboard()
         {
             InitializeComponent();
@@ -214,10 +217,12 @@ namespace NSPIREIncSystem.CustomerServiceManagement.Dashboards
                 {
                     var log = new Log();
                     log.Date = DateTime.Now.ToString("MM/dd/yyyy");
-                    log.Description = NotificationWindow.username + " accesses the Customer Service Management Module.";
                     log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                    log.Description = NotificationWindow.username + 
+                        " accesses the Customer Service Management Module.";
                     context.Logs.Add(log);
                     context.SaveChanges();
+                    isEntered = true;
                 }
             }
         }
@@ -236,7 +241,7 @@ namespace NSPIREIncSystem.CustomerServiceManagement.Dashboards
             canvasCustomerServiceMenu.Opacity = 0;
             FoldInnerCanvasSideward(canvasCustomerServiceMenu);
 
-            LoadDashboard();
+            if (isEntered != true) { LoadDashboard(); }
         }
 
         private void btnServiceRequests_Click(object sender, RoutedEventArgs e)
@@ -244,7 +249,6 @@ namespace NSPIREIncSystem.CustomerServiceManagement.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             ServiceRequestsMasterData page = new ServiceRequestsMasterData();
             frame.Navigate(page);
-
             FoldInnerCanvasSideward(canvasCustomerServiceMenu);
         }
 
@@ -260,7 +264,7 @@ namespace NSPIREIncSystem.CustomerServiceManagement.Dashboards
         private void btnClientAccounts_Click(object sender, RoutedEventArgs e)
         {
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
-            ClientAccountsMasterData page = new ClientAccountsMasterData();
+            CustomerAccounts page = new CustomerAccounts();
             frame.Navigate(page);
 
             FoldInnerCanvasSideward(canvasCustomerServiceMenu);
@@ -290,6 +294,8 @@ namespace NSPIREIncSystem.CustomerServiceManagement.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             frame.BackNavigationMode = BackNavigationMode.PreviousScreen;
             frame.GoBack();
+            FoldInnerCanvasSideward(canvasCustomerServiceMenu);
+            isEntered = false;
         }
     }
 }

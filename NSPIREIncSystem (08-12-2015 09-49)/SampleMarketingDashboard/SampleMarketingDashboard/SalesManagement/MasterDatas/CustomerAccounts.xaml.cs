@@ -1,18 +1,18 @@
-﻿using DevExpress.Xpf.WindowsUI;
-using NSPIREIncSystem.SalesManagement.Views;
-using NSPIREIncSystem.Models;
-using NSPIREIncSystem.Shared.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using NSPIREIncSystem.SalesManagement.Reports;
+using DevExpress.Xpf.WindowsUI;
 using DevExpress.XtraReports.UI;
+using NSPIREIncSystem.Models;
+using NSPIREIncSystem.LeadManagement.Reports;
+using NSPIREIncSystem.LeadManagement.Views;
+using NSPIREIncSystem.Shared.Windows;
 
-namespace NSPIREIncSystem.SalesManagement.MasterDatas
+namespace NSPIREIncSystem.LeadManagement.MasterDatas
 {
     /// <summary>
     /// Interaction logic for CustomerAccounts.xaml
@@ -192,7 +192,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         #endregion
 
         #region Load Details
-        private Task<string> QueryLoadSalesStages()
+        private Task<string> QueryLoadCustomerAccounts()
         {
             return Task.Factory.StartNew(() =>
             {
@@ -269,7 +269,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             {
                 string message = "";
                 busyIndicator.IsBusy = true;
-                message = await QueryLoadSalesStages();
+                message = await QueryLoadCustomerAccounts();
 
                 if (message != null)
                 {
@@ -321,7 +321,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             }
         }
 
-        private void LoadActivity()
+        private void LoadCustomerAccounts()
          {
              RefreshTable(txtSearch.Text);
          }
@@ -329,12 +329,17 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadActivity();
+            LoadCustomerAccounts();
             canvasCustomerAccountsMasterData.Width = GetCanvasMinWidth(canvasCustomerAccountsMasterData);
             canvasCustomerAccountsMasterData.Height = GetCanvasMinHeight(canvasCustomerAccountsMasterData);
             canvasCustomerAccountsMasterData.Visibility = Visibility.Collapsed;
             canvasCustomerAccountsMasterData.Opacity = 0;
             FoldInnerCanvasSideward(canvasCustomerAccountsMasterData);
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            LoadCustomerAccounts();
         }
         
         private void btnView_Click(object sender, RoutedEventArgs e)
@@ -359,7 +364,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                 sb.Begin(this);
                 _isExpanded = !_isExpanded;
 
-                LoadActivity();
+                LoadCustomerAccounts();
             }
         }
         
@@ -412,7 +417,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
 
                 if (selectedAccount != null)
                 {
-                    var account = context.CustomerAccounts.First(c => c.AccountNumber == selectedAccount.AccountNumber);
+                    var account = context.CustomerAccounts.FirstOrDefault(c => c.AccountNumber == selectedAccount.AccountNumber);
 
                     if (account != null)
                     {
@@ -434,7 +439,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
 
                             context.CustomerAccounts.Remove(account);
                             var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "Customer Account successfully deleted";
+                            Shared.Windows.NoticeWindow.message = "Customer account successfully deleted";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -449,7 +454,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                         NullMessage();
                     }
                 }
-                LoadActivity();
+                LoadCustomerAccounts();
             }
         }
         
@@ -532,11 +537,6 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             windows.Left = (screenWidth / 2) - (windows.Width / 2);
             if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
             windows.ShowDialog();
-        }
-        
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            LoadActivity();
         }
     }
 }

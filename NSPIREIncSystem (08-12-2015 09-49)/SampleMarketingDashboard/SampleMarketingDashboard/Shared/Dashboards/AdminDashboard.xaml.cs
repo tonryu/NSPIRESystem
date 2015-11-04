@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
@@ -10,6 +12,7 @@ using NSPIREIncSystem.CustomerServiceManagement.Dashboards;
 using NSPIREIncSystem.LeadManagement.Dashboards;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Settings.MasterDatas;
+using NSPIREIncSystem.Shared.Windows;
 using NSPIREIncSystem.TaskManagement.Dashboards;
 
 namespace NSPIREIncSystem.Shared.Dashboards
@@ -19,8 +22,10 @@ namespace NSPIREIncSystem.Shared.Dashboards
     /// </summary>
     public partial class AdminDashboard : UserControl
     {
-        double screenHeight = Application.Current.MainWindow.Height;
+        double screenLeftEdge = Application.Current.MainWindow.Left;
+        double screenTopEdge = Application.Current.MainWindow.Top;
         double screenWidth = Application.Current.MainWindow.Width;
+        double screenHeight = Application.Current.MainWindow.Height;
         public List<TextBlock> textBlockList { get; set; }
 
         public AdminDashboard()
@@ -188,8 +193,113 @@ namespace NSPIREIncSystem.Shared.Dashboards
         }
         #endregion
 
+        #region Load details
+        private Task<string> QueryLogs()
+        {
+            return Task.Factory.StartNew(() => 
+            {
+                try
+                {
+                    using (var context = new DatabaseContext())
+                    {
+                        var logs = context.Logs.ToList();
+
+                        if (logs != null)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return "No logs";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return "Error : " + ex.Message;
+                }
+            });
+        }
+
+        private async void RefreshLogs()
+        {
+            var message = await QueryLogs();
+
+            if (message != null)
+            {
+                var windows = new NoticeWindow();
+                NoticeWindow.message = message;
+                windows.Height = 0;
+                windows.Top = screenTopEdge + 8;
+                windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                windows.ShowDialog();
+            }
+            else
+            {
+                using (var context = new DatabaseContext())
+                {
+                    var textBlock = new TextBlock();
+                    var logs = context.Logs.OrderByDescending(c => c.LogId).ToList();
+                    Thickness margin = textBlock.Margin;
+                    var specificStackPanel = new StackPanel();
+                    var wholeStackPanel = new StackPanel();
+                    var separator = new Separator();
+                    BrushConverter conveter = new BrushConverter();
+                    Brush brush = conveter.ConvertFromString("#FF0069FF") as Brush;
+
+                    textBlock.TextWrapping = TextWrapping.Wrap;
+                    wholeStackPanel.Height = Double.NaN;
+                    specificStackPanel.Height = Double.NaN;
+
+                    sbLogs.Content = null;
+                    wholeStackPanel.Children.Clear();
+                    foreach (var log in logs)
+                    {
+                        //textblock for date and time
+                        specificStackPanel = new StackPanel();
+                        textBlock = new TextBlock();
+                        textBlock.Text = Convert.ToDateTime(log.Date).ToString("MMMM d, yyyy") + " " +
+                            Convert.ToDateTime(log.Time).ToString("hh:mm:ss tt");
+                        margin.Top = 5;
+                        margin.Bottom = 5;
+                        margin.Left = 10;
+                        margin.Right = 10;
+                        textBlock.Margin = margin;
+                        specificStackPanel.Children.Add(textBlock);
+
+                        //textblock for log description
+                        textBlock = new TextBlock();
+                        textBlock.Text = log.Description;
+                        margin.Top = 0;
+                        margin.Bottom = 5;
+                        margin.Left = 10;
+                        margin.Right = 20;
+                        textBlock.Margin = margin;
+                        specificStackPanel.Children.Add(textBlock);
+                        separator = new Separator();
+                        brush = conveter.ConvertFromString("#FF0069FF") as Brush;
+                        separator.BorderBrush = brush;
+                        specificStackPanel.Children.Add(separator);
+                        wholeStackPanel.Children.Add(specificStackPanel);
+                    }
+
+                    sbLogs.Content = wholeStackPanel;
+                    lblTotalLogs.Text = "Total : " + logs.Count();
+                }
+            }
+        }
+
+        private void LoadLogs()
+        {
+            RefreshLogs();
+        }
+        #endregion
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            LoadLogs();
+
             canvasMainMenu.Width = GetCanvasMinWidth(canvasMainMenu);
             canvasMainMenu.Height = GetCanvasMinHeight(canvasMainMenu);
             canvasMainMenu.Visibility = Visibility.Collapsed;
@@ -200,56 +310,20 @@ namespace NSPIREIncSystem.Shared.Dashboards
             canvasSettings.Height = GetCanvasMinHeight(canvasSettings);
             canvasSettings.Visibility = Visibility.Collapsed;
             canvasSettings.Opacity = 0;
-
-            #region Logs
-            using (var context = new DatabaseContext())
-            {
-                var textBlock = new TextBlock();
-                var logs = context.Logs.OrderByDescending(c => c.LogId).ToList();
-                bool isDesc = true; Thickness margin = textBlock.Margin;
-                textBlock.TextWrapping = TextWrapping.Wrap;
-                var stackPanel = new StackPanel();
-
-                foreach (var log in logs)
-                {
-                    if (isDesc != false)
-                    {
-                        stackPanel = new StackPanel();
-                        textBlock = new TextBlock();
-                        textBlock.Text = log.Description;
-                        margin.Top = 10;
-                        margin.Bottom = 0;
-                        margin.Left = 10;
-                        margin.Right = 10;
-                        textBlock.Margin = margin;
-                        stackPanel.Children.Add(textBlock);
-                        isDesc = false;
-                    }
-                    else
-                    {
-                        textBlock = new TextBlock();
-                        textBlock.Text = Convert.ToDateTime(log.Date).ToString("MMMM d, yyyy") + " " 
-                            + Convert.ToDateTime(log.Time).ToString("HH:mm:ss");
-                        margin.Top = 5;
-                        margin.Bottom = 10;
-                        margin.Left = 10;
-                        margin.Right = 20;
-                        textBlock.Margin = margin;
-                        stackPanel.Children.Add(textBlock);
-                        isDesc = true;
-                        var stackPanel2 = new StackPanel();
-                        stackPanel2.Children.Add(stackPanel);
-                        gridLogs.Children.Add(stackPanel2);
-                    }
-                }
-            }
-            #endregion
         }
 
         private void btnLead_Click(object sender, RoutedEventArgs e)
         {
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             LeadDashboard page = new LeadDashboard();
+            frame.Navigate(page);
+            FoldInnerCanvasSideward(canvasMainMenu);
+        }
+
+        private void btnSales_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+            SalesDashboard page = new SalesDashboard();
             frame.Navigate(page);
             FoldInnerCanvasSideward(canvasMainMenu);
         }
@@ -310,5 +384,13 @@ namespace NSPIREIncSystem.Shared.Dashboards
             FoldInnerCanvasSideward(canvasSettings);
             FoldInnerCanvasSideward(canvasMainMenu);
         }
+
+        //private void btnLogs_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
+        //    SystemLog page = new SystemLog();
+        //    frame.Navigate(page);
+        //    FoldInnerCanvasSideward(canvasMainMenu);
+        //}
     }
 }

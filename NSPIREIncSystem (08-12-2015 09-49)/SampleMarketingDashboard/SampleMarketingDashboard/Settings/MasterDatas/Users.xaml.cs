@@ -36,29 +36,28 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                 try
                 {
                     usersList.Clear();
-                    using(var context = new DatabaseContext())
+                    using (var context = new DatabaseContext())
                     {
                         var user = context.UserAccounts.ToList();
 
-                        foreach(var item in user)
+                        foreach (var item in user)
                         {
                             var empname = context.Employees.FirstOrDefault(c => c.EmployeeId == item.EmployeeId);
+
                             usersList.Add(new UsersLists()
                             {
-                                IsAdmin= item.IsAdmin,
-                                CustomerServiceManagementAccess= item.CustomerServiceAccess,
-                                EmployeeName = empname.FirstName + "" + empname.LastName,
-                                LeadManagementAccess= item.LeadManagementAccess,
+                                IsAdmin = item.IsAdmin,
+                                CustomerServiceManagementAccess = item.CustomerServiceAccess,
+                                EmployeeName = empname.FirstName + " " + empname.LastName,
+                                LeadManagementAccess = item.LeadManagementAccess,
                                 TaskManagementAccess = item.TaskManagementAccess,
                                 UserAccountId = item.UserAccountId
                             });
-
                         }
                     }
                     return null;
-            }
-
-                catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     return "Error Message" + ex.Message;
                 }
@@ -75,7 +74,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
 
                 if (message != null)
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
+                    var windows = new NoticeWindow();
                     NoticeWindow.message = message;
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
@@ -84,15 +83,17 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                     windows.ShowDialog();
                 }
 
-                dcUsersList.ItemsSource = usersList.Where(c => c.UserAccountId.Contains(txtSearch.Text) ||
-                   c.EmployeeName.Contains(txtSearch.Text)).OrderBy(c => c.UserAccountId).ToList();
-
-                viewUser.BestFitColumns();
-
-                if (usersList.Count == 0)
+                if (usersList.Count() > 0)
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    NoticeWindow.message = "List has no Record.";
+                    dcUsersList.ItemsSource = usersList.Where(c => c.UserAccountId.ToLower().Contains(str.ToLower()) ||
+                       c.EmployeeName.ToLower().Contains(str.ToLower())).OrderBy(c => c.UserAccountId).ToList();
+
+                    viewUser.BestFitColumns();
+                }
+                else
+                {
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "List has no record.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -369,7 +370,7 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                     
                     if (user != null)
                     {
-                        var window = new MessageBoxWindow("Are you sure you want to delete this record?");
+                        var window = new MessageBoxWindow("Are you sure you want to permanently delete this record?");
                         window.Height = 0;
                         window.Top = screenTopEdge + 8;
                         window.Left = (screenWidth / 2) - (window.Width / 2);
@@ -380,8 +381,8 @@ namespace NSPIREIncSystem.Settings.MasterDatas
                         {
                             context.UserAccounts.Remove(user);
 
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "LEAD SUCCESSFULLY DELETED";
+                            var windows = new NoticeWindow();
+                            NoticeWindow.message = "Lead succesfully deleted";
                             windows.Height = 0;
                             windows.Top = screenTopEdge + 8;
                             windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -409,8 +410,8 @@ namespace NSPIREIncSystem.Settings.MasterDatas
 
         private void NullMessage()
         {
-            var windows = new Shared.Windows.NoticeWindow();
-            Shared.Windows.NoticeWindow.message = "No row is selected.";
+            var windows = new NoticeWindow();
+            NoticeWindow.message = "No row is selected.";
             windows.Height = 0;
             windows.Top = screenTopEdge + 8;
             windows.Left = (screenWidth / 2) - (windows.Width / 2);

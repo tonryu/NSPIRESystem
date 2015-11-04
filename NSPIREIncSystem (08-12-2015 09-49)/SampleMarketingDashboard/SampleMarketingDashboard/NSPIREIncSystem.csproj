@@ -54,35 +54,36 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Charts.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Mvvm.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Office.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.PivotGrid.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Printing.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.RichEdit.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Sparkline.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v13.1.UI, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="devexpress.xpf.charts.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="devexpress.xpf.controls.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Core.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v15.1.UI, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.charts.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.controls.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="devexpress.xpf.grid.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Grid.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="devexpress.xpf.layoutcontrol.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Mvvm.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Printing.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Ribbon.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="devexpress.xpf.richedit.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="devexpress.xpf.scheduler.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraReports.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraReports.v13.1.Extensions, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.grid.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.layoutcontrol.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Mvvm.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.richedit.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.scheduler.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Themes.Office2013.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v15.1.Extensions, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -106,12 +107,14 @@
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Input.Manipulations" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -148,6 +151,15 @@
     <Compile Include="LeadManagement\MasterDatas\LeadActivityMasterData.xaml.cs">
       <DependentUpon>LeadActivityMasterData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeadManagement\MasterDatas\MarketingStrategyMasterData.xaml.cs">
+      <DependentUpon>MarketingStrategyMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\MasterDatas\ProductCategory.xaml.cs">
+      <DependentUpon>ProductCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\MasterDatas\ProductsMasterData.xaml.cs">
+      <DependentUpon>ProductsMasterData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeadManagement\MasterDatas\SalesStage.xaml.cs">
       <DependentUpon>SalesStage.xaml</DependentUpon>
     </Compile>
@@ -163,6 +175,15 @@
     <Compile Include="LeadManagement\Views\LeadDetails.xaml.cs">
       <DependentUpon>LeadDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeadManagement\Views\MarketingStrategiesForm.xaml.cs">
+      <DependentUpon>MarketingStrategiesForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\ProductCategoryForm.xaml.cs">
+      <DependentUpon>ProductCategoryForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\ProductsView.xaml.cs">
+      <DependentUpon>ProductsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeadManagement\Views\SalesStageDetails.xaml.cs">
       <DependentUpon>SalesStageDetails.xaml</DependentUpon>
     </Compile>
@@ -176,36 +197,36 @@
     <Compile Include="Models\GridLengthAnimation.cs" />
     <Compile Include="Models\Variables.cs" />
     <Compile Include="Models\Views.cs" />
-    <Compile Include="Reports\ContactsReportData.cs" />
-    <Compile Include="Reports\ContactsReportDesign.cs">
+    <Compile Include="LeadManagement\Reports\ContactsReportData.cs" />
+    <Compile Include="LeadManagement\Reports\ContactsReportDesign.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ContactsReportDesign.designer.cs">
+    <Compile Include="LeadManagement\Reports\ContactsReportDesign.designer.cs">
       <DependentUpon>ContactsReportDesign.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DashboardReportData.cs" />
-    <Compile Include="Reports\DashboardReportDesign.cs">
+    <Compile Include="LeadManagement\Reports\DashboardReportData.cs" />
+    <Compile Include="LeadManagement\Reports\DashboardReportDesign.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\DashboardReportDesign.Designer.cs">
+    <Compile Include="LeadManagement\Reports\DashboardReportDesign.Designer.cs">
       <DependentUpon>DashboardReportDesign.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\LeadActivityReportData.cs">
+    <Compile Include="LeadManagement\Reports\LeadActivityReportData.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reports\LeadActivityReportDesign.cs">
+    <Compile Include="LeadManagement\Reports\LeadActivityReportDesign.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\LeadActivityReportDesign.Designer.cs">
+    <Compile Include="LeadManagement\Reports\LeadActivityReportDesign.Designer.cs">
       <DependentUpon>LeadActivityReportDesign.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\LeadsReportData.cs">
+    <Compile Include="LeadManagement\Reports\LeadsReportData.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reports\LeadsReportDesign.cs">
+    <Compile Include="LeadManagement\Reports\LeadsReportDesign.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\LeadsReportDesign.Designer.cs">
+    <Compile Include="LeadManagement\Reports\LeadsReportDesign.Designer.cs">
       <DependentUpon>LeadsReportDesign.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesManagement\Dashboards\SalesDashboard.xaml.cs">
@@ -227,6 +248,32 @@
     <Compile Include="SalesManagement\Reports\CustomerAccountsReportDesign.Designer.cs">
       <DependentUpon>CustomerAccountsReportDesign.cs</DependentUpon>
     </Compile>
+    <Compile Include="SalesManagement\Reports\CustomersReportData.cs" />
+    <Compile Include="SalesManagement\Reports\CustomersReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomersReportDesign.Designer.cs">
+      <DependentUpon>CustomersReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\ProductsReportData.cs" />
+    <Compile Include="LeadManagement\Reports\ProductsReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\ProductsReportDesign.Designer.cs">
+      <DependentUpon>ProductsReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\AgentsDetails.xaml.cs">
+      <DependentUpon>AgentsDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\AgentsForm.xaml.cs">
+      <DependentUpon>AgentsForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomerDetails.xaml.cs">
+      <DependentUpon>CustomerDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomersForm.xaml.cs">
+      <DependentUpon>CustomersForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalesManagement\Views\CustomerAccountDetails.xaml.cs">
       <DependentUpon>CustomerAccountDetails.xaml</DependentUpon>
     </Compile>
@@ -245,6 +292,12 @@
     <Compile Include="Settings\Views\TerritoryDetails.xaml.cs">
       <DependentUpon>TerritoryDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shared\Forms\ProductSelection.xaml.cs">
+      <DependentUpon>ProductSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Forms\EmployeeSelection.xaml.cs">
+      <DependentUpon>EmployeeSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shared\Windows\EmployeeSelectionWindow.xaml.cs">
       <DependentUpon>EmployeeSelectionWindow.xaml</DependentUpon>
     </Compile>
@@ -253,9 +306,6 @@
     </Compile>
     <Compile Include="Settings\Windows\UserAccountWindow.xaml.cs">
       <DependentUpon>UserAccountWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shared\Sample\MasterDataView.xaml.cs">
-      <DependentUpon>MasterDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -284,9 +334,6 @@
     <Compile Include="Shared\Dashboards\AdminDashboard.xaml.cs">
       <DependentUpon>AdminDashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomerServiceManagement\MasterDatas\ClientAccountsMasterData.xaml.cs">
-      <DependentUpon>ClientAccountsMasterData.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CustomerServiceManagement\Dashboards\CustomerServiceDashboard.xaml.cs">
       <DependentUpon>CustomerServiceDashboard.xaml</DependentUpon>
     </Compile>
@@ -295,9 +342,6 @@
     </Compile>
     <Compile Include="LeadManagement\MasterDatas\LeadMasterData.xaml.cs">
       <DependentUpon>LeadMasterData.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerServiceManagement\MasterDatas\ProductsMasterData.xaml.cs">
-      <DependentUpon>ProductsMasterData.xaml</DependentUpon>
     </Compile>
     <Compile Include="TaskManagement\MasterDatas\ProjectMasterData.xaml.cs">
       <DependentUpon>ProjectMasterData.xaml</DependentUpon>
@@ -315,6 +359,18 @@
       <DependentUpon>TicketsMasterData.xaml</DependentUpon>
     </Compile>
     <Page Include="LeadManagement\MasterDatas\LeadActivityMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\MasterDatas\MarketingStrategyMasterData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\MasterDatas\ProductCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\MasterDatas\ProductsMasterData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,6 +393,18 @@
     <Page Include="LeadManagement\Views\LeadDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\MarketingStrategiesForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\ProductCategoryForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\Views\ProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LeadManagement\Views\SalesStageDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +446,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SalesManagement\Views\AgentsDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\AgentsForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomerDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomersForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SalesManagement\Views\CustomerAccountDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -402,6 +486,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Shared\Forms\ProductSelection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Shared\Forms\EmployeeSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shared\Windows\EmployeeSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -411,10 +503,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Settings\Windows\UserAccountWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Shared\Sample\MasterDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,10 +542,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomerServiceManagement\MasterDatas\ClientAccountsMasterData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CustomerServiceManagement\Dashboards\CustomerServiceDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -467,10 +551,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LeadManagement\MasterDatas\LeadMasterData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomerServiceManagement\MasterDatas\ProductsMasterData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -514,24 +594,31 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ContactsReportDesign.resx">
+    <EmbeddedResource Include="LeadManagement\Reports\ContactsReportDesign.resx">
       <DependentUpon>ContactsReportDesign.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DashboardReportDesign.resx">
+    <EmbeddedResource Include="LeadManagement\Reports\DashboardReportDesign.resx">
       <DependentUpon>DashboardReportDesign.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\LeadActivityReportDesign.resx">
+    <EmbeddedResource Include="LeadManagement\Reports\LeadActivityReportDesign.resx">
       <DependentUpon>LeadActivityReportDesign.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\LeadsReportDesign.resx">
+    <EmbeddedResource Include="LeadManagement\Reports\LeadsReportDesign.resx">
       <DependentUpon>LeadsReportDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesManagement\Reports\CustomerAccountsReportDesign.resx">
       <DependentUpon>CustomerAccountsReportDesign.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SalesManagement\Reports\CustomersReportDesign.resx">
+      <DependentUpon>CustomersReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeadManagement\Reports\ProductsReportDesign.resx">
+      <DependentUpon>ProductsReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\NSPIREIncSystem.Reports.DashboardReportData.datasource" />
     <None Include="Properties\DataSources\NSPIREIncSystem.SalesManagement.Reports.CustomerAccountsReportData.datasource" />
+    <None Include="Properties\DataSources\NSPIREIncSystem.SalesManagement.Reports.CustomersReportData.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -847,6 +934,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="new images\nspire-new-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\History-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\System-explorer-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

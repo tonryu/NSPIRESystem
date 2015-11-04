@@ -52,7 +52,7 @@ namespace NSPIREIncSystem.Shared.Views
                 }
                 catch (Exception ex)
                 {
-                    return "Invalid username or password";
+                    return "Error : " + ex.Message;
                 }
             });
         }
@@ -94,16 +94,22 @@ namespace NSPIREIncSystem.Shared.Views
                     context.Logs.Add(log);
                     context.SaveChanges();
                 }
-                
-                txtUsername.Text = "";
-                txtPassword.Text = "";
-                txtUsername.Focus();
+
+                if (txtUsername.Text != null && txtUsername.Text != "")
+                {
+                    txtPassword.Text = "";
+                    txtPassword.Focus();
+                }
+                else
+                {
+                    txtUsername.Focus();
+                }
             }
             else
             {
                 using (var context = new DatabaseContext())
                 {
-                    var user = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == txtUsername.Text);
+                    var user = context.UserAccounts.FirstOrDefault(c => c.UserAccountId == searchVal1);
                     var employee = context.Employees.FirstOrDefault(c => c.EmployeeId == user.EmployeeId);
                     Variables.Name = employee.FirstName + " " + employee.MiddleName + " " + employee.LastName;
                     Variables.ULastName = employee.LastName;
@@ -152,7 +158,7 @@ namespace NSPIREIncSystem.Shared.Views
                 byte[] data = System.Text.Encoding.Unicode.GetBytes(searchVal2);
                 //byte[] datas = System.Text.Encoding.Unicode.GetBytes(searchVal2);
                 data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                String hash = System.Text.Encoding.ASCII.GetString(data);
+                String hash = System.Text.Encoding.Unicode.GetString(data);
 
                 if (searchVal1 != "" && searchVal2 != "") { Refresh(searchVal1, hash); }
                 else { Refresh("", ""); }

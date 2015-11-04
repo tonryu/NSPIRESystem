@@ -6,10 +6,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
+using DevExpress.XtraReports.UI;
 using NSPIREIncSystem.Models;
+using NSPIREIncSystem.LeadManagement.Reports;
+using NSPIREIncSystem.LeadManagement.Views;
 using NSPIREIncSystem.Shared.Windows;
 
-namespace NSPIREIncSystem.SalesManagement.MasterDatas
+namespace NSPIREIncSystem.LeadManagement.MasterDatas
 {
     /// <summary>
     /// Interaction logic for CustomersMasterData.xaml
@@ -221,6 +224,19 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                                         Website = customer.Website
                                     });
                                 }
+                                else
+                                {
+                                    customersList.Add(new CustomersView()
+                                    {
+                                        CompanyAddress = customer.CompanyAddress,
+                                        CustomerID = customer.CustomerID,
+                                        DateSigned = customer.DateSigned,
+                                        Email = customer.Email,
+                                        CompanyName = customer.CompanyName,
+                                        PhoneNo = customer.PhoneNo,
+                                        Website = customer.Website
+                                    });
+                                }
                             }
                         }
                     }
@@ -309,22 +325,31 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             canvasCustomersMasterData.Opacity = 0;
             FoldInnerCanvasSideward(canvasCustomersMasterData);
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            LoadCustomers();
+        }
         
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
             var selectedCustomer = dcCustomersList.SelectedItem as CustomersView;
 
             Storyboard sb;
-            if (_isExpanded != true && selectedCustomer != null)
+            if ((selectedCustomer != null) 
+                && (selectedCustomer.CustomerID != CustomerDetails.CustomerId))
             {
-                //CustomerAccountDetails.AccountNumber = selectedCustomer.AccountNumber;
+                CustomerDetails.CustomerId = selectedCustomer.CustomerID;
 
-                sb = this.FindResource("gridin") as Storyboard;
-                sb.Begin(this);
-                _isExpanded = !_isExpanded;
+                if (_isExpanded != true)
+                {
+                    sb = this.FindResource("gridin") as Storyboard;
+                    sb.Begin(this);
+                    _isExpanded = !_isExpanded;
+                }
 
-                //var page = new CustomerAccountDetails();
-                //navigation.Navigate(page);
+                var page = new CustomerDetails();
+                navigation.Navigate(page);
             }
             else
             {
@@ -338,7 +363,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //CustomerAccountsForm.AccountNumber = null;
+            CustomersForm.CustomerId = 0;
               
             Storyboard sb;
             if (_isExpanded != true)
@@ -348,8 +373,8 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                 _isExpanded = !_isExpanded;
             }
 
-            //var page = new CustomerAccountsForm();
-            //navigation.Navigate(page);
+            var page = new CustomersForm();
+            navigation.Navigate(page);
         }
         
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -362,14 +387,14 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                 _isExpanded = !_isExpanded;
             }
 
-            var selectedCustomer = dcCustomersList.SelectedItem as CustomerAccountsView;
+            var selectedCustomer = dcCustomersList.SelectedItem as CustomersView;
 
             if (selectedCustomer != null)
             {
-                //CustomerAccountsForm.AccountNumber = selectedAccount.AccountNumber;
+                CustomersForm.CustomerId = selectedCustomer.CustomerID;
 
-                //var page = new CustomerAccountsForm();
-                //navigation.Navigate(page);
+                var page = new CustomersForm();
+                navigation.Navigate(page);
             }
             else
             {
@@ -385,7 +410,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
 
                 if (selectedCustomer != null)
                 {
-                    var customer = context.Customers.First(c => c.CustomerID == selectedCustomer.CustomerID);
+                    var customer = context.Customers.FirstOrDefault(c => c.CustomerID == selectedCustomer.CustomerID);
 
                     if (customer != null)
                     {
@@ -423,61 +448,58 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         {
             using (var context = new DatabaseContext())
             {
-                var customers = context.Customers.ToList();
                 int customerNo = 0;
-                //if (customers.Count() > 0)
-                //{
-                //    List<CustomerAccountsReportData> dataList = new List<CustomerAccountsReportData>();
-                //    List<CustomerAccountsReportDetail> detailsList = new List<CustomerAccountsReportDetail>();
-                //    foreach (var account in customers)
-                //    {
-                //        customerNo++;
-                //        var detail = new CustomerAccountsReportDetail();
-                //        var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == account.TerritoryID);
-                //        var customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
-                //        var product = context.Products.FirstOrDefault(c => c.ProductID == account.ProductID);
+                if (customersList.Count() > 0)
+                {
+                    List<CustomersReportData> dataList = new List<CustomersReportData>();
+                    List<CustomersReportDetail> detailsList = new List<CustomersReportDetail>();
+                    foreach (var customer in customersList.OrderBy(c => c.CustomerID))
+                    {
+                        customerNo++;
+                        var detail = new CustomersReportDetail();
+                        var lead = context.Leads.FirstOrDefault
+                            (c => c.CompanyName.ToLower() == customer.CompanyName.ToLower());
 
-                //        detail.AccountNumber = Convert.ToString(customerNo);
-                //        detail.Customer = customer.CompanyName;
-                //        detail.Discount = account.Discount;
-                //        detail.Gross = account.Gross;
-                //        detail.ModeOfPayment = account.ModeOfPayment;
-                //        detail.NetValue = account.NetValue;
-                //        detail.Product = product.ProductName;
-                //        detail.ServiceCharge = account.ServiceCharge;
-                //        detail.Territory = territory.TerritoryName;
-                //        detailsList.Add(detail);
-                //    }
-                //    dataList.Add(new CustomerAccountsReportData()
-                //    {
-                //        ReportHeader = "CUSTOMER ACCOUNTS",
-                //        ReportTitle = "CUSTOMER ACCOUNTS as of " + DateTime.Now.ToString("MMMM dd, yyyy"),
-                //        TotalCustomerAccounts = detailsList.Count(),
-                //        details = detailsList
-                //    });
+                        detail.CompanyAddress = customer.CompanyAddress;
+                        detail.CompanyName = customer.CompanyName;
+                        detail.CustomerID = customerNo;
+                        detail.DateSigned = customer.DateSigned;
+                        detail.Email = customer.Email;
+                        if (lead != null) { detail.FromLead = "FROM LEAD"; } else { detail.FromLead = ""; }
+                        detail.PhoneNo = customer.PhoneNo;
+                        detail.Website = customer.Website;
+                        detailsList.Add(detail);
+                    }
+                    dataList.Add(new CustomersReportData()
+                    {
+                        ReportHeader = "CUSTOMERS",
+                        ReportTitle = "CUSTOMERS as of " + DateTime.Now.ToString("MMMM dd, yyyy"),
+                        TotalCustomers = detailsList.Count(),
+                        details = detailsList
+                    });
 
-                //    var report = new CustomerAccountsReportDesign
-                //    {
-                //        DataSource = dataList.Distinct(),
-                //        Name = "CUSTOMER ACCOUNTS as of "
-                //            + DateTime.Now.ToString("MMMM dd, yyyy")
-                //    };
+                    var report = new CustomersReportDesign
+                    {
+                        DataSource = dataList.Distinct(),
+                        Name = "CUSTOMERS as of "
+                            + DateTime.Now.ToString("MMMM dd, yyyy")
+                    };
 
-                //    using (ReportPrintTool printTool = new ReportPrintTool(report))
-                //    {
-                //        printTool.ShowRibbonPreviewDialog();
-                //    }
-                //}
-                //else
-                //{
-                //    var windows = new Shared.Windows.NoticeWindow();
-                //    Shared.Windows.NoticeWindow.message = "No data to print.";
-                //    windows.Height = 0;
-                //    windows.Top = screenTopEdge + 8;
-                //    windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                //    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                //    windows.ShowDialog();
-                //}
+                    using (ReportPrintTool printTool = new ReportPrintTool(report))
+                    {
+                        printTool.ShowRibbonPreviewDialog();
+                    }
+                }
+                else
+                {
+                    var windows = new Shared.Windows.NoticeWindow();
+                    Shared.Windows.NoticeWindow.message = "No data to print.";
+                    windows.Height = 0;
+                    windows.Top = screenTopEdge + 8;
+                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                    windows.ShowDialog();
+                }
             }
         }
         
@@ -498,11 +520,6 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             windows.Left = (screenWidth / 2) - (windows.Width / 2);
             if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
             windows.ShowDialog();
-        }
-        
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            LoadCustomers();
         }
     }
 }

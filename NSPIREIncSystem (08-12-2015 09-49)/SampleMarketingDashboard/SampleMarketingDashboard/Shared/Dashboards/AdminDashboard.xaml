@@ -1,17 +1,20 @@
 ﻿<UserControl x:Class="NSPIREIncSystem.Shared.Dashboards.AdminDashboard" 
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler" 
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" 
-             dx:ThemeManager.ThemeName="DeepBlue" 
+             dx:ThemeManager.ThemeName="Office2013" 
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
-    <Grid Background="White">
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded" FontFamily="Arial">
+    <UserControl.Background>
+        <ImageBrush ImageSource="/new images/05.jpg"/>
+    </UserControl.Background>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -23,11 +26,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="DASHBOARD" Margin="10 5 5 5" Foreground="#0069ff" FontSize="30" FontFamily="Segoe UI Light" Grid.ColumnSpan="2"/>
+        <TextBlock Text="DASHBOARD" Margin="50 10 50 0" Foreground="White" FontSize="30" Grid.ColumnSpan="2"/>
 
-        <dxsch:SchedulerControl Grid.Column="1" Grid.Row="1" Margin="5 5 10 0" ActiveViewType="Month"/>
+        <dxsch:SchedulerControl Grid.Column="1" Grid.Row="1" Margin="5 5 50 0" ActiveViewType="Month"/>
 
-        <Border Grid.Column="1" Grid.Row="2" BorderBrush="#FF90AFD7" BorderThickness="5 0 5 5" Background="White" Margin="5 0 10 10">
+        <Border Grid.Column="1" Grid.Row="2" BorderBrush="#FF90AFD7" BorderThickness="5 0 5 5" Background="White" Margin="5 0 50 10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -51,7 +54,7 @@
             </Grid>
         </Border>
 
-        <dx:DXTabControl Margin="10 5 5 10" Grid.Row="1" Grid.RowSpan="2">
+        <dx:DXTabControl Margin="50 5 5 10" Grid.Row="1" Grid.RowSpan="2">
             <dx:DXTabItem Header="My Schedules" FontSize="15" Cursor="Hand">
                 <Grid>
                     <TextBlock x:Name="txtbMessage" Text="No task for you today"/>
@@ -66,15 +69,12 @@
                 <Grid Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="SYSTEM LOGS" Margin="10 10 0 0" Foreground="#0069ff" FontSize="18" FontWeight="Bold"/>
-                    <Separator Grid.Row="1" BorderBrush="#0069ff" BorderThickness="10"/>
-                    <ScrollViewer x:Name="sbLogs" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <Grid x:Name="gridLogs" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        </Grid>
-                    </ScrollViewer>
+                    <TextBlock Text="SYSTEM LOGS" Margin="10 5 0 5" Foreground="#FF0069FF" FontSize="18" FontWeight="Bold"/>
+                    <ScrollViewer x:Name="sbLogs" Grid.Row="1" BorderBrush="#FF0069FF" BorderThickness="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+                    <TextBlock x:Name="lblTotalLogs" Grid.Row="2" Margin="5" Foreground="#FF0069FF"/>
                 </Grid>
             </dx:DXTabItem>
             <dx:DXTabItem Header="Statistics" FontSize="15" Cursor="Hand">
@@ -103,7 +103,7 @@
             </dx:DXTabItem>
         </dx:DXTabControl>
 
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="5 5 5 10">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="50 5 50 10" TextBlock.FontSize="11">
             <Canvas x:Name="canvasMainMenu" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackLead">
                     <Button x:Name="btnLead" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnLead_Click">
@@ -117,7 +117,7 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="stackSales">
-                    <Button x:Name="btnSales" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}">
+                    <Button x:Name="btnSales" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSales_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="/new images/task-icon.png"/>
                         </Button.Background>
@@ -161,7 +161,6 @@
                     </StackPanel>
                 </StackPanel>
             </Canvas>
-
             <Canvas x:Name="canvasSettings" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <StackPanel x:Name="stackSystemParameters">
                     <Button x:Name="btnSysParams" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnSysParams_Click">

@@ -6,13 +6,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using DevExpress.Xpf.WindowsUI;
-using DevExpress.XtraReports.UI;
+using NSPIREIncSystem.LeadManagement.Views;
 using NSPIREIncSystem.Models;
-using NSPIREIncSystem.SalesManagement.Reports;
-using NSPIREIncSystem.SalesManagement.Views;
 using NSPIREIncSystem.Shared.Windows;
 
-namespace NSPIREIncSystem.SalesManagement.MasterDatas
+namespace NSPIREIncSystem.LeadManagement.MasterDatas
 {
     /// <summary>
     /// Interaction logic for AgentsMasterData.xaml
@@ -23,8 +21,10 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         double screenTopEdge = Application.Current.MainWindow.Top;
         double screenWidth = Application.Current.MainWindow.Width;
         double screenHeight = Application.Current.MainWindow.Height;
-        public List<CustomerAccountsView> agentsList = new List<CustomerAccountsView>();
+        public List<AgentsView> agentsList = new List<AgentsView>();
+        public List<CustomerAccountsView> accountsList = new List<CustomerAccountsView>();
         bool _isExpanded = false;
+        //public static bool isFinish = false;
 
         public AgentsMasterData()
         {
@@ -192,7 +192,7 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         #endregion
 
         #region Load Details
-        private Task<string> QueryLoadSalesStages()
+        private Task<string> QueryLoadAgents()
         {
             return Task.Factory.StartNew(() =>
             {
@@ -201,54 +201,21 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                     agentsList.Clear();
                     using (var context = new DatabaseContext())
                     {
-                        var customerAccounts = context.CustomerAccounts.ToList();
+                        var agents = context.Agents.ToList();
 
-                        foreach (var item in customerAccounts)
+                        if (agents.Count > 0)
                         {
-                            var customer = context.Customers.FirstOrDefault(c => c.CustomerID == item.CustomerID);
-                            var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == item.TerritoryID);
-                            var product = context.Products.FirstOrDefault(c => c.ProductID == item.ProductID);
-
-                            if (customer != null)
+                            foreach (var agent in agents)
                             {
-                                if (customer.LeadID != 0)
+                                agentsList.Add(new AgentsView()
                                 {
-                                    var lead = context.Leads.FirstOrDefault(c => c.LeadID == customer.LeadID);
-
-                                    if (lead != null && territory != null && product != null)
-                                    {
-                                        agentsList.Add(new CustomerAccountsView()
-                                        {
-                                            AccountNumber = item.AccountNumber,
-                                            Customer = lead.CompanyName,
-                                            Discount = item.Discount,
-                                            Gross = item.Gross,
-                                            ModeOfPayment = item.ModeOfPayment,
-                                            NetValue = item.NetValue,
-                                            Product = product.ProductName,
-                                            ServiceCharge = item.ServiceCharge,
-                                            Territory = territory.TerritoryName
-                                        });
-                                    }
-                                }
-                                else
-                                {
-                                    if (territory != null && product != null)
-                                    {
-                                        agentsList.Add(new CustomerAccountsView()
-                                        {
-                                            AccountNumber = item.AccountNumber,
-                                            Customer = customer.CompanyName,
-                                            Discount = item.Discount,
-                                            Gross = item.Gross,
-                                            ModeOfPayment = item.ModeOfPayment,
-                                            NetValue = item.NetValue,
-                                            Product = product.ProductName,
-                                            ServiceCharge = item.ServiceCharge,
-                                            Territory = territory.TerritoryName
-                                        });
-                                    }
-                                }
+                                    AgentId = agent.AgentId,
+                                    AgentName = agent.AgentName,
+                                    ContactNo = agent.ContactNo,
+                                    IsEmployee = agent.IsEmployee,
+                                    Position = agent.Position,
+                                    Territory = agent.Territory
+                                });
                             }
                         }
                     }
@@ -269,11 +236,11 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             {
                 string message = "";
                 busyIndicator.IsBusy = true;
-                message = await QueryLoadSalesStages();
+                message = await QueryLoadAgents();
 
                 if (message != null)
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
+                    var windows = new NoticeWindow();
                     NoticeWindow.message = message;
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
@@ -286,17 +253,16 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                 if (agentsList.Count() > 0)
                 {
                     dcAgentsList.ItemsSource = agentsList.Where
-                        (c => c.AccountNumber.ToLower().Contains(str.ToLower())
-                        || c.Customer.ToLower().Contains(str.ToLower())
-                        || c.Product.ToLower().Contains(str.ToLower())
+                        (c => c.AgentName.ToLower().Contains(str.ToLower())
+                        || c.ContactNo.ToLower().Contains(str.ToLower())
+                        || c.Position.ToLower().Contains(str.ToLower())
                         || c.Territory.ToLower().Contains(str.ToLower())).ToList();
                 }
                 else
                 {
                     dcAgentsList.ItemsSource = null;
-
                     var windows = new Shared.Windows.NoticeWindow();
-                    NoticeWindow.message = "No customer accounts";
+                    NoticeWindow.message = "List has no agents.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -305,18 +271,6 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
                 }
 
                 viewAgents.BestFitColumns();
-
-
-                if (agentsList.Count == 0)
-                {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    NoticeWindow.message = "List has no customer accounts.";
-                    windows.Height = 0;
-                    windows.Top = screenTopEdge + 8;
-                    windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                    if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                    windows.ShowDialog();
-                }
                 busyIndicator.IsBusy = false;
             }
         }
@@ -336,22 +290,107 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             canvasAgentsMasterData.Opacity = 0;
             FoldInnerCanvasSideward(canvasAgentsMasterData);
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            LoadAgents();
+        }
+
+        private void btnSearchAccount_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectedAgent = dcAgentsList.SelectedItem as AgentsView;
+
+                if (selectedAgent != null)
+                {
+                    var agent = context.Agents.FirstOrDefault(c => c.AgentId == selectedAgent.AgentId);
+
+                    if (agent != null)
+                    {
+                        var accounts = context.CustomerAccounts.ToList();
+
+                        if (accounts != null)
+                        {
+                            accountsList.Clear();
+                            foreach (var account in accounts)
+                            {
+                                var customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
+                                var product = context.Products.FirstOrDefault(c => c.ProductID == account.ProductID);
+                                var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == account.TerritoryID);
+
+                                if (account.AgentId == agent.AgentId)
+                                {
+                                    accountsList.Add(new CustomerAccountsView
+                                    {
+                                        AccountNumber = account.AccountNumber,
+                                        Agent = agent.AgentName,
+                                        Customer = customer.CompanyName,
+                                        Discount = account.Discount,
+                                        Gross = account.Gross,
+                                        ModeOfPayment = account.ModeOfPayment,
+                                        NetValue = account.NetValue,
+                                        Product = product.ProductName,
+                                        ServiceCharge = account.ServiceCharge,
+                                        Territory = territory.TerritoryName
+                                    });
+                                }
+                            }
+
+                            dcCustomerAccountsList.ItemsSource = accountsList.Where
+                                (c => c.Agent.ToLower().Contains(txtSearchAccount.Text.ToLower()) ||
+                                c.Customer.ToLower().Contains(txtSearchAccount.Text.ToLower()) ||
+                                c.Product.ToLower().Contains(txtSearchAccount.Text.ToLower()) ||
+                                c.Territory.ToLower().Contains(txtSearchAccount.Text.ToLower()));
+                            viewCustomerAccounts.BestFitColumns();
+                        }
+                    }
+                }
+            }
+        }
         
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
-            var selectedAgent = dcAgentsList.SelectedItem as CustomerAccountsView;
+            var selectedAgent = dcAgentsList.SelectedItem as AgentsView;
 
             Storyboard sb;
             if (_isExpanded != true && selectedAgent != null)
             {
-                //CustomerAccountDetails.AccountNumber = selectedAgent.AccountNumber;
+                AgentsDetails.AgentId = selectedAgent.AgentId;
 
                 sb = this.FindResource("gridin") as Storyboard;
                 sb.Begin(this);
                 _isExpanded = !_isExpanded;
 
-                //var page = new CustomerAccountDetails();
-                //navigation.Navigate(page);
+                var page = new AgentsDetails();
+                navigation.Navigate(page);
+            }
+            else
+            {
+                sb = this.FindResource("gridout") as Storyboard;
+                sb.Begin(this);
+                _isExpanded = !_isExpanded;
+
+                navigation.BackNavigationMode = BackNavigationMode.Root;
+                navigation.GoBack();
+
+                LoadAgents();
+            }
+        }
+        
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb;
+            if (_isExpanded != true)
+            {
+                AgentsForm.AgentId = 0;
+
+                sb = this.FindResource("gridin") as Storyboard;
+                sb.Begin(this);
+                _isExpanded = !_isExpanded;
+
+                var page = new AgentsForm();
+                navigation.Navigate(page);
             }
             else
             {
@@ -363,40 +402,33 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             }
         }
         
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            //CustomerAccountsForm.AccountNumber = null;
-              
-            Storyboard sb;
-            if (_isExpanded != true)
-            {
-                sb = this.FindResource("gridin") as Storyboard;
-                sb.Begin(this);
-                _isExpanded = !_isExpanded;
-            }
-
-            //var page = new CustomerAccountsForm();
-            //navigation.Navigate(page);
-        }
-        
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            var selectedAccount = dcAgentsList.SelectedItem as AgentsView;
+
             Storyboard sb;
-            if (_isExpanded != true)
-            {
-                sb = this.FindResource("gridin") as Storyboard;
-                sb.Begin(this);
-                _isExpanded = !_isExpanded;
-            }
-
-            var selectedAccount = dcAgentsList.SelectedItem as CustomerAccountsView;
-
             if (selectedAccount != null)
             {
-                //CustomerAccountsForm.AccountNumber = selectedAccount.AccountNumber;
+                if (_isExpanded != true)
+                {
+                    AgentsForm.AgentId = selectedAccount.AgentId;
 
-                //var page = new CustomerAccountsForm();
-                //navigation.Navigate(page);
+                    var page = new AgentsForm();
+                    navigation.Navigate(page);
+
+                    sb = this.FindResource("gridin") as Storyboard;
+                    sb.Begin(this);
+                    _isExpanded = !_isExpanded;
+                }
+                else
+                {
+                    sb = this.FindResource("gridout") as Storyboard;
+                    sb.Begin(this);
+                    _isExpanded = !_isExpanded;
+
+                    navigation.BackNavigationMode = BackNavigationMode.Root;
+                    navigation.GoBack();
+                }
             }
             else
             {
@@ -408,33 +440,45 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         {
             using (var context= new DatabaseContext())
             {
-                var selectedAccount = dcAgentsList.SelectedItem as CustomerAccountsView;
+                var selectedAgents = dcAgentsList.SelectedItem as AgentsView;
 
-                if (selectedAccount != null)
+                if (selectedAgents != null)
                 {
-                    var account = context.CustomerAccounts.First(c => c.AccountNumber == selectedAccount.AccountNumber);
+                    var agent = context.Agents.FirstOrDefault(c => c.AgentId == selectedAgents.AgentId);
 
-                    if (account != null)
+                    if (agent != null)
                     {
-                        var window = new MessageBoxWindow("Are you sure you want to delete this record?");
+                        var window = new MessageBoxWindow("Are you sure you want to permanently delete this record?");
                         window.Height = 0;
                         window.Top = screenTopEdge + 8;
                         window.Left = (screenWidth / 2) - (window.Width / 2);
                         if (screenLeftEdge > 0 || screenLeftEdge < -8) { window.Left += screenLeftEdge; }
                         window.ShowDialog();
 
-                        if (Variables.yesClicked == true)
-                        {
-                            context.CustomerAccounts.Remove(account);
-                            var windows = new Shared.Windows.NoticeWindow();
-                            Shared.Windows.NoticeWindow.message = "Customer Account successfully deleted";
-                            windows.Height = 0;
-                            windows.Top = screenTopEdge + 8;
-                            windows.Left = (screenWidth / 2) - (windows.Width / 2);
-                            if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
-                            windows.ShowDialog();
+                        var account = context.CustomerAccounts.FirstOrDefault(c => c.AgentId == agent.AgentId);
 
-                            context.SaveChanges();
+                        if (account == null)
+                        {
+                            if (Variables.yesClicked == true)
+                            {
+                                var log = new Log();
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " deleted Agent " +
+                                    agent.AgentName + ".";
+                                context.Logs.Add(log);
+
+                                context.Agents.Remove(agent);
+                                var windows = new NoticeWindow();
+                                NoticeWindow.message = "Agent successfully deleted";
+                                windows.Height = 0;
+                                windows.Top = screenTopEdge + 8;
+                                windows.Left = (screenWidth / 2) - (windows.Width / 2);
+                                if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
+                                windows.ShowDialog();
+
+                                context.SaveChanges();
+                            }
                         }
                     }
                     else
@@ -507,6 +551,57 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
             //    }
             }
         }
+
+        private void dcAgentsList_SelectedItemChanged(object sender, DevExpress.Xpf.Grid.SelectedItemChangedEventArgs e)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectedAgent = dcAgentsList.SelectedItem as AgentsView;
+
+                if (selectedAgent != null)
+                {
+                    var agent = context.Agents.FirstOrDefault(c => c.AgentId == selectedAgent.AgentId);
+
+                    if (agent != null)
+                    {
+                        lblAgentName.Text = agent.AgentName + "'s Handled Accounts";
+
+                        var accounts = context.CustomerAccounts.ToList();
+
+                        if (accounts != null)
+                        {
+                            accountsList.Clear();
+                            foreach (var account in accounts)
+                            {
+                                var customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
+                                var product = context.Products.FirstOrDefault(c => c.ProductID == account.ProductID);
+                                var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == account.TerritoryID);
+
+                                if (account.AgentId == agent.AgentId)
+                                {
+                                    accountsList.Add(new CustomerAccountsView
+                                    {
+                                        AccountNumber = account.AccountNumber,
+                                        Agent = agent.AgentName,
+                                        Customer = customer.CompanyName,
+                                        Discount = account.Discount,
+                                        Gross = account.Gross,
+                                        ModeOfPayment = account.ModeOfPayment,
+                                        NetValue = account.NetValue,
+                                        Product = product.ProductName,
+                                        ServiceCharge = account.ServiceCharge,
+                                        Territory = territory.TerritoryName
+                                    });
+                                }
+                            }
+
+                            dcCustomerAccountsList.ItemsSource = accountsList.ToList();
+                            viewCustomerAccounts.BestFitColumns();
+                        }
+                    }
+                }
+            }
+        }
         
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -518,18 +613,13 @@ namespace NSPIREIncSystem.SalesManagement.MasterDatas
         
         private void NullMessage()
         {
-            var windows = new Shared.Windows.NoticeWindow();
+            var windows = new NoticeWindow();
             NoticeWindow.message = "Please select a record.";
             windows.Height = 0;
             windows.Top = screenTopEdge + 8;
             windows.Left = (screenWidth / 2) - (windows.Width / 2);
             if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
             windows.ShowDialog();
-        }
-        
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            LoadAgents();
         }
     }
 }

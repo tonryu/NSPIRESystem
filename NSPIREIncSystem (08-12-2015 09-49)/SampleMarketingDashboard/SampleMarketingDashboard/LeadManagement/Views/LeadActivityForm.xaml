@@ -8,7 +8,8 @@
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
              dx:ThemeManager.ThemeName="Office2013" 
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="1000" Background="White" Loaded="UserControl_Loaded">
+             d:DesignHeight="500" d:DesignWidth="1000" Background="White" Loaded="UserControl_Loaded"
+             FontFamily="Arial">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,9 +17,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="lblActivity" Text="Lead Activity" Grid.Row="0" Margin="10" FontFamily="Segoe UI" FontWeight="Bold" Foreground="#0069ff" FontSize="25"/>
+        <TextBlock x:Name="lblActivity" Text="Lead Activity" Grid.Row="0" Margin="10" FontWeight="Bold" Foreground="#0069ff" FontSize="25"/>
 
-        <Grid Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -35,11 +36,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="lblActivityId" Text="LEAD ACTIVITY ID #" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:TextEdit x:Name="txtActivityId" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left" IsEnabled="False"/>
+            <dxe:TextEdit x:Name="txtActivityId" Grid.Column="1" Padding="0 5" Margin="5" Width="243" HorizontalAlignment="Left" IsReadOnly="True"/>
             <TextBlock x:Name="lblDescription"  Text="DESCRIPTION" Grid.Row="1" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:TextEdit x:Name="txtDescription" Grid.Row="1" Grid.Column="1" Padding="0 5" Margin="5" VerticalContentAlignment="Top" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblActivityDate"  Text="ACTIVITY DATE *" Grid.Row="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:DateEdit x:Name="txtActivityDate" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" DateEditPopupContentType="DateTimePicker" AllowNullInput="False" IsTextEditable="False"/>
+            <dxe:DateEdit x:Name="txtActivityDate" Grid.Row="2" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" AllowNullInput="False" IsTextEditable="False"/>
             <TextBlock x:Name="lblActivityTime"  Text="ACTIVITY TIME *" Grid.Row="3" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:TextEdit x:Name="txtActivityTime" Grid.Row="3" Grid.Column="1" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" NullText="24-hour format" Mask="HH:mm"/>
             <TextBlock x:Name="lblCost" Text="COST *" Grid.Row="4" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
@@ -57,7 +58,7 @@
             <TextBlock x:Name="lblNextStep" Text="NEXT STEP *" Grid.Row="4" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <dxe:TextEdit x:Name="txtNextStep" Grid.Row="4" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243"/>
             <TextBlock x:Name="lblNextStepDue" Text="NEXT STEP DUE DATE *" Grid.Row="5" Grid.Column="2" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
-            <dxe:DateEdit x:Name="txtNextStepDue" Grid.Row="5" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" DateEditPopupContentType="DateTimePicker" AllowNullInput="False" IsTextEditable="False"/>
+            <dxe:DateEdit x:Name="txtNextStepDue" Grid.Row="5" Grid.Column="3" Padding="0 5" Margin="5" HorizontalAlignment="Left" Width="243" AllowNullInput="False" IsTextEditable="False"/>
             <TextBlock x:Name="lblFinalizedCheck" Text="IS FINALIZED? *" Grid.Row="6" Foreground="#0069ff" Margin="20 5" Padding="0 5" VerticalAlignment="Center"/>
             <WPFSpark:ToggleSwitch x:Name="tsFinalizedCheck"
                                    Grid.Row="6"

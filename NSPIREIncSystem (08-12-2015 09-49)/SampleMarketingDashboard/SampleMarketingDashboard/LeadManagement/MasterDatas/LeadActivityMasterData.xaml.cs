@@ -4,13 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Resources;
 using DevExpress.Xpf.WindowsUI;
 using DevExpress.XtraReports.UI;
-using NSPIREIncSystem.LeadManagement.Reports;
 using NSPIREIncSystem.LeadManagement.Views;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Reports;
@@ -30,6 +26,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
         bool _isExpanded = false;
         public List<ActivityView> activityList = new List<ActivityView>();
         public static int LeadId;
+        public static int contactId;
 
         public LeadActivityMasterData()
         {
@@ -214,28 +211,31 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                             {
                                 foreach (var item in activity)
                                 {
+                                    var lead = context.Leads.FirstOrDefault(c => c.LeadID == item.LeadID);
 
-                                    var leads = context.Leads.FirstOrDefault(c => c.LeadID == item.LeadID);
-                                    var contact = context.Contacts.FirstOrDefault(c => c.LeadId == leads.LeadID);
-
-                                    activityList.Add(new ActivityView()
+                                    if (lead != null)
                                     {
-                                        ActivityDate = item.ActivityDate,
-                                        ActivityId = item.ActivityID,
-                                        ActivityTime = item.ActivityTime,
-                                        ClientResponse = item.ClientResponse,
-                                        Cost = item.Cost,
-                                        Description = item.Description,
-                                        IsFinalized = item.IsFinalized,
-                                        MarketingVoucher = item.MarketingVoucherNo,
-                                        NextStep = item.NextStep,
-                                        NextStepDueDate = item.DueDateOfNextStep,
-                                        SalesRep = item.SalesRep,
-                                        CompanyName = leads.CompanyName,
-                                        ContactPerson = contact.ContactPersonName,
-                                        TransactionDetails = item.DetailsOfTransaction
+                                        var contact = context.Contacts.FirstOrDefault(c => c.LeadId == lead.LeadID);
 
-                                    });
+                                        activityList.Add(new ActivityView()
+                                        {
+                                            ActivityDate = item.ActivityDate,
+                                            ActivityId = item.ActivityID,
+                                            ActivityTime = item.ActivityTime,
+                                            ClientResponse = item.ClientResponse,
+                                            Cost = item.Cost,
+                                            Description = item.Description,
+                                            IsFinalized = item.IsFinalized,
+                                            MarketingVoucher = item.MarketingVoucherNo,
+                                            NextStep = item.NextStep,
+                                            NextStepDueDate = item.DueDateOfNextStep,
+                                            SalesRep = item.SalesRep,
+                                            CompanyName = lead.CompanyName,
+                                            ContactPerson = contact.ContactPersonName,
+                                            TransactionDetails = item.DetailsOfTransaction
+
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -245,7 +245,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
                 catch (Exception ex)
                 {
-                    return "Error Message" + ex.Message;
+                    return "Error Message : " + ex.Message;
                 }
             });
         }
@@ -288,10 +288,11 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
                     viewLeadActivity.BestFitColumns();
                 }
+
                 if (activityList.Count == 0)
                 {
                     var windows = new NoticeWindow();
-                    NoticeWindow.message = "List has no Activity.";
+                    NoticeWindow.message = "List has no activity.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -412,7 +413,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 sb.Begin(this);
                 _isExpanded = !_isExpanded;
 
-                LoadMethod(txtSearch.Text);
+               LoadActivity();
             }
         }
 
@@ -565,7 +566,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                     dataList.Add(new LeadActivityReportData()
                     {
                         ReportHeader = "LEAD ACTIVITIES",
-                        ReportTitle = "LEAD ACTIVITIES OF " + lead.CompanyName.ToUpper()
+                        ReportTitle = "LEAD ACTIVITIES of " + lead.CompanyName.ToUpper()
                         + " as of " + DateTime.Now.ToString("MMMM dd, yyyy"),
                         TotalActivities = detailsList.Count(),
                         details = detailsList
@@ -574,7 +575,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                     var report = new LeadActivityReportDesign
                     {
                         DataSource = dataList.Distinct(),
-                        Name = "LEAD ACTIVITIES OF " + lead.CompanyName.ToUpper()
+                        Name = "LEAD ACTIVITIES of " + lead.CompanyName.ToUpper()
                         + " as of " + DateTime.Now.ToString("MMMM dd, yyyy")
                     };
 
@@ -585,8 +586,8 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                 }
                 else
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    Shared.Windows.NoticeWindow.message = "No data to print.";
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "No data to print.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);
@@ -605,7 +606,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
         private void NullMessage()
         {
-            var windows = new Shared.Windows.NoticeWindow();
+            var windows = new NoticeWindow();
             NoticeWindow.message = "Please select a record.";
             windows.Height = 0;
             windows.Top = screenTopEdge + 8;

@@ -288,7 +288,11 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              canvasSalesStagesMasterData.Visibility = Visibility.Collapsed;
              canvasSalesStagesMasterData.Opacity = 0;
              FoldInnerCanvasSideward(canvasSalesStagesMasterData);
-             
+         }
+
+         private void btnSearch_Click(object sender, RoutedEventArgs e)
+         {
+             LoadActivity();
          }
 
          private void btnView_Click(object sender, RoutedEventArgs e)
@@ -331,7 +335,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
 
             var page = new SalesStageForm();
             navigation.Navigate(page);
-            
          }
 
          private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -358,8 +361,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              {
                  NullMessage();
              }
-
-           
          }
 
          private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -388,7 +389,7 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                              var log = new Log();
                              log.Date = DateTime.Now.ToString("MM/dd/yyyy");
                              log.Description = NotificationWindow.username + " deleted "
-                                 + salestage.SalesStageName + ".";
+                                 + salestage.SalesStageName + " sales stage status.";
                              log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                              context.Logs.Add(log);
 
@@ -410,12 +411,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
                  }
                  LoadActivity();
              }
-            
-         }
-
-         private void btnPrint_Click(object sender, RoutedEventArgs e)
-         {
-
          }
 
          private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -434,11 +429,6 @@ namespace NSPIREIncSystem.LeadManagement.MasterDatas
              windows.Left = (screenWidth / 2) - (windows.Width / 2);
              if (screenLeftEdge > 0 || screenLeftEdge < -8) { windows.Left += screenLeftEdge; }
              windows.ShowDialog();
-         }
-
-         private void btnSearch_Click(object sender, RoutedEventArgs e)
-         {
-             LoadActivity();
          }
     }
 }

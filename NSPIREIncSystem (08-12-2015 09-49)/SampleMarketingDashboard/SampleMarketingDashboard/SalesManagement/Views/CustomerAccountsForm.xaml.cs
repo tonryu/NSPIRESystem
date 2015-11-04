@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using NSPIREIncSystem.Models;
 using NSPIREIncSystem.Shared.Windows;
 
-namespace NSPIREIncSystem.SalesManagement.Views
+namespace NSPIREIncSystem.LeadManagement.Views
 {
     /// <summary>
     /// Interaction logic for CustomerAccountsForm.xaml
@@ -40,6 +30,7 @@ namespace NSPIREIncSystem.SalesManagement.Views
                 var territories = context.Territories.ToList();
                 var products = context.Products.ToList();
                 var modes = new string[] { "CASH", "QUARTERLY", "MONTHLY" };
+                var agents = context.Agents.ToList();
 
                 if (customers != null)
                 {
@@ -58,7 +49,7 @@ namespace NSPIREIncSystem.SalesManagement.Views
                 if (products != null)
                 {
                     cbProduct.ItemsSource = null;
-                    cbProduct.ItemsSource = products.Select(c => c.ProductName).ToList();
+                    cbProduct.ItemsSource = products.OrderBy(c => c.ProductID).Select(c => c.ProductName).ToList();
                 }
                 else { cbProduct.ItemsSource = null; }
 
@@ -69,6 +60,13 @@ namespace NSPIREIncSystem.SalesManagement.Views
                 }
                 else { cbModeOfPayment.ItemsSource = null; }
 
+                if (agents != null)
+                {
+                    cbAgent.ItemsSource = null;
+                    cbAgent.ItemsSource = agents.Select(c => c.AgentName).ToList();
+                }
+                else { cbAgent.ItemsSource = null; }
+
                 if (AccountNumber != null)
                 {
                     var account = context.CustomerAccounts.FirstOrDefault(c => c.AccountNumber == AccountNumber);
@@ -78,6 +76,7 @@ namespace NSPIREIncSystem.SalesManagement.Views
                         var customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
                         var territory = context.Territories.FirstOrDefault(c => c.TerritoryID == account.TerritoryID);
                         var product = context.Products.FirstOrDefault(c => c.ProductID == account.ProductID);
+                        var agent = context.Agents.FirstOrDefault(c => c.AgentId == account.AgentId);
 
                         if (customer != null && territory != null && product != null)
                         {
@@ -89,8 +88,8 @@ namespace NSPIREIncSystem.SalesManagement.Views
                             Grid.SetRow(cbTerritory, 2); Grid.SetColumn(cbTerritory, 1);
                             Grid.SetRow(lblProduct, 3);
                             Grid.SetRow(cbProduct, 3); Grid.SetColumn(cbProduct, 1);
-                            Grid.SetRow(lblModeOfPayment, 4);
-                            Grid.SetRow(cbModeOfPayment, 4); Grid.SetColumn(cbModeOfPayment, 1);
+                            Grid.SetRow(lblAgent, 4);
+                            Grid.SetRow(cbAgent, 4); Grid.SetColumn(cbAgent, 1);
 
                             txtAccountNumber.Text = account.AccountNumber;
                             txtDiscount.Text = account.Discount;
@@ -101,6 +100,7 @@ namespace NSPIREIncSystem.SalesManagement.Views
                             cbModeOfPayment.SelectedItem = account.ModeOfPayment;
                             cbProduct.SelectedItem = product.ProductName;
                             cbTerritory.SelectedItem = territory.TerritoryName;
+                            cbAgent.SelectedItem = agent.AgentName;
                         }
                     }
                 }
@@ -114,8 +114,8 @@ namespace NSPIREIncSystem.SalesManagement.Views
                     Grid.SetRow(cbTerritory, 1); Grid.SetColumn(cbTerritory, 1);
                     Grid.SetRow(lblProduct, 2);
                     Grid.SetRow(cbProduct, 2); Grid.SetColumn(cbProduct, 1);
-                    Grid.SetRow(lblModeOfPayment, 3);
-                    Grid.SetRow(cbModeOfPayment, 3); Grid.SetColumn(cbModeOfPayment, 1);
+                    Grid.SetRow(lblAgent, 3);
+                    Grid.SetRow(cbAgent, 3); Grid.SetColumn(cbAgent, 1);
 
                     txtDiscount.Text = "₱";
                     txtGross.Text = "₱";
@@ -125,6 +125,7 @@ namespace NSPIREIncSystem.SalesManagement.Views
                     cbModeOfPayment.SelectedItem = "";
                     cbProduct.SelectedItem = "";
                     cbTerritory.SelectedItem = "";
+                    cbAgent.SelectedItem = "";
                 }
             }
         }
@@ -133,24 +134,27 @@ namespace NSPIREIncSystem.SalesManagement.Views
         {
             using (var context = new DatabaseContext())
             {
-                if ((txtDiscount.Text != null || txtDiscount.Text != "") &&
-                    (txtGross.Text != null || txtGross.Text != "") &&
-                    (txtNetValue.Text != null || txtNetValue.Text != "") &&
-                    (txtServiceCharge.Text != null || txtServiceCharge.Text != "") &&
-                    (cbCompanyName.Text != null || cbCompanyName.Text != "") &&
-                    (cbModeOfPayment.Text != null || cbModeOfPayment.Text != "") &&
-                    (cbProduct.Text != null || cbProduct.Text != "") &&
-                    (cbTerritory.Text != null || cbTerritory.Text != ""))
+                if ((txtDiscount.Text != null && txtDiscount.Text != "") &&
+                    (txtGross.Text != null && txtGross.Text != "") &&
+                    (txtNetValue.Text != null && txtNetValue.Text != "") &&
+                    (txtServiceCharge.Text != null && txtServiceCharge.Text != "") &&
+                    (cbCompanyName.Text != null && cbCompanyName.Text != "") &&
+                    (cbModeOfPayment.Text != null && cbModeOfPayment.Text != "") &&
+                    (cbProduct.Text != null && cbProduct.Text != "") &&
+                    (cbTerritory.Text != null && cbTerritory.Text != "") &&
+                    (cbAgent.Text != null && cbAgent.Text != ""))
                 {
                     var territory = context.Territories.FirstOrDefault(c => c.TerritoryName.ToLower() == cbTerritory.Text.ToLower());
                     var product = context.Products.FirstOrDefault(c => c.ProductName.ToLower() == cbProduct.Text.ToLower());
                     var customer = context.Customers.FirstOrDefault(c => c.CompanyName.ToLower() == cbCompanyName.Text.ToLower());
+                    var agent = context.Agents.FirstOrDefault(c =>  c.AgentName.ToLower() == cbAgent.Text.ToLower());
 
                     if (AccountNumber != null)
                     {
+                        #region edit
                         var account = context.CustomerAccounts.FirstOrDefault(c => c.AccountNumber == AccountNumber);
 
-                        if ((account != null) && (territory != null) && (product != null) && (customer != null))
+                        if ((account != null) && (territory != null) && (product != null) && (customer != null) && (agent != null))
                         {
                             if (account.ProductID == product.ProductID)
                             {
@@ -163,18 +167,19 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                 account.ProductID = product.ProductID;
                                 account.ServiceCharge = txtServiceCharge.Text;
                                 account.TerritoryID = territory.TerritoryID;
+                                account.AgentId = agent.AgentId;
 
                                 customer = context.Customers.FirstOrDefault(c=> c.CustomerID == account.CustomerID);
                                 var log = new Log();
-                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
-                                log.Time = DateTime.Now.ToString("HH:mm");
-                                log.Description = NotificationWindow.username + " modified "
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " modifies "
                                     + customer.CompanyName + "'s customer account.";
                                 context.Logs.Add(log);
 
                                 context.SaveChanges();
 
-                                var windows = new Shared.Windows.NoticeWindow();
+                                var windows = new NoticeWindow();
                                 NoticeWindow.message = "Customer account successfully updated";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
@@ -186,14 +191,14 @@ namespace NSPIREIncSystem.SalesManagement.Views
                             {
                                 customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
                                 var log = new Log();
-                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
-                                log.Time = DateTime.Now.ToString("HH:mm");
-                                log.Description = NotificationWindow.username + " failed to modify "
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " fails to modify "
                                     + customer.CompanyName + "'s customer account due to it cannot change its product.";
                                 context.Logs.Add(log);
                                 context.SaveChanges();
 
-                                var windows = new Shared.Windows.NoticeWindow();
+                                var windows = new NoticeWindow();
                                 NoticeWindow.message = "Customer account cannot change a product.";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
@@ -202,10 +207,12 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                 windows.ShowDialog();
                             }
                         }
+                        #endregion
                     }
                     else
                     {
-                        if ((territory != null) && (product != null) && (customer != null))
+                        #region add
+                        if ((territory != null) && (product != null) && (customer != null) && (agent != null))
                         {
                             var account = context.CustomerAccounts.FirstOrDefault(c => c.CustomerID == customer.CustomerID && c.ProductID == product.ProductID);
 
@@ -241,20 +248,21 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                 account.ProductID = product.ProductID;
                                 account.ServiceCharge = txtServiceCharge.Text;
                                 account.TerritoryID = territory.TerritoryID;
+                                account.AgentId = agent.AgentId;
                                 context.CustomerAccounts.Add(account);
 
                                 customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
                                 var log = new Log();
-                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
-                                log.Time = DateTime.Now.ToString("HH:mm");
-                                log.Description = NotificationWindow.username + " created "
-                                    + "a customer account for '" + customer.CompanyName +
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
+                                log.Description = NotificationWindow.username + " creates "
+                                    + "a new customer account for '" + customer.CompanyName +
                                     "' with the product '" + product.ProductName + "'.";
                                 context.Logs.Add(log);
 
                                 context.SaveChanges();
 
-                                var windows = new Shared.Windows.NoticeWindow();
+                                var windows = new NoticeWindow();
                                 NoticeWindow.message = "Customer account successfully created";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
@@ -266,15 +274,17 @@ namespace NSPIREIncSystem.SalesManagement.Views
                             {
                                 customer = context.Customers.FirstOrDefault(c => c.CustomerID == account.CustomerID);
                                 var log = new Log();
-                                log.Date = DateTime.Now.ToString("MM/dd//yyyy");
-                                log.Time = DateTime.Now.ToString("HH:mm");
+                                log.Date = DateTime.Now.ToString("MM/dd/yyyy");
+                                log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                                 log.Description = NotificationWindow.username +
-                                    " tried to create a customer account but the account for '" +
-                                    customer.CompanyName + "' already exists.";
+                                    " fails to create a new customer account because"
+                                    +" the account for " + customer.CompanyName 
+                                    + " with the product " + product.ProductName 
+                                    + " already exists.";
                                 context.Logs.Add(log);
                                 context.SaveChanges();
 
-                                var windows = new Shared.Windows.NoticeWindow();
+                                var windows = new NoticeWindow();
                                 NoticeWindow.message = "Customer account is already existing.";
                                 windows.Height = 0;
                                 windows.Top = screenTopEdge + 8;
@@ -283,12 +293,13 @@ namespace NSPIREIncSystem.SalesManagement.Views
                                 windows.ShowDialog();
                             }
                         }
+                        #endregion
                     }
                 }
                 else
                 {
-                    var windows = new Shared.Windows.NoticeWindow();
-                    NoticeWindow.message = "Please fill all boxes associated with an asterisk (*) sign.";
+                    var windows = new NoticeWindow();
+                    NoticeWindow.message = "Please fill all boxes labeled with an asterisk(*) symbol.";
                     windows.Height = 0;
                     windows.Top = screenTopEdge + 8;
                     windows.Left = (screenWidth / 2) - (windows.Width / 2);

@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="NSPIREIncSystem.LeadManagement.MasterDatas.ProductsMasterData" 
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:gridanim="clr-namespace:NSPIREIncSystem" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             dx:ThemeManager.ThemeName="Office2013" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded" FontFamily="Arial">
+    <UserControl.Resources>
+        <Storyboard x:Key="gridin">
+            <gridanim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="firstColumn" Storyboard.TargetProperty="Width" From="633" To="803"/>
+        </Storyboard>
+        <Storyboard x:Key="gridout">
+            <gridanim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="firstColumn" Storyboard.TargetProperty="Width" From="803" To="633"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/new images/05.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="PRODUCTS" FontSize="25" Margin="50 10 50 0" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
+
+        <Grid Grid.Row="1" Margin="50 5 50 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="firstColumn"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--products-->
+            <Border BorderBrush="#0069ff" BorderThickness="2" Grid.RowSpan="2" Margin="5 0 5 0" Padding="8" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="2" Text="Search Product : " Foreground="#0069ff" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtSearch" Grid.Column="1"  Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="2" Click="btnSearch_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/search-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                    <dxg:GridControl x:Name="dcProductsList" Grid.Row="1" Grid.ColumnSpan="3" Margin="10 5 5 5" SelectedItemChanged="dcProductsList_SelectedItemChanged">
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="viewProducts" ShowGroupPanel="False" NavigationStyle="Row"
+                                HorizontalScrollbarVisibility="Auto" VerticalScrollbarVisibility="Auto"/>
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Header="Product ID #" FieldName="ProductID" Visible="False"/>
+                            <dxg:GridColumn Header="Product Name" FieldName="ProductName"/>
+                            <dxg:GridColumn Header="Cost" FieldName="Cost" Visible="False"/>
+                            <dxg:GridColumn Header="Category" FieldName="Category" Visible="False"/>
+                        </dxg:GridControl.Columns>
+                    </dxg:GridControl>
+                </Grid>
+            </Border>
+            <!--navigation frame-->
+            <Border BorderBrush="#0069ff" BorderThickness="2" Grid.Column="1" Grid.RowSpan="2" Margin="5 0 5 0" Padding="8" Background="White">
+                <dxwui:NavigationFrame x:Name="frame" AnimationType="Fade">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="lblLeads" FontSize="20" Foreground="#0069ff" Margin="5 0 2 0" Padding="5" TextWrapping="Wrap"/>
+                            <TextBlock Margin="2" Text="Search Lead : " Grid.Column="1" Foreground="#0069ff" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtSearch2" Grid.Column="2" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btnSearch2" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="3" Click="btnSearch2_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/new images/search-icon.png"/>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                        <dxg:GridControl x:Name="dcLeadsList" Grid.Row="2" Margin="5">
+                            <dxg:GridControl.View>
+                                <dxg:TableView x:Name="viewLead" ShowGroupPanel="False" NavigationStyle="Row"
+                                   HorizontalScrollbarVisibility="Auto" VerticalScrollbarVisibility="Auto"/>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn Header="Lead ID #" FieldName="LeadId" Visible="False"/>
+                                <dxg:GridColumn Header="Lead" FieldName="CompanyName"/>
+                                <dxg:GridColumn Header="Territory" FieldName="TerritoryName" Visible="False"/>
+                                <dxg:GridColumn Header="Address" FieldName="CompanyAddress" Visible="False"/>
+                                <dxg:GridColumn Header="Status" FieldName="SalesStageStatus" Visible="False"/>
+                                <dxg:GridColumn Header="Product" FieldName="ProductName" Visible="False"/>
+                                <dxg:GridColumn Header="Date Added" FieldName="DateAdded" Visible="False"/>
+                                <dxg:GridColumn Header="Marketing Strategy" FieldName="MarketingStrategy" Visible="False"/>
+                                <dxg:GridColumn Header="Is Active?" FieldName="IsActive" Visible="False"/>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </Grid>
+                </dxwui:NavigationFrame>
+            </Border>
+        </Grid>
+
+        <Canvas x:Name="canvasProductMasterData" TextBlock.FontSize="11" Grid.Row="2" Grid.ColumnSpan="2" Margin="5 5 5 10" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel x:Name="stackView">
+                <Button x:Name="btnView" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/view-details-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="VIEW" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackAdd">
+                <Button x:Name="btnAdd" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAdd_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/add-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="ADD" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackEdit">
+                <Button x:Name="btnEdit" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEdit_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/edit-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="MODIFY" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackDelete">
+                <Button x:Name="btnDelete" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDelete_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/trash-mail-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="DELETE" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackPrint">
+                <Button x:Name="btnPrint" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnPrint_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/print-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="PRINT" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackBack">
+                <Button x:Name="btnBack" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+
+        <xctk:BusyIndicator x:Name="busyIndicator" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Grid.ColumnSpan="3" Margin="116 0 116 13" 
+                            Width="162" Height="68" Grid.RowSpan="3" FontWeight="Bold" 
+                            Foreground="Black"/>
+    </Grid>
+</UserControl>

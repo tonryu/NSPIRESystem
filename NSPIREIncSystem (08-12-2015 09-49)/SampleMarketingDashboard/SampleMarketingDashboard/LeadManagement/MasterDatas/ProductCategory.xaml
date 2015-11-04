@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="NSPIREIncSystem.LeadManagement.MasterDatas.ProductCategory" 
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:anim="clr-namespace:NSPIREIncSystem" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             dx:ThemeManager.ThemeName="Office2013" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded" FontFamily="Arial">
+    <UserControl.Resources>
+        <Storyboard x:Key="gridin">
+            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="0" To="550"/>
+        </Storyboard>
+        <Storyboard x:Key="gridout">
+            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="550" To="0"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/new images/05.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Product Categories" FontSize="25" Margin="50 10 10 5" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
+            <Grid Grid.Column="1" Margin="5 5 50 5">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Search Product : " Margin="2" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtSearch" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" Click="btnSearch_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/new images/search-icon.png"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0" x:Name="secondColumn"/>
+            </Grid.ColumnDefinitions>
+            <dxg:GridControl x:Name="dcProductList" Grid.Row="1" Margin="5">
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="viewProducts" ShowGroupPanel="False" NavigationStyle="Row"
+                               VerticalScrollbarVisibility="Auto" HorizontalScrollbarVisibility="Auto"/>
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Category ID #" Visible="False" FieldName="CategoryID"/>
+                    <dxg:GridColumn Header="Category Name" FieldName="CategoryName" />
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+            <Border BorderBrush="#0069ff" BorderThickness="2" Grid.Column="1" Margin="5" Padding="8" Background="White">
+                <dxwui:NavigationFrame x:Name="navigation" Padding="5" AnimationType="Fade"/>
+            </Border>
+        </Grid>
+
+        <Canvas x:Name="canvasSalesStagesMasterData" TextBlock.FontSize="11" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 5 5 10">
+            <!--<StackPanel x:Name="stackView">
+                <Button x:Name="btnView" Cursor="Hand" Padding="5 5 5 0" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/view-details-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="VIEW" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                    <TextBlock Text="" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>-->
+            <StackPanel x:Name="stackAdd">
+                <Button x:Name="btnAdd" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnAdd_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/add-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="ADD" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackEdit">
+                <Button x:Name="btnEdit" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnEdit_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/edit-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="MODIFY" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="stackDelete">
+                <Button x:Name="btnDelete" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnDelete_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/trash-mail-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="DELETE" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>           
+            <StackPanel x:Name="stackBack">
+                <Button x:Name="btnBack" Padding="5 5 5 0" Cursor="Hand" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnBack_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/new images/back-icon.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="BACK" HorizontalAlignment="Center" Padding="5 0 5 1"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+        
+        <xctk:BusyIndicator x:Name="busyIndicator" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Grid.ColumnSpan="3" Margin="116 0 116 13" 
+                            Width="162" Height="68" Grid.RowSpan="3" FontWeight="Bold" 
+                            Foreground="Black"/>
+    </Grid>
+</UserControl>

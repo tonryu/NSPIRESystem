@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NSPIREIncSystem.SalesManagement.MasterDatas.AgentsMasterData" 
+﻿<UserControl x:Class="NSPIREIncSystem.LeadManagement.MasterDatas.AgentsMasterData" 
              xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
@@ -10,13 +10,13 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
              dx:ThemeManager.ThemeName="Office2013" 
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+             d:DesignHeight="700" d:DesignWidth="1500" Loaded="UserControl_Loaded" FontFamily="Arial">
     <UserControl.Resources>
         <Storyboard x:Key="gridin">
-            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="0" To="850"/>
+            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="633" To="450"/>
         </Storyboard>
         <Storyboard x:Key="gridout">
-            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="850" To="0"/>
+            <anim:GridLengthAnimation BeginTime="0:0:0" Duration="0:0:0.25" Storyboard.TargetName="secondColumn" Storyboard.TargetProperty="Width" From="450" To="633"/>
         </Storyboard>
     </UserControl.Resources>
     <Grid>
@@ -33,47 +33,89 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.ColumnSpan="2">
+        <TextBlock Text="AGENTS" FontSize="25" Margin="50 10 50 0" VerticalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
+        
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="50 0 50 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition x:Name="secondColumn"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="AGENTS" FontSize="25" Margin="50 10 50 0" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="White"/>
-            <Grid Grid.Column="1" Margin="50 10 50 0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Search Agent : " Margin="2" Foreground="White" VerticalAlignment="Center"/>
-                    <TextBox x:Name="txtSearch" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-                    <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" Click="btnSearch_Click">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/new images/search-icon.png"/>
-                        </Button.Background>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </Grid>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="50 5 50 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0" x:Name="secondColumn"/>
-            </Grid.ColumnDefinitions>
-            <Border BorderBrush="#0069ff" BorderThickness="2" Margin="5" Padding="8" Background="White">
-                <dxg:GridControl x:Name="dcAgentsList">
-                    <dxg:GridControl.View>
-                        <dxg:TableView x:Name="viewAgents" ShowGroupPanel="False" NavigationStyle="Row"
+            <Border BorderBrush="#0069ff" BorderThickness="2" Margin="0 5 5 5" Padding="8" Background="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="Search : " Margin="2" Foreground="#0069ff" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtSearch" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btnSearch" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" Click="btnSearch_Click">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/new images/search-icon.png"/>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <dxg:GridControl x:Name="dcAgentsList" Grid.Row="1" SelectedItemChanged="dcAgentsList_SelectedItemChanged">
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="viewAgents" ShowGroupPanel="False" NavigationStyle="Row"
                                VerticalScrollbarVisibility="Auto" HorizontalScrollbarVisibility="Auto"/>
-                    </dxg:GridControl.View>
-                    <dxg:GridControl.Columns>
-                        <dxg:GridColumn Header="Agent ID #" Visible="False"/>
-                        <dxg:GridColumn Header="Agent"/>
-                    </dxg:GridControl.Columns>
-                </dxg:GridControl>
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Header="Agent ID #" Visible="False" FieldName="AgentId"/>
+                            <dxg:GridColumn Header="Agent" FieldName="AgentName"/>
+                            <dxg:GridColumn Header="Position" FieldName="Position"/>
+                            <dxg:GridColumn Header="Contact #" Visible="False" FieldName="ContactNo"/>
+                            <dxg:GridColumn Header="Territory" Visible="False" FieldName="Territory"/>
+                            <dxg:GridColumn Header="Is employee?" FieldName="IsEmployee"/>
+                        </dxg:GridControl.Columns>
+                    </dxg:GridControl>
+                </Grid>
             </Border>
             <Border BorderBrush="#0069ff" BorderThickness="2" Grid.Column="1" Margin="5" Padding="8" Background="White">
-                <dxwui:NavigationFrame x:Name="navigation" Padding="5" AnimationType="Fade"/>
+                <dxwui:NavigationFrame x:Name="navigation" Padding="5" AnimationType="Fade">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblAgentName" HorizontalAlignment="Left" Padding="5" Margin="5" Foreground="#0069ff" FontSize="15" TextWrapping="Wrap"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                            <TextBlock Text="Search : " Margin="2" Foreground="#0069ff" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                            <TextBox x:Name="txtSearchAccount" Margin="2" ToolTip="Enter here" Width="200" Height="30" Style="{DynamicResource TextBoxRoundedStyle1}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btnSearchAccount" ToolTip="Search" Cursor="Hand" Height="35" Width="35" BorderBrush="#0069ff" Style="{DynamicResource ButtonMetroStyle3}" Margin="5" Grid.Column="1" Click="btnSearchAccount_Click">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/new images/search-icon.png"/>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                        <dxg:GridControl x:Name="dcCustomerAccountsList" Grid.Row="1" Grid.ColumnSpan="2">
+                            <dxg:GridControl.View>
+                                <dxg:TableView x:Name="viewCustomerAccounts" ShowGroupPanel="False" NavigationStyle="Row" 
+                                               VerticalScrollbarVisibility="Auto" HorizontalScrollbarVisibility="Auto"/>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn Header="Account #" Visible="False" FieldName="AccountNumber"/>
+                                <dxg:GridColumn Header="Customer" FieldName="Customer"/>
+                                <dxg:GridColumn Header="Product" FieldName="Product"/>
+                                <dxg:GridColumn Header="Territory" FieldName="Territory"/>
+                                <dxg:GridColumn Header="Agent" Visible="False" FieldName="Agent"/>
+                                <dxg:GridColumn Header="Payment Mode" FieldName="ModeOfPayment"/>
+                                <dxg:GridColumn Header="Gross" Visible="False" FieldName="Gross"/>
+                                <dxg:GridColumn Header="Discount" Visible="False" FieldName="Discount"/>
+                                <dxg:GridColumn Header="Service Charge" Visible="False" FieldName="ServiceCharge"/>
+                                <dxg:GridColumn Header="Net Value" Visible="False" FieldName="NetValue"/>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </Grid>
+                </dxwui:NavigationFrame>
             </Border>
         </Grid>
 
-        <Canvas x:Name="canvasAgentsMasterData" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 5 5 10">
+        <Canvas x:Name="canvasAgentsMasterData" TextBlock.FontSize="11" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5 5 5 10">
             <StackPanel x:Name="stackView">
                 <Button x:Name="btnView" Cursor="Hand" Padding="5 5 5 0" Height="80" Width="80" Margin="3" BorderBrush="Black" Foreground="Black" FontFamily="Segoe UI" FontSize="12" Style="{DynamicResource ButtonStyle1}" Click="btnView_Click">
                     <Button.Background>
@@ -136,6 +178,7 @@
                 </StackPanel>
             </StackPanel>
         </Canvas>
+        
         <xctk:BusyIndicator x:Name="busyIndicator" 
                             HorizontalAlignment="Center" VerticalAlignment="Center"
                             Grid.ColumnSpan="3" Margin="116 0 116 13" 

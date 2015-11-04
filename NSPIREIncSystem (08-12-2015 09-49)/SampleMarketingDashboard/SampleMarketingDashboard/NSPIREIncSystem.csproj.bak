@@ -1,0 +1,888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9EE874E3-117E-42B6-BD27-774FA443D6C1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NSPIREIncSystem</RootNamespace>
+    <AssemblyName>NSPIREIncSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.1.UI, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.charts.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.controls.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.grid.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.layoutcontrol.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Mvvm.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.richedit.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="devexpress.xpf.scheduler.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v13.1.Extensions, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFSpark.1.1\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.0.14.3\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.0.14.3, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.0.14.3\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="odyssey">
+      <HintPath>..\..\..\..\..\downloads\odyssey.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Input.Manipulations" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFSpark.1.1\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFSpark, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFSpark.1.1\lib\net40\WPFSpark.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xceed.wpf.toolkit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\debug\xceed.wpf.toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="LeadManagement\MasterDatas\LeadActivityMasterData.xaml.cs">
+      <DependentUpon>LeadActivityMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\MasterDatas\SalesStage.xaml.cs">
+      <DependentUpon>SalesStage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\ContactPersonForm.xaml.cs">
+      <DependentUpon>ContactPersonForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\LeadActivityDetails.xaml.cs">
+      <DependentUpon>LeadActivityDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\LeadActivityForm.xaml.cs">
+      <DependentUpon>LeadActivityForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\LeadDetails.xaml.cs">
+      <DependentUpon>LeadDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\SalesStageDetails.xaml.cs">
+      <DependentUpon>SalesStageDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\SalesStageForm.xaml.cs">
+      <DependentUpon>SalesStageForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Views\LeadForm.xaml.cs">
+      <DependentUpon>LeadForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\GridLengthAnimation.cs" />
+    <Compile Include="Models\Variables.cs" />
+    <Compile Include="Models\Views.cs" />
+    <Compile Include="LeadManagement\Reports\ContactsReportData.cs" />
+    <Compile Include="LeadManagement\Reports\ContactsReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\ContactsReportDesign.designer.cs">
+      <DependentUpon>ContactsReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\DashboardReportData.cs" />
+    <Compile Include="LeadManagement\Reports\DashboardReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\DashboardReportDesign.Designer.cs">
+      <DependentUpon>DashboardReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\LeadActivityReportData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\LeadActivityReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\LeadActivityReportDesign.Designer.cs">
+      <DependentUpon>LeadActivityReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\LeadsReportData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\LeadsReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LeadManagement\Reports\LeadsReportDesign.Designer.cs">
+      <DependentUpon>LeadsReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Dashboards\SalesDashboard.xaml.cs">
+      <DependentUpon>SalesDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\MasterDatas\AgentsMasterData.xaml.cs">
+      <DependentUpon>AgentsMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\MasterDatas\CustomersMasterData.xaml.cs">
+      <DependentUpon>CustomersMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\MasterDatas\CustomerAccounts.xaml.cs">
+      <DependentUpon>CustomerAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomerAccountsReportData.cs" />
+    <Compile Include="SalesManagement\Reports\CustomerAccountsReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomerAccountsReportDesign.Designer.cs">
+      <DependentUpon>CustomerAccountsReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomersReportData.cs" />
+    <Compile Include="SalesManagement\Reports\CustomersReportDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SalesManagement\Reports\CustomersReportDesign.Designer.cs">
+      <DependentUpon>CustomersReportDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\AgentsDetails.xaml.cs">
+      <DependentUpon>AgentsDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\AgentsForm.xaml.cs">
+      <DependentUpon>AgentsForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomerDetails.xaml.cs">
+      <DependentUpon>CustomerDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomersForm.xaml.cs">
+      <DependentUpon>CustomersForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomerAccountDetails.xaml.cs">
+      <DependentUpon>CustomerAccountDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalesManagement\Views\CustomerAccountsForm.xaml.cs">
+      <DependentUpon>CustomerAccountsForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\MasterDatas\Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\MasterDatas\Territories.xaml.cs">
+      <DependentUpon>Territories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\MasterDatas\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Views\TerritoryDetails.xaml.cs">
+      <DependentUpon>TerritoryDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Windows\EmployeeSelectionWindow.xaml.cs">
+      <DependentUpon>EmployeeSelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Windows\EmployeeWindow.xaml.cs">
+      <DependentUpon>EmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Windows\UserAccountWindow.xaml.cs">
+      <DependentUpon>UserAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Sample\MasterDataView.xaml.cs">
+      <DependentUpon>MasterDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Dashboards\UserDashboard.xaml.cs">
+      <DependentUpon>UserDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Windows\NoticeWindow.xaml.cs">
+      <DependentUpon>NoticeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Windows\MessageBoxLogout.xaml.cs">
+      <DependentUpon>MessageBoxLogout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Windows\MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Windows\NotificationWindow.xaml.cs">
+      <DependentUpon>NotificationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Windows\TaskSchedulerWindow.xaml.cs">
+      <DependentUpon>TaskSchedulerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Dashboards\AdminDashboard.xaml.cs">
+      <DependentUpon>AdminDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerServiceManagement\Dashboards\CustomerServiceDashboard.xaml.cs">
+      <DependentUpon>CustomerServiceDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\Dashboards\LeadDashboard.xaml.cs">
+      <DependentUpon>LeadDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LeadManagement\MasterDatas\LeadMasterData.xaml.cs">
+      <DependentUpon>LeadMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerServiceManagement\MasterDatas\ProductsMasterData.xaml.cs">
+      <DependentUpon>ProductsMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManagement\MasterDatas\ProjectMasterData.xaml.cs">
+      <DependentUpon>ProjectMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerServiceManagement\MasterDatas\ServiceRequestsMasterData.xaml.cs">
+      <DependentUpon>ServiceRequestsMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManagement\Dashboards\TaskManagementDashboard.xaml.cs">
+      <DependentUpon>TaskManagementDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskManagement\MasterDatas\TaskMasterData.xaml.cs">
+      <DependentUpon>TaskMasterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerServiceManagement\MasterDatas\TicketsMasterData.xaml.cs">
+      <DependentUpon>TicketsMasterData.xaml</DependentUpon>
+    </Compile>
+    <Page Include="LeadManagement\MasterDatas\LeadActivityMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\MasterDatas\SalesStage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\ContactPersonForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\LeadActivityDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\LeadActivityForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\Views\LeadDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\SalesStageDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LeadManagement\Views\SalesStageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\Views\LeadForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="SalesManagement\Dashboards\SalesDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SalesManagement\MasterDatas\AgentsMasterData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\MasterDatas\CustomersMasterData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\MasterDatas\CustomerAccounts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\AgentsDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\AgentsForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomerDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomersForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomerAccountDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalesManagement\Views\CustomerAccountsForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\MasterDatas\Employees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\MasterDatas\Territories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\MasterDatas\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Views\TerritoryDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Shared\Windows\EmployeeSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Windows\EmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\Windows\UserAccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Sample\MasterDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Views\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Dashboards\UserDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Windows\NoticeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Shared\Windows\MessageBoxLogout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Windows\MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Windows\NotificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Windows\TaskSchedulerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Dashboards\AdminDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerServiceManagement\Dashboards\CustomerServiceDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\Dashboards\LeadDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeadManagement\MasterDatas\LeadMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerServiceManagement\MasterDatas\ProductsMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskManagement\MasterDatas\ProjectMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerServiceManagement\MasterDatas\ServiceRequestsMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskManagement\Dashboards\TaskManagementDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskManagement\MasterDatas\TaskMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerServiceManagement\MasterDatas\TicketsMasterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeadManagement\Reports\ContactsReportDesign.resx">
+      <DependentUpon>ContactsReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeadManagement\Reports\DashboardReportDesign.resx">
+      <DependentUpon>DashboardReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeadManagement\Reports\LeadActivityReportDesign.resx">
+      <DependentUpon>LeadActivityReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeadManagement\Reports\LeadsReportDesign.resx">
+      <DependentUpon>LeadsReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesManagement\Reports\CustomerAccountsReportDesign.resx">
+      <DependentUpon>CustomerAccountsReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesManagement\Reports\CustomersReportDesign.resx">
+      <DependentUpon>CustomersReportDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\NSPIREIncSystem.Reports.DashboardReportData.datasource" />
+    <None Include="Properties\DataSources\NSPIREIncSystem.SalesManagement.Reports.CustomerAccountsReportData.datasource" />
+    <None Include="Properties\DataSources\NSPIREIncSystem.SalesManagement.Reports.CustomersReportData.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\AcadDept.png" />
+    <Resource Include="images\AcadDept2.png" />
+    <Resource Include="images\Accounting.png" />
+    <Resource Include="images\Add.png" />
+    <Resource Include="images\Add2.png" />
+    <Resource Include="images\Bill.png" />
+    <Resource Include="images\blaine.png" />
+    <Resource Include="images\blaine2.png" />
+    <Resource Include="images\BookOpen.png" />
+    <Resource Include="images\BookOpen2.png" />
+    <Resource Include="images\Books.png" />
+    <Resource Include="images\Books2.png" />
+    <Resource Include="images\Boy.png" />
+    <Resource Include="images\Boy2.png" />
+    <Resource Include="images\Building.png" />
+    <Resource Include="images\Calculator.png" />
+    <Resource Include="images\Calculator2.png" />
+    <Resource Include="images\Calendar-Date.png" />
+    <Resource Include="images\Calendar-Date2.png" />
+    <Resource Include="images\Camera.png" />
+    <Resource Include="images\Camera2.png" />
+    <Resource Include="images\Cancel.png" />
+    <Resource Include="images\Cancel2.png" />
+    <Resource Include="images\Card.png" />
+    <Resource Include="images\Card2.png" />
+    <Resource Include="images\Check-Box.png" />
+    <Resource Include="images\Check-Box2.png" />
+    <Resource Include="images\Check.png" />
+    <Resource Include="images\Check2.png" />
+    <Resource Include="images\Clean.png" />
+    <Resource Include="images\Clean2.png" />
+    <Resource Include="images\Close.png" />
+    <Resource Include="images\Close2.png" />
+    <Resource Include="images\Collection.png" />
+    <Resource Include="images\Collection2.png" />
+    <Resource Include="images\Copy.png" />
+    <Resource Include="images\Copy2.png" />
+    <Resource Include="images\corner-blue.jpg" />
+    <Resource Include="images\Counting-Machine.png" />
+    <Resource Include="images\CS logo.png" />
+    <Resource Include="images\Data-Disk.png" />
+    <Resource Include="images\Data.png" />
+    <Resource Include="images\DataCopy.png" />
+    <Resource Include="images\DataCopy2.png" />
+    <Resource Include="images\Department.png" />
+    <Resource Include="images\Device-Bell.png" />
+    <Resource Include="images\Discount.png" />
+    <Resource Include="images\Discount2.png" />
+    <Resource Include="images\Document.png" />
+    <Resource Include="images\Document2.png" />
+    <Resource Include="images\Door.png" />
+    <Resource Include="images\Door2.png" />
+    <Resource Include="images\Double-Check.png" />
+    <Resource Include="images\Double-Check2.png" />
+    <Resource Include="images\Edit.png" />
+    <Resource Include="images\Edit2.png" />
+    <Resource Include="images\Enroll.png" />
+    <Resource Include="images\Enroll2.png" />
+    <Resource Include="images\Equalizer.png" />
+    <Resource Include="images\Equalizer2.png" />
+    <Resource Include="images\Excel-Export.png" />
+    <Resource Include="images\Excel-Export2.png" />
+    <Resource Include="images\Excel-Import.png" />
+    <Resource Include="images\Excel-Import2.png" />
+    <Resource Include="images\Fee.png" />
+    <Resource Include="images\Fee2.png" />
+    <Resource Include="images\Garbage.png" />
+    <Resource Include="images\Garbage2.png" />
+    <Resource Include="images\Gear.png" />
+    <Resource Include="images\Gear2.png" />
+    <Resource Include="images\grade.png" />
+    <Resource Include="images\grade2.png" />
+    <Resource Include="images\Graduate-Degree.png" />
+    <Resource Include="images\Grid.png" />
+    <Resource Include="images\Grid2.png" />
+    <Resource Include="images\Home 2.png" />
+    <Resource Include="images\Home.png" />
+    <Resource Include="images\Home2.png" />
+    <Resource Include="images\killer-whale-1.png" />
+    <Resource Include="images\Ledger.png" />
+    <Resource Include="images\Ledger2.png" />
+    <Resource Include="images\Left.png" />
+    <Resource Include="images\Left2.png" />
+    <Resource Include="images\List.png" />
+    <Resource Include="images\Logout.png" />
+    <Resource Include="images\Logout2.png" />
+    <Resource Include="images\Minus.png" />
+    <Resource Include="images\Minus2.png" />
+    <Resource Include="images\New.png" />
+    <Resource Include="images\New2.png" />
+    <Resource Include="images\Next.png" />
+    <Resource Include="images\Next2.png" />
+    <Resource Include="images\no_photo.png" />
+    <Resource Include="images\Nspire new.png" />
+    <Resource Include="images\nspire.png" />
+    <Resource Include="images\nspire2.jpg" />
+    <Resource Include="images\nspire3.jpg" />
+    <Resource Include="images\orca.jpg" />
+    <Resource Include="images\orca.png" />
+    <Resource Include="images\outreach.png" />
+    <Resource Include="images\outreach2.png" />
+    <Resource Include="images\Override.png" />
+    <Resource Include="images\Override2.png" />
+    <Resource Include="images\Peso 2.png" />
+    <Resource Include="images\Peso.png" />
+    <Resource Include="images\Previous.png" />
+    <Resource Include="images\Previous2.png" />
+    <Resource Include="images\Principal.png" />
+    <Resource Include="images\Principal2.png" />
+    <Resource Include="images\Printer.png" />
+    <Resource Include="images\Printer2.png" />
+    <Resource Include="images\PrinterMany.png" />
+    <Resource Include="images\PrinterMany2.png" />
+    <Resource Include="images\PrinterSection.png" />
+    <Resource Include="images\PrinterSection2.png" />
+    <Resource Include="images\PrinterSingle.png" />
+    <Resource Include="images\PrinterSingle2.png" />
+    <Resource Include="images\Program.png" />
+    <Resource Include="images\Program2.png" />
+    <Resource Include="images\Promisory.png" />
+    <Resource Include="images\Quick.png" />
+    <Resource Include="images\Quick2.png" />
+    <Resource Include="images\record.png" />
+    <Resource Include="images\Refresh.png" />
+    <Resource Include="images\Refresh2.png" />
+    <Resource Include="images\Report.png" />
+    <Resource Include="images\Right.png" />
+    <Resource Include="images\Room.png" />
+    <Resource Include="images\Save.png" />
+    <Resource Include="images\Save2.png" />
+    <Resource Include="images\School.png" />
+    <Resource Include="images\School2.png" />
+    <Resource Include="images\SchoolYear.png" />
+    <Resource Include="images\SchoolYear2.png" />
+    <Resource Include="images\Search.png" />
+    <Resource Include="images\Search2.png" />
+    <Resource Include="images\Section.png" />
+    <Resource Include="images\Section2.png" />
+    <Resource Include="images\Select.png" />
+    <Resource Include="images\Select2.png" />
+    <Resource Include="images\strategy.png" />
+    <Resource Include="images\strategy2.png" />
+    <Resource Include="images\Student-Read-01.png" />
+    <Resource Include="images\Student-Read-02.png" />
+    <Resource Include="images\StudentCard.png" />
+    <Resource Include="images\StudentCard2.png" />
+    <Resource Include="images\target.png" />
+    <Resource Include="images\target2.png" />
+    <Resource Include="images\Teacher-01.png" />
+    <Resource Include="images\Teacher.png" />
+    <Resource Include="images\TeacherDashboard.png" />
+    <Resource Include="images\TeacherDashboard2.png" />
+    <Resource Include="images\University.png" />
+    <Resource Include="images\Update.png" />
+    <Resource Include="images\Update2.png" />
+    <Resource Include="images\User-Add.png" />
+    <Resource Include="images\User-Login.png" />
+    <Resource Include="images\User-Profile.png" />
+    <Resource Include="images\User.png" />
+    <Resource Include="images\View.png" />
+    <Resource Include="images\View2.png" />
+    <Resource Include="images\Warning.png" />
+    <Resource Include="images\white wash.jpg" />
+    <Resource Include="images\Windows-8-Login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Book-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Bar Chart - 01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Graph-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Bell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Telephone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\User-Male.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Folder-Open-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Employee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Calendar Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Task-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Assign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\File add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Previous3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Ticket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Lead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\action-plan-icon.png" />
+    <Resource Include="new images\calendar-icon.png" />
+    <Resource Include="new images\chart-icon.png" />
+    <Resource Include="new images\client-icon.png" />
+    <Resource Include="new images\customer-service-icon.png" />
+    <Resource Include="new images\employee-icon.png" />
+    <Resource Include="new images\gear-icon.png" />
+    <Resource Include="new images\lead-icon.png" />
+    <Resource Include="new images\male-user-icon.png" />
+    <Resource Include="new images\master-data-icon.png" />
+    <Resource Include="new images\office-building-icon.png" />
+    <Resource Include="new images\print-icon.png" />
+    <Resource Include="new images\project-icon.png" />
+    <Resource Include="new images\service-request-icon.png" />
+    <Resource Include="new images\sysparams-icon.png" />
+    <Resource Include="new images\task-icon.png" />
+    <Resource Include="new images\ticket-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\back-icon.png" />
+    <Resource Include="new images\home-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\module-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\play-icon.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\add-icon.png" />
+    <Resource Include="new images\check-icon.png" />
+    <Resource Include="new images\delete-close-icon.png" />
+    <Resource Include="new images\edit-icon.png" />
+    <Resource Include="new images\mailbox-icon.png" />
+    <Resource Include="new images\search-icon.png" />
+    <Resource Include="new images\trash-mail-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\report-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\service-request-form-icon.png" />
+    <Resource Include="new images\ticket-form-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\view-details-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\product-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomerServiceManagement\Windows\" />
+    <Folder Include="Settings\Reports\" />
+    <Folder Include="TaskManagement\Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\activity-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\05.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\04.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\01.jpg" />
+    <Resource Include="new images\02.jpg" />
+    <Resource Include="new images\03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="new images\nspire-new-logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

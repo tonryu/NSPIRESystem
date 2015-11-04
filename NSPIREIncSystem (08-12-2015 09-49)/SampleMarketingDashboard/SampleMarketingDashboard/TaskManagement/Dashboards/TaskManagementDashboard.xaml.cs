@@ -17,6 +17,8 @@ namespace NSPIREIncSystem.TaskManagement.Dashboards
     /// </summary>
     public partial class TaskManagementDashboard : UserControl
     {
+        static bool isEntered = false;
+
         public TaskManagementDashboard()
         {
             InitializeComponent();
@@ -218,6 +220,7 @@ namespace NSPIREIncSystem.TaskManagement.Dashboards
                     log.Time = DateTime.Now.ToString("hh:mm:ss tt");
                     context.Logs.Add(log);
                     context.SaveChanges();
+                    isEntered = true;
                 }
             }
         }
@@ -241,7 +244,7 @@ namespace NSPIREIncSystem.TaskManagement.Dashboards
             canvasSchedules.Visibility = Visibility.Collapsed;
             canvasSchedules.Opacity = 0;
 
-            LoadDashboard();
+            if (isEntered != true) { LoadDashboard(); }
         }
 
         private void btnTasks_Click(object sender, RoutedEventArgs e)
@@ -278,6 +281,8 @@ namespace NSPIREIncSystem.TaskManagement.Dashboards
             var frame = DevExpress.Xpf.Core.Native.LayoutHelper.FindParentObject<NavigationFrame>(this);
             frame.BackNavigationMode = BackNavigationMode.PreviousScreen;
             frame.GoBack();
+            FoldInnerCanvasSideward(canvasTaskMenu);
+            isEntered = false;
         }
 
         private void btnBackToTaskMenu_Click(object sender, RoutedEventArgs e)
